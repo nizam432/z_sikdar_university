@@ -1,79 +1,66 @@
-<?php 
-	/*$message_success=$this->session->userdata('message');
-	if(isset($message_success))
-	{
-		echo '<div class="alert alert-success" role="alert">'.$message_success.'</div>';
-		$this->session->unset_userdata('message');
-	}*/
-?>
-
 <div class="col-md-12">
-
 	<div class="breadcrumb_container">
 		<ol class="breadcrumb">
 		  <li><a href="<?php echo base_url()?>backend_dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-		  <li class="active">Article</li>
+		  <li class="active">section</li>
 		</ol>
 	</div>
 	
 	<div class="submit_btn_all">
-		<a href="<?php echo base_url()?>backend_article/add"> 
+		<a href="<?php echo base_url()?>backend_section/add"> 
 			<button type="button" class="btn btn-primary ">Add new</button>
 		</a>
-		
 		<button  type="submit" name="publish" id="publish" class="btn btn-success addrecord">
 			<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Publish
 		</button>
 		
 		<button type="submit" name="unpublish" id="unpublish" class="btn btn-warning  addrecord">
 			<span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> Unpublish
-		</button>
-
+		</button>		
 	</div>
-
-	<div class="box box-primary col-xs-12" >
-		<div class="box-header ">
-		  <h3 class="box-title">Article List</h3>
-		</div>
-		<!-- /.box-header -->
-		<div class="box-body no-padding">
-		  <table id="example1"  class="table table-bordered  table-striped ">
-			<thead>
-			<tr>
-				<th><input type="checkbox"  id="selecctall" /></th>
-				<th>#</th>
-				<th>Picture</th>
-				<th>Title</th>
-				<th>Entry By</th>
-				<th>Entry Date</th>
-				<th>status</th>
-				<th>Edit</th>
-			</tr>
-			</thead>
-			<?php 	
+	
+	<div class="box box-primary">
+	<div class="box-header">
+	  <h3 class="box-title">section List</h3>
+	</div>
+	<!-- /.box-header -->
+	<div class="box-body">
+	  <table id="example1" class="table table-bordered table-striped">
+		<thead>
+		<tr>
+		  <th><input type="checkbox"  id="selecctall" /></th> 	
+		  <th>#</th>
+		  <th>section Name</th>
+		  <th>Entry By</th>
+		  <th>Entry Date & Time</th>
+		  <th>Status</th>
+		  <th>Edit</th>
+		</tr>
+		</thead>
+		<tbody>
+		   <?php 	
 				$sl=1;
-				foreach($article_list as $article_list_data)
+				foreach($section_list as $section_list_data)
 				{
-					
-					
-					echo '<tr>
-					<td><input type="checkbox" name="checkbox[]" value="' . $article_list_data->article_id . '" id="checkbox[]" class="checkbox1"></td>
+					echo '<tr class="odd gradeX">
+					<td><input type="checkbox" name="checkbox[]" value="' . $section_list_data->section_id . '" id="checkbox[]" class="checkbox1"></td>
 					<td>' . $sl++. '</td>
-					<td> <img class="img-circle" width="50" height="50" src="' .base_url().$article_list_data->article_image. '"></td>
-					<td>' . $article_list_data->title. '</td>
-					<td>' . $article_list_data->entry_by. '</td>
-					<td>' . $article_list_data->entry_date. '</td>	
-					<td>' . (($article_list_data->status==1)? 
+					<td>'.$section_list_data->section_title . '</td>
+					<td>' . $section_list_data->entry_by . '</td>
+					<td>' . $section_list_data->entry_date_time . '</td>
+					<td>' . (($section_list_data->status==1)? 
 					'<span class="label label-success">Publish</span>' :  '<span class="label label-warning">Unpublish</span>'). '</td>	
-					<td><a href="'.base_url().'backend_article/edit/'.$article_list_data->article_id.'"><i class="fa fa-edit"></i> Edit</a></td>	
+					<td> <a href="'.base_url().'backend_section/edit/'.$section_list_data->section_id.'"><span class="fa fa-edit"></span> Edit</a></td>					
 					</tr>';
 				}  
-			?> 
-		  </table > 
-		</div>       <!-- /.box-body -->
-		<?php //echo $this->pagination->create_links(); ?>
+		?>
+		</tbody>
+	  </table>
+	</div>
+	<!-- /.box-body -->
 	</div>
 </div>
+
 <script>
 	$(document).ready(function() {
 		resetcheckbox();
@@ -103,7 +90,7 @@
 				});
 //                    return  false;
 			$.ajax({
-				url: '<?php echo base_url() ?>backend_article/publish',
+				url: '<?php echo base_url() ?>backend_section/publish',
 				type: 'post',
 				data: 'ids=' + checkValues
 			}).done(function(data) {
@@ -126,7 +113,7 @@
 				});
 //                    return  false;
 			$.ajax({
-				url: '<?php echo base_url() ?>backend_article/unpublish',
+				url: '<?php echo base_url() ?>backend_section/unpublish',
 				type: 'post',
 				data: 'ids=' + checkValues
 			}).done(function(data) {

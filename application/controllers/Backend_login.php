@@ -34,7 +34,7 @@ class Backend_login extends CI_Controller{
     {
         //$email=$_POST['email'];
          $email=  $this->input->post('email',TRUE);
-        $password=  MD5($this->input->post('password',TRUE));
+        $password= $this->input->post('password',TRUE);
         $this->load->model('admin_login_model');
         $result=$this->admin_login_model->check($email,$password);
 
