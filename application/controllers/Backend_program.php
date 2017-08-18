@@ -44,7 +44,8 @@ class Backend_program extends CI_Controller
 	public function add()
 	{
 		$data = array();
-		$data['content']=$this->load->view('admin/program/add','', TRUE);
+		$data['faculty']=$this->model_backend_program->get_faculty_data();
+		$data['content']=$this->load->view('admin/program/add',$data, TRUE);
 		$this->load->view('admin/index', $data);
 	}
 

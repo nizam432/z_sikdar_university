@@ -87,11 +87,11 @@
 		</div>	
 				
 		<div class="form-group ">
-		  <label class="col-sm-2 ">Present Family</label>
+		  <label class="col-sm-2 ">Present Address</label>
 		  <div class="col-sm-4">
 			<input type="text" name="present_address" class="form-control">
 		  </div>
-		  <label class="col-sm-2 ">Permenent Family</label>
+		  <label class="col-sm-2 ">Permenent Address</label>
 		  <div class="col-sm-4">
 			<input type="text" name="permanent_address" class="form-control">
 		  </div>
