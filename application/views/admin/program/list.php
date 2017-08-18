@@ -30,7 +30,7 @@
 		<tr>
 		  <th><input type="checkbox"  id="selecctall" /></th> 	
 		  <th>#</th>
-		  <th>program Name</th>
+		  <th>Program Name</th>
 		  <th>Entry By</th>
 		  <th>Entry Date & Time</th>
 		  <th>Status</th>

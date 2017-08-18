@@ -26,9 +26,20 @@
 				</div>
 		<?php }?>	  
 		<div class="form-group ">
-		  <label >department Title</label>
+		  <label >Department Title</label>
 		  <input type="text" name="department_title" value="<?php echo $department_edit->department_title ?>" class="form-control">
 		</div>
+		<div class="form-group">
+		  <label>Faculty</label>
+		  <select name="faculty" class="form-control">
+			<?php 
+				foreach($faculty as $faculty_data)
+				{		
+					 echo '<option '.(($faculty_data->faculty_id==$department_edit->faculty)? 'selected="selected"': '').' value="'.$faculty_data->faculty_id.'">'.$faculty_data->faculty_title.'</option>';
+				}
+			?>
+		  </select>
+		</div>		
 		<div class="form-group">
 		  <label>Status</label>
 		  <select name="status" class="form-control">

@@ -12,12 +12,12 @@
 		</span>
 	  </a>
 	  <ul class="treeview-menu">
+		<li><a href="<?php echo base_url()?>backend_session"><i class="fa fa-user"></i> <span>session</span></a></li>
+		<li><a href="<?php echo base_url()?>backend_semester"><i class="fa fa-user"></i> <span>semester</span></a></li>	  
 		<li><a href="<?php echo base_url()?>backend_faculty"><i class="fa fa-user"></i> <span>Faculty</span></a></li>
+		<li><a href="<?php echo base_url()?>backend_department"><i class="fa fa-user"></i> <span>Department</span></a></li>		
 		<li><a href="<?php echo base_url()?>backend_program"><i class="fa fa-user"></i> <span>Program</span></a></li>
 		<li><a href="<?php echo base_url()?>backend_section"><i class="fa fa-user"></i> <span>Section</span></a></li>
-		<li><a href="<?php echo base_url()?>backend_session"><i class="fa fa-user"></i> <span>session</span></a></li>
-		<li><a href="<?php echo base_url()?>backend_semester"><i class="fa fa-user"></i> <span>semester</span></a></li>
-		<li><a href="<?php echo base_url()?>backend_department"><i class="fa fa-user"></i> <span>Department</span></a></li>
 		<li><a href="<?php echo base_url()?>backend_shift"><i class="fa fa-user"></i> <span>Shift</span></a></li>
 	  </ul>
 	</li>

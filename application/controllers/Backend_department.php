@@ -44,7 +44,8 @@ class Backend_department extends CI_Controller
 	public function add()
 	{
 		$data = array();
-		$data['content']=$this->load->view('admin/department/add','', TRUE);
+		$data['faculty']=$this->model_backend_department->get_faculty_data();
+		$data['content']=$this->load->view('admin/department/add',$data, TRUE);
 		$this->load->view('admin/index', $data);
 	}
 
@@ -58,6 +59,7 @@ class Backend_department extends CI_Controller
 	{
 		$data = array();
 		$data['department_edit']= $this->model_backend_department->get_department_row($id);
+		$data['faculty']=$this->model_backend_department->get_faculty_data();
 		$data['content']=$this->load->view('admin/department/edit',$data, TRUE);
 		$this->load->view('admin/index', $data);
 	}
@@ -73,12 +75,14 @@ class Backend_department extends CI_Controller
 	{
 		$data=array();
 		$data['department_title']=$this->input->post('department_title', TRUE);
+		$data['faculty']=$this->input->post('faculty', TRUE);
 		$data['entry_by']=$this->session->userdata('admin_id');
 		$data['entry_date_time']=date('Y-m-d H:i:s');
 		$data['status']=$this->input->post('status', TRUE);
 		
 		//Form Validation
-		$this->form_validation->set_rules('department_title', 'department Title', 'required');
+		$this->form_validation->set_rules('department_title', 'Department Title', 'required');
+		$this->form_validation->set_rules('faculty', 'Faculty', 'required');
 		
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -110,12 +114,14 @@ class Backend_department extends CI_Controller
 	{
 		$data = array();
 		$data['department_title']=$this->input->post('department_title', TRUE);
+		$data['faculty']=$this->input->post('faculty', TRUE);
 		$data['update_by']=$this->session->userdata('admin_id');
 		$data['update_date_time']=date('Y-m-d H:i:s');
 		$data['status']=$this->input->post('status', TRUE);
 		
 		//Form Validation
 		$this->form_validation->set_rules('department_title', 'department Title', 'required');
+		$this->form_validation->set_rules('faculty', 'Faculty', 'required');
 		
 		if ($this->form_validation->run() == FALSE)
 		{

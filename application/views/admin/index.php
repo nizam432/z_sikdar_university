@@ -285,7 +285,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
      <!-- Anything you want-->
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2016 <a target="_blank" href="http://nanoit.biz/">nanosoft</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2016 <a target="_blank" href="#">----</a>.</strong> All rights reserved.
   </footer>
  <!-- Tab panes --><?php /*
   <!-- Control Sidebar -->

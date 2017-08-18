@@ -18,6 +18,15 @@ class Model_backend_program extends  CI_Model
 		$this->db->insert('program',$data);
 	}
 	
+	public function get_faculty_data()
+	{
+		$this->db->select('faculty_id,faculty_title');
+		$this->db->from('faculty');
+		$this->db->where('status',1);
+		$query=$this->db->get('');
+		$result=$query->result();
+		return $result;
+	}	
 
 	public function get_program_row($id)
 	{

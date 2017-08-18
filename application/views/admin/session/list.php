@@ -21,7 +21,7 @@
 	
 	<div class="box box-primary">
 	<div class="box-header">
-	  <h3 class="box-title">session List</h3>
+	  <h3 class="box-title">Session List</h3>
 	</div>
 	<!-- /.box-header -->
 	<div class="box-body">
@@ -30,7 +30,7 @@
 		<tr>
 		  <th><input type="checkbox"  id="selecctall" /></th> 	
 		  <th>#</th>
-		  <th>session Name</th>
+		  <th>Session Name</th>
 		  <th>Entry By</th>
 		  <th>Entry Date & Time</th>
 		  <th>Status</th>

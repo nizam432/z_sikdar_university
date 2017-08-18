@@ -30,6 +30,20 @@
 		  <label >Program Title</label>
 		  <input type="text" name="program_title" class="form-control">
 		</div>
+		
+		<div class="form-group">
+		  <label>Faculty</label>
+		  <select name="faculty" class="form-control">
+			<option value="">Please select</option>
+			<?php 
+				foreach($faculty as $faculty_data)
+				{		
+					 echo '<option value="'.$faculty_data->faculty_id.'">'.$faculty_data->faculty_title.'</option>';
+				}
+			?>
+		  </select>
+		</div>
+		
 		<div class="form-group">
 		  <label>Status</label>
 		  <select name="status" class="form-control">
