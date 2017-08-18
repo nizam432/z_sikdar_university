@@ -29,6 +29,16 @@ class Model_backend_student extends  CI_Model
 		return $result;
 	}
 	
+	public function get_faculty_data()
+	{
+		$this->db->select('faculty_id,faculty_title');
+		$this->db->from('faculty');
+		$this->db->where('status',1);
+		$query=$this->db->get('');
+		$result=$query->result();
+		return $result;
+	}	
+	
 	public function update_student_data($data, $id)
 	{
 		$this->db->where('std_row_id', $id);

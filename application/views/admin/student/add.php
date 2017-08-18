@@ -207,13 +207,19 @@
 		<div class="form-group ">
 		  <label class="col-sm-2 ">Faculty</label>
 		  <div class="col-sm-4">
-			  <select name="faculty" class="form-control">
+			  <select name="faculty" class="form-control faculty">
 				<option value="">Please select</option>
+				<?php 
+					foreach($faculty as $faculty_data)
+					{		
+						 echo '<option value="'.$faculty_data->faculty_id.'">'.$faculty_data->faculty_title.'</option>';
+					}
+				?>
 			  </select>
 		  </div>
 		  <label class="col-sm-2 ">Department</label>
 		  <div class="col-sm-4">		  
-			  <select name="department" class="form-control">
+			  <select name="department" class="form-control department">
 				<option value="">Please select</option>
 			  </select>
 		   </div>
@@ -222,7 +228,7 @@
 		<div class="form-group ">
 		  <label class="col-sm-2 ">Program</label>
 		  <div class="col-sm-4">			  
-			  <select name="program" class="form-control">
+			  <select name="program" class="form-control program">
 				<option value="">Please select</option>
 			  </select>
 		  </div>	  
@@ -305,4 +311,59 @@
 		 }
 	 });
 	 
+	$('.faculty').change(function(){
+	  $.ajax({
+		type: "POST",
+		url: "<?php echo base_url();?>backend_student/get_department",
+		data:{id:$(this).val()}, 
+		beforeSend :function(){
+		$(".department option:gt(0)").remove(); 
+		$('.department').find("option:eq(0)").html("Please wait..");
+
+		},                         
+		success: function (data) {
+		  /*get response as json */
+		   $('.department').find("option:eq(0)").html("Please Select");
+		  var obj=jQuery.parseJSON(data);
+		  $(obj).each(function()
+		  {
+		   var option = $('<option />');
+		   option.attr('value', this.value).text(this.label);           
+		   $('.department').append(option);
+		 });  
+
+		  /*ends */
+
+		}
+	  });
+	});	 
+
+
+	$('.department').change(function(){
+	  $.ajax({
+		type: "POST",
+		url: "<?php echo base_url();?>backend_student/get_program",
+		data:{id:$(this).val()}, 
+		beforeSend :function(){
+		$(".program option:gt(0)").remove(); 
+		$('.program').find("option:eq(0)").html("Please wait..");
+
+		},                         
+		success: function (data) {
+		  /*get response as json */
+		   $('.program').find("option:eq(0)").html("Please Select");
+		  var obj=jQuery.parseJSON(data);
+		  $(obj).each(function()
+		  {
+		   var option = $('<option />');
+		   option.attr('value', this.value).text(this.label);           
+		   $('.program').append(option);
+		 });  
+
+		  /*ends */
+
+		}
+	  });
+	});		
 </script>
+

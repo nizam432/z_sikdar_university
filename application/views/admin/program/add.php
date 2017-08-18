@@ -27,13 +27,13 @@
 			<?php }?>
 
 		<div class="form-group ">
-		  <label >Program Title</label>
+		  <label>Program Title</label>
 		  <input type="text" name="program_title" class="form-control">
 		</div>
 		
 		<div class="form-group">
 		  <label>Faculty</label>
-		  <select name="faculty" class="form-control">
+		  <select name="faculty" class="form-control faculty">
 			<option value="">Please select</option>
 			<?php 
 				foreach($faculty as $faculty_data)
@@ -46,7 +46,7 @@
 		
 		<div class="form-group">
 		  <label>Department</label>
-		  <select name="department" class="form-control">
+		  <select name="department" class="form-control department">
 		  </select>
 		</div>
 		
@@ -66,3 +66,38 @@
   </div>
   <!-- /.box -->
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+  $(document).ready(function(){
+    /*Get the Department list */
+
+    $('.faculty').change(function(){
+	
+      $.ajax({
+        type: "POST",
+        url: "<?php echo base_url();?>backend_program/get_department",
+        data:{id:$(this).val()}, 
+        beforeSend :function(){
+		$(".department option:gt(0)").remove(); 
+		$('.department').find("option:eq(0)").html("Please wait..");
+
+        },                         
+        success: function (data) {
+          /*get response as json */
+           $('.department').find("option:eq(0)").html("Please Select");
+          var obj=jQuery.parseJSON(data);
+          $(obj).each(function()
+          {
+           var option = $('<option />');
+           option.attr('value', this.value).text(this.label);           
+           $('.department').append(option);
+         });  
+
+          /*ends */
+
+        }
+      });
+    });
+});
+</script>

@@ -44,7 +44,9 @@ class Backend_student extends CI_Controller
 	public function add()
 	{
 		$data = array();
-		$data['content']=$this->load->view('admin/student/add','', TRUE);
+		$data['faculty']= $this->model_backend_student->get_faculty_data();
+		$data['session']= $this->model_backend_student->get_session_data();
+		$data['content']=$this->load->view('admin/student/add',$data, TRUE);
 		$this->load->view('admin/index', $data);
 	}
 
@@ -159,4 +161,50 @@ class Backend_student extends CI_Controller
 		$ids = ( explode( ',', $this->input->get_post('ids') ));
 		$this->model_backend_student->unpublish_data($data,$ids);
 	}
+	
+	/**
+	 * Get Department Data
+	 *
+	 * @return array
+	 */		
+	Public function get_department()
+	{
+		
+
+		  $result=$this->db->where('faculty',$_POST['id'])
+						->get('department')
+						->result();
+     
+        $data=array();
+		foreach($result as $r)
+		{
+			$data['value']=$r->department_id;
+			$data['label']=$r->department_title;
+			$json[]=$data;
+		}
+		echo json_encode($json);
+	}	
+
+	/**
+	 * Get Department Data
+	 *
+	 * @return array
+	 */		
+	Public function get_program()
+	{
+		
+
+		  $result=$this->db->where('department',$_POST['id'])
+						->get('program')
+						->result();
+     
+        $data=array();
+		foreach($result as $r)
+		{
+			$data['value']=$r->program_id;
+			$data['label']=$r->program_title;
+			$json[]=$data;
+		}
+		echo json_encode($json);
+	}	
 }

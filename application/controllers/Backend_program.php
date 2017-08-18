@@ -59,6 +59,10 @@ class Backend_program extends CI_Controller
 	{
 		$data = array();
 		$data['program_edit']= $this->model_backend_program->get_program_row($id);
+		$data['faculty']=$this->model_backend_program->get_faculty_data();
+		//department id
+		$faculty_id=$data['program_edit']->faculty;
+		$data['department']=$this->model_backend_program->get_department_data($faculty_id);
 		$data['content']=$this->load->view('admin/program/edit',$data, TRUE);
 		$this->load->view('admin/index', $data);
 	}
@@ -73,13 +77,18 @@ class Backend_program extends CI_Controller
 	public function save()
 	{
 		$data=array();
+		
 		$data['program_title']=$this->input->post('program_title', TRUE);
+		$data['faculty']=$this->input->post('faculty', TRUE);
+		$data['department']=$this->input->post('department', TRUE);
 		$data['entry_by']=$this->session->userdata('admin_id');
 		$data['entry_date_time']=date('Y-m-d H:i:s');
 		$data['status']=$this->input->post('status', TRUE);
 		
 		//Form Validation
 		$this->form_validation->set_rules('program_title', 'program Title', 'required');
+		$this->form_validation->set_rules('faculty', 'Faculty Title', 'required');
+		$this->form_validation->set_rules('department', 'Department Title', 'required');
 		
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -111,12 +120,16 @@ class Backend_program extends CI_Controller
 	{
 		$data = array();
 		$data['program_title']=$this->input->post('program_title', TRUE);
+		$data['faculty']=$this->input->post('faculty', TRUE);
+		$data['department']=$this->input->post('department', TRUE);
 		$data['update_by']=$this->session->userdata('admin_id');
 		$data['update_date_time']=date('Y-m-d H:i:s');
 		$data['status']=$this->input->post('status', TRUE);
 		
 		//Form Validation
 		$this->form_validation->set_rules('program_title', 'program Title', 'required');
+		$this->form_validation->set_rules('faculty', 'Faculty Title', 'required');
+		$this->form_validation->set_rules('department', 'Department Title', 'required');
 		
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -159,5 +172,28 @@ class Backend_program extends CI_Controller
 		$data['status']=0;
 		$ids = ( explode( ',', $this->input->get_post('ids') ));
 		$this->model_backend_program->unpublish_data($data,$ids);
+	}
+	
+	/**
+	 * Get Department Data
+	 *
+	 * @return array
+	 */		
+	Public function get_department()
+	{
+		
+
+		  $result=$this->db->where('faculty',$_POST['id'])
+						->get('department')
+						->result();
+     
+        $data=array();
+		foreach($result as $r)
+		{
+			$data['value']=$r->department_id;
+			$data['label']=$r->department_title;
+			$json[]=$data;
+		}
+		echo json_encode($json);
 	}
 }

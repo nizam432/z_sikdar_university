@@ -2,7 +2,6 @@
 	<li class="header">HEADER</li>
 	<!-- Optionally, you can add icons to the links -->
 	<li class="active"><a href="<?php echo base_url()?>backend_dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-	<li><a href="<?php echo base_url()?>backend_category"><i class="fa fa-tree"></i> <span>Category</span></a></li>
 	<li><a href="<?php echo base_url()?>backend_student"><i class="fa fa-user"></i> <span>Student</span></a></li>
 	<li><a href="<?php echo base_url()?>backend_user"><i class="fa fa-user"></i> <span>User</span></a></li>
 	<li class="treeview">
