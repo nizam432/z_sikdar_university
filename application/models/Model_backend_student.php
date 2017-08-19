@@ -38,7 +38,46 @@ class Model_backend_student extends  CI_Model
 		$result=$query->result();
 		return $result;
 	}	
+
+	public function get_semester_data()
+	{
+		$this->db->select('semester_id,semester_title');
+		$this->db->from('semester');
+		$this->db->where('status',1);
+		$query=$this->db->get('');
+		$result=$query->result();
+		return $result;
+	}
 	
+	public function get_session_data()
+	{
+		$this->db->select('session_id,session_title');
+		$this->db->from('session');
+		$this->db->where('status',1);
+		$query=$this->db->get('');
+		$result=$query->result();
+		return $result;
+	}	
+
+	public function get_section_data()
+	{
+		$this->db->select('section_id,section_title');
+		$this->db->from('section');
+		$this->db->where('status',1);
+		$query=$this->db->get('');
+		$result=$query->result();
+		return $result;
+	}
+	
+	public function get_shift_data()
+	{
+		$this->db->select('shift_id,shift_title');
+		$this->db->from('shift');
+		$this->db->where('status',1);
+		$query=$this->db->get('');
+		$result=$query->result();
+		return $result;
+	}	
 	public function update_student_data($data, $id)
 	{
 		$this->db->where('std_row_id', $id);

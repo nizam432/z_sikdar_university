@@ -44,8 +44,12 @@ class Backend_student extends CI_Controller
 	public function add()
 	{
 		$data = array();
-		$data['faculty']= $this->model_backend_student->get_faculty_data();
+		$data['blood_group']=array(1=>'A+',2=>'A-',3=>'B+',4=>'B-',5=>'O+',6=>'O-',7=>'AB+',8=>'AB-');
+		$data['semester']= $this->model_backend_student->get_semester_data();
 		$data['session']= $this->model_backend_student->get_session_data();
+		$data['section']= $this->model_backend_student->get_section_data();
+		$data['shift']= $this->model_backend_student->get_shift_data();
+		$data['faculty']= $this->model_backend_student->get_faculty_data();
 		$data['content']=$this->load->view('admin/student/add',$data, TRUE);
 		$this->load->view('admin/index', $data);
 	}
@@ -75,12 +79,56 @@ class Backend_student extends CI_Controller
 	{
 		$data=array();
 		$data['student_full_name']=$this->input->post('student_full_name', TRUE);
+		$data['father_name']=$this->input->post('father_name', TRUE);
+		$data['mother_name']=$this->input->post('mother_name', TRUE);
+		$data['marital_status']=$this->input->post('marital_status', TRUE);
+		$data['blood_group']=$this->input->post('blood_group', TRUE);
+		$data['contact_self']=$this->input->post('contact_self', TRUE);
+		$data['contact_family']=$this->input->post('contact_family', TRUE);
+		$data['present_address']=$this->input->post('present_address', TRUE);
+		$data['permanent_address']=$this->input->post('permanent_address', TRUE);
+		$data['nationality']=$this->input->post('nationality', TRUE);
+		$data['email_id']=$this->input->post('email_id', TRUE);
+		$data['physical_challenge']=$this->input->post('physical_challenge', TRUE);
+		$data['credit_transfer']=$this->input->post('credit_transfer', TRUE);
+		$data['student_id']=$this->input->post('student_id', TRUE);
+		$data['reg_no']=$this->input->post('reg_no', TRUE);
+		$data['semester']=$this->input->post('semester', TRUE);
+		$data['session']=$this->input->post('session', TRUE);
+		$data['faculty']=$this->input->post('faculty', TRUE);
+		$data['department']=$this->input->post('department', TRUE);
+		$data['program']=$this->input->post('program', TRUE);
+		$data['section']=$this->input->post('section', TRUE);
+		$data['shift']=$this->input->post('shift', TRUE);
+		$data['admission_date']=$this->input->post('admission_date', TRUE);
+		$data['status']=$this->input->post('status', TRUE);
+		
 		$data['entry_by']=$this->session->userdata('admin_id');
 		$data['entry_date_time']=date('Y-m-d H:i:s');
 		$data['status']=$this->input->post('status', TRUE);
 		
 		//Form Validation
 		$this->form_validation->set_rules('student_full_name', 'Student Name', 'required');
+		$this->form_validation->set_rules('father_name', 'Father\'s Name', 'required');
+		$this->form_validation->set_rules('mother_name', 'Mother\'s Name', 'required');
+		$this->form_validation->set_rules('marital_status', 'Marital Status', 'required');
+		$this->form_validation->set_rules('blood_group', 'Blood Group', 'required');
+		$this->form_validation->set_rules('email_id', 'Email ID', 'required');
+		$this->form_validation->set_rules('contact_self', 'Contact Self', 'required');
+		$this->form_validation->set_rules('contact_family', 'Contact Family', 'required');
+		$this->form_validation->set_rules('present_address', 'Present Address', 'required');
+		$this->form_validation->set_rules('permanent_address', 'Permanent Address', 'required');
+		$this->form_validation->set_rules('student_id', 'Student ID', 'required');
+		$this->form_validation->set_rules('reg_no', 'Registration ID', 'required');
+		$this->form_validation->set_rules('semester', 'Semester', 'required');
+		$this->form_validation->set_rules('session', 'session', 'required');
+		$this->form_validation->set_rules('faculty', 'Faculty', 'required');
+		$this->form_validation->set_rules('department', 'Dpartment', 'required');
+		$this->form_validation->set_rules('program', 'program', 'required');
+		$this->form_validation->set_rules('section', 'section', 'required');
+		$this->form_validation->set_rules('shift', 'shift', 'required');
+		$this->form_validation->set_rules('admission_date', 'Admission Date', 'required');
+		$this->form_validation->set_rules('status', 'status', 'required');
 		
 		if ($this->form_validation->run() == FALSE)
 		{

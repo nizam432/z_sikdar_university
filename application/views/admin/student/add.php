@@ -64,23 +64,34 @@
 		<div class="form-group ">
 		  <label class="col-sm-2 ">Date of Birth</label>
 		  <div class="col-sm-4">
-			<input type="text" name="dob" class="form-control">
+			<div class="input-group date">
+			  <div class="input-group-addon">
+				<i class="fa fa-calendar"></i>
+			  </div>
+               <input type="text"  name="dob" class="form-control pull-right datepicker">
+            </div>
 		  </div>
 
 		  <label class="col-sm-2 ">Blood Group</label>
 		  <div class="col-sm-4">
 			  <select name="blood_group" class="form-control">
 				<option value="">Please select</option>
+				<?php 
+					foreach($blood_group as $key_blood_group=>$blood_group_value)
+					{		
+						 echo '<option value="'.$key_blood_group.'">'.$blood_group_value.'</option>';
+					}
+				?>					
 			  </select>
 		  </div>
 		</div>	
-		<div class="form-group ">
+		<div class="form-group">
 		  <label class="col-sm-2 ">Contact Self</label>
 		  <div class="col-sm-4">
 			<input type="text" name="contact_self" class="form-control">
 		  </div>
 
-		  <label class="col-sm-2 ">Contact Family</label>
+		  <label class="col-sm-2">Contact Family</label>
 		  <div class="col-sm-4">
 			<input type="text" name="contact_family" class="form-control">
 		  </div>
@@ -143,7 +154,7 @@
 		  <label class="col-sm-3 ">Passing Year</label>
 		  <label class="col-sm-3 ">DIV/GPA</label>
 		  <label class="col-sm-3 ">Board/Institute</label>
-		  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		 
 		
 		<fieldset class="brother" style="width:100%">
 			<div class="bro">
@@ -185,7 +196,7 @@
 		  </div>
 		  <label class="col-sm-2 ">Reg.No. </label>
 		  <div class="col-sm-4">
-			<input type="text" name="student_id" class="form-control">
+			<input type="text" name="reg_no" class="form-control">
 		  </div>
 		</div>			
 		<div class="form-group ">
@@ -193,6 +204,12 @@
 		  <div class="col-sm-4">		  
 			  <select name="semester" class="form-control">
 				<option value="">Please select</option>
+				<?php 
+					foreach($semester as $semester_data)
+					{		
+						 echo '<option value="'.$semester_data->semester_id.'">'.$semester_data->semester_title.'</option>';
+					}
+				?>				
 			  </select>
 		   </div>
 
@@ -200,6 +217,12 @@
 		  <div class="col-sm-4">			  
 			  <select name="session" class="form-control">
 				<option value="">Please select</option>
+				<?php 
+					foreach($session as $session_data)
+					{		
+						 echo '<option value="'.$session_data->session_id.'">'.$session_data->session_title.'</option>';
+					}
+				?>				
 			  </select>
 		  </div>
 		</div>
@@ -236,6 +259,12 @@
 		  <div class="col-sm-4">			  
 			  <select name="section" class="form-control">
 				<option value="">Please select</option>
+				<?php 
+					foreach($section as $section_data)
+					{		
+						 echo '<option value="'.$section_data->section_id.'">'.$section_data->section_title.'</option>';
+					}
+				?>
 			  </select>
 			</div>
 		</div>	
@@ -244,12 +273,23 @@
 		  <div class="col-sm-4">
 			  <select name="shift" class="form-control">
 				<option value="">Please select</option>
+				<?php 
+					foreach($shift as $shift_data)
+					{		
+						 echo '<option value="'.$shift_data->shift_id.'">'.$shift_data->shift_title.'</option>';
+					}
+				?>				
 			  </select>
 			</div>
 			
 		  <label class="col-sm-2 ">Admission Date</label>
 		  <div class="col-sm-4">		  
-			<input type="text" name="admission_date" class="form-control">
+			<div class="input-group date">
+			  <div class="input-group-addon">
+				<i class="fa fa-calendar"></i>
+			  </div>
+               <input type="text"  name="admission_date" class="form-control pull-right datepicker">
+            </div>			
 		   </div>
 		</div>	
 	
@@ -359,9 +399,7 @@
 		   option.attr('value', this.value).text(this.label);           
 		   $('.program').append(option);
 		 });  
-
 		  /*ends */
-
 		}
 	  });
 	});		

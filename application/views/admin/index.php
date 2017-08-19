@@ -24,7 +24,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/backend/plugins/datatables/dataTables.bootstrap.css">
   
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/backend/dist/css/AdminLTE.css">
-  <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+ 
+  <!-- Date Picker -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/backend/plugins/datepicker/bootstrap-datepicker.js"
+  
+
+ <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect.
   -->
@@ -388,6 +393,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="<?php echo base_url(); ?>assets/backend/dist/js/app.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/backend/dist/js/demo.js"></script>
 
+<!-- Date picker -->
+<script src="<?php echo base_url(); ?>assets/backend/plugins/datepicker/bootstrap-datepicker.js"></script>
+
+
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. Slimscroll is required when using the
@@ -399,6 +408,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
     //Initialize Select2 Elements
     $(".select2").select2();
    
+    //date picker
+       $('.datepicker').datepicker({
+      autoclose: true,
+	  format: 'yyyy-mm-dd'
+	   
+    });
+
 	//data table
 	 $("#example1").DataTable();
 	 
