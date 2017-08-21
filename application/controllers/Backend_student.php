@@ -64,6 +64,8 @@ class Backend_student extends CI_Controller
 	{
 		$data = array();
 		$data['student_edit']= $this->model_backend_student->get_student_row($id);
+		$std_row_id=$data['student_edit']->std_row_id;
+		$data['qualification']= $this->model_backend_student->get_student_qualification($std_row_id);
 		$data['blood_group']=array(1=>'A+',2=>'A-',3=>'B+',4=>'B-',5=>'O+',6=>'O-',7=>'AB+',8=>'AB-');
 		$data['semester']= $this->model_backend_student->get_semester_data();
 		$data['session']= $this->model_backend_student->get_session_data();

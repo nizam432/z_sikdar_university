@@ -190,26 +190,34 @@
 		 
 		
 		<fieldset class="brother" style="width:100%">
+			
+			<?php 
+			$number_of_row=count($qualification);
+			$sl=0;
+			foreach($qualification as $key=>$qualification_data){
+				$sl++;
+				?>
 			<div class="bro">
 				  <div class="col-sm-3">
-					<input type="text" name="degree_title[]" required  class="form-control">
+					<input type="text" name="degree_title[]" value="<?php echo $qualification_data->degree_title ?>" required  class="form-control">
 				  </div>
 				  
 				  <div class="col-sm-3">
-					<input type="text" name="passing_year[]" required class="form-control">
+					<input type="text" name="passing_year[]" value="<?php echo $qualification_data->passing_year ?>"required class="form-control">
 				  </div>
 				  
 				  <div class="col-sm-3">
-					<input type="text" name="div_or_cgpa[]"  required class="form-control">
+					<input type="text" name="div_or_cgpa[]"  value="<?php echo $qualification_data->div_or_cgpa ?>" required class="form-control">
 				  </div>
 				  <div class="col-sm-3">
-					<input type="text" name="board_or_institiute[]" required class="form-control">
+					<input type="text" name="board_or_institiute[]" value="<?php echo $qualification_data->board_or_institiute ?>" required class="form-control">
 				  </div>
 				<br>
 				<div class="col-sm-12 pull-right">
-				<a class="btn btn-info pull-right" required name="addnewbro">+</a>
+				<a class="btn btn-info pull-right" required name="addnewbro"><?php if($number_of_row==$sl) echo '+'; else echo '-';?></a>
 				</div >
 			</div>
+			<?php } ?>
 		</fieldset>	 
 		
 		</div>	

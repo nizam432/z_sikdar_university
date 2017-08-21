@@ -58,6 +58,16 @@ class Model_backend_student extends  CI_Model
 		$query=$this->db->get('');
 		$result=$query->result();
 		return $result;
+	}
+
+	public function get_student_qualification($std_row_id)
+	{
+		$this->db->select('*');
+		$this->db->from('student_qualification');
+		$this->db->where('std_row_id',$std_row_id);
+		$query=$this->db->get('');
+		$result=$query->result();
+		return $result;
 	}	
 
 	public function get_semester_data()
