@@ -64,14 +64,19 @@ class Backend_student extends CI_Controller
 	{
 		$data = array();
 		$data['student_edit']= $this->model_backend_student->get_student_row($id);
+		//student row id
 		$std_row_id=$data['student_edit']->std_row_id;
 		$data['qualification']= $this->model_backend_student->get_student_qualification($std_row_id);
 		$data['blood_group']=array(1=>'A+',2=>'A-',3=>'B+',4=>'B-',5=>'O+',6=>'O-',7=>'AB+',8=>'AB-');
 		$data['semester']= $this->model_backend_student->get_semester_data();
 		$data['session']= $this->model_backend_student->get_session_data();
+		$data['faculty']= $this->model_backend_student->get_faculty_data();
+		//faculty id
+		$faculty=$data['student_edit']->faculty;
+		$data['department']= $this->model_backend_student->get_department_edit_data($faculty);
+		$data['program']= $this->model_backend_student->get_program_edit_data();
 		$data['section']= $this->model_backend_student->get_section_data();
-		$data['shift']= $this->model_backend_student->get_shift_data();
-		$data['faculty']= $this->model_backend_student->get_faculty_data();		
+		$data['shift']= $this->model_backend_student->get_shift_data();		
 		$data['content']=$this->load->view('admin/student/edit',$data, TRUE);
 		$this->load->view('admin/index', $data);
 	}
@@ -143,7 +148,7 @@ class Backend_student extends CI_Controller
 		
 		//student table field
 		$this->form_validation->set_rules('student_full_name', 'Student Name', 'required');
-		/*$this->form_validation->set_rules('father_name', 'Father\'s Name', 'required');
+		$this->form_validation->set_rules('father_name', 'Father\'s Name', 'required');
 		$this->form_validation->set_rules('mother_name', 'Mother\'s Name', 'required');
 		$this->form_validation->set_rules('marital_status', 'Marital Status', 'required');
 		$this->form_validation->set_rules('sex', 'Sex', 'required');
@@ -170,7 +175,6 @@ class Backend_student extends CI_Controller
 		$this->form_validation->set_rules('passing_year[]', 'Passing Year', 'required');
 		$this->form_validation->set_rules('div_or_cgpa[]', 'Divition', 'required');
 		$this->form_validation->set_rules('board_or_institiute[]', 'Marital Status', 'required');
-		*/
 		//Credit table field
 		
 		

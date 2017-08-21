@@ -68,6 +68,26 @@ class Model_backend_student extends  CI_Model
 		$query=$this->db->get('');
 		$result=$query->result();
 		return $result;
+	}		
+	
+	public function get_department_edit_data($faculty)
+	{
+		$this->db->select('department_id,department_title');
+		$this->db->from('department');
+		$this->db->where('faculty',$faculty);
+		$query=$this->db->get('');
+		$result=$query->result();
+		return $result;
+	}
+
+	public function get_department_edit_data($program)
+	{
+		$this->db->select('program_id,program_title');
+		$this->db->from('program');
+		$this->db->where('faculty',$faculty);
+		$query=$this->db->get('');
+		$result=$query->result();
+		return $result;
 	}	
 
 	public function get_semester_data()

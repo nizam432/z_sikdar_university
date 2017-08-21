@@ -172,7 +172,7 @@
 		</div>
 
 		<div class="form-group" id="credit_transfer_item">
-
+assdfsf
 		</div>
 	</div> 
 </div>
