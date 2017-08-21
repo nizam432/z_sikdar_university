@@ -16,6 +16,27 @@ class Model_backend_student extends  CI_Model
 	public function save_student_data($data)
 	{
 		$this->db->insert('student',$data);
+		return $this->db->insert_id();
+	}
+	
+	public function save_student_credit_data($credit)
+	{
+		
+		$this->db->insert('student_credit_transfer',$credit);
+	}
+	
+	public function save_student_qualification_data($qualification,$std_row_id)
+	{
+		$data=array();
+		foreach($qualification['degree_title'] as $key=>$value)
+		{
+			$data['std_row_id']=$std_row_id;
+			$data['degree_title']=$qualification['degree_title'][$key];
+			$data['passing_year']=$qualification['passing_year'][$key]; 
+			$data['div_or_cgpa']=$qualification['div_or_cgpa'][$key];
+			$data['board_or_institiute']=$qualification['board_or_institiute'][$key]; 
+			$this->db->insert('student_qualification',$data);
+		}
 	}
 	
 

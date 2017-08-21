@@ -38,7 +38,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Select2 -->
   <!-- jQuery 2.2.3 -->
 <script src="<?php echo base_url(); ?>assets/backend/plugins/jQuery/jquery-2.2.3.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- bootstrap validation -->
+<script src="<?php echo base_url(); ?>assets/backend/dist/js/validator.min.js"></script>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">

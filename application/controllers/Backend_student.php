@@ -64,6 +64,12 @@ class Backend_student extends CI_Controller
 	{
 		$data = array();
 		$data['student_edit']= $this->model_backend_student->get_student_row($id);
+		$data['blood_group']=array(1=>'A+',2=>'A-',3=>'B+',4=>'B-',5=>'O+',6=>'O-',7=>'AB+',8=>'AB-');
+		$data['semester']= $this->model_backend_student->get_semester_data();
+		$data['session']= $this->model_backend_student->get_session_data();
+		$data['section']= $this->model_backend_student->get_section_data();
+		$data['shift']= $this->model_backend_student->get_shift_data();
+		$data['faculty']= $this->model_backend_student->get_faculty_data();		
 		$data['content']=$this->load->view('admin/student/edit',$data, TRUE);
 		$this->load->view('admin/index', $data);
 	}
@@ -77,11 +83,16 @@ class Backend_student extends CI_Controller
 	 */	
 	public function save()
 	{
+		//student table field;
 		$data=array();
+		
 		$data['student_full_name']=$this->input->post('student_full_name', TRUE);
 		$data['father_name']=$this->input->post('father_name', TRUE);
 		$data['mother_name']=$this->input->post('mother_name', TRUE);
 		$data['marital_status']=$this->input->post('marital_status', TRUE);
+		$data['marital_status']=$this->input->post('marital_status', TRUE);
+		$data['sex']=$this->input->post('sex', TRUE);
+		$data['dob']=$this->input->post('dob', TRUE);
 		$data['blood_group']=$this->input->post('blood_group', TRUE);
 		$data['contact_self']=$this->input->post('contact_self', TRUE);
 		$data['contact_family']=$this->input->post('contact_family', TRUE);
@@ -101,17 +112,40 @@ class Backend_student extends CI_Controller
 		$data['section']=$this->input->post('section', TRUE);
 		$data['shift']=$this->input->post('shift', TRUE);
 		$data['admission_date']=$this->input->post('admission_date', TRUE);
-		$data['status']=$this->input->post('status', TRUE);
+		$data['graduation_type']=$this->input->post('graduation_type', TRUE);
 		
+		//call photo upload function
+		$result=$this->do_upload('student_photo');
+		if(!empty($result[0]))
+		{
+			echo $data['student_photo'] = "/uplaod_file/student_photo/$result[0]" ;	
+		}
+
 		$data['entry_by']=$this->session->userdata('admin_id');
 		$data['entry_date_time']=date('Y-m-d H:i:s');
 		$data['status']=$this->input->post('status', TRUE);
+			
+		// Qtalification table field
+		$qualification=array();
+		$qualification['degree_title']= $this->input->post('degree_title',TRUE);
+		$qualification['passing_year']= $this->input->post('passing_year',TRUE);
+		$qualification['div_or_cgpa']= $this->input->post('div_or_cgpa',TRUE);
+		$qualification['board_or_institiute']= $this->input->post('board_or_institiute',TRUE);
+		
+		// Credit table field
+		$credit= array();
+		$credit['credit']= $this->input->post('credit',TRUE);
+		$credit['cgpa']= $this->input->post('cgpa',TRUE);
 		
 		//Form Validation
+		
+		//student table field
 		$this->form_validation->set_rules('student_full_name', 'Student Name', 'required');
-		$this->form_validation->set_rules('father_name', 'Father\'s Name', 'required');
+		/*$this->form_validation->set_rules('father_name', 'Father\'s Name', 'required');
 		$this->form_validation->set_rules('mother_name', 'Mother\'s Name', 'required');
 		$this->form_validation->set_rules('marital_status', 'Marital Status', 'required');
+		$this->form_validation->set_rules('sex', 'Sex', 'required');
+		$this->form_validation->set_rules('dob', 'Date of Birth', 'required');
 		$this->form_validation->set_rules('blood_group', 'Blood Group', 'required');
 		$this->form_validation->set_rules('email_id', 'Email ID', 'required');
 		$this->form_validation->set_rules('contact_self', 'Contact Self', 'required');
@@ -129,6 +163,14 @@ class Backend_student extends CI_Controller
 		$this->form_validation->set_rules('shift', 'shift', 'required');
 		$this->form_validation->set_rules('admission_date', 'Admission Date', 'required');
 		$this->form_validation->set_rules('status', 'status', 'required');
+		//Qualification table field
+		$this->form_validation->set_rules('degree_title[]', 'Degree required', 'required');
+		$this->form_validation->set_rules('passing_year[]', 'Passing Year', 'required');
+		$this->form_validation->set_rules('div_or_cgpa[]', 'Divition', 'required');
+		$this->form_validation->set_rules('board_or_institiute[]', 'Marital Status', 'required');
+		*/
+		//Credit table field
+		
 		
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -137,8 +179,35 @@ class Backend_student extends CI_Controller
 		}
 		else
 		{
-			//save student
-			$this->model_backend_student->save_student_data($data);
+			$this->db->trans_begin();
+
+			//save student data
+			$insert_id=$this->model_backend_student->save_student_data($data);
+			
+			if(!empty($credit['credit']))
+			{
+				$credit['std_row_id']=$insert_id;
+				//save student credit
+				$this->model_backend_student->save_student_credit_data($credit);
+			}
+			
+			
+			if(!empty($qualification['degree_title'][0]))
+			{
+				$std_row_id=$insert_id;
+				//save student qalification
+				$this->model_backend_student->save_student_qualification_data($qualification,$std_row_id);
+			}
+			
+			
+			if ($this->db->trans_status() === FALSE)
+			{
+					$this->db->trans_rollback();
+			}
+			else
+			{
+					$this->db->trans_commit();
+			}		
 			
 			// Redirect with flash message
 			$result=array();
@@ -255,4 +324,36 @@ class Backend_student extends CI_Controller
 		}
 		echo json_encode($json);
 	}	
+	
+	public function do_upload($student_photo)
+	{
+	    // photo upload
+		$config = array();
+		$config['upload_path'] = './uplaod_file/student_photo/';
+		$config['allowed_types'] = 'gif|jpg|png|';
+		$config['max_size'] = '200';	
+		
+		$this->load->library('upload', $config,'student_photo');
+		$this->student_photo->initialize($config);
+		$student_photo = $this->student_photo->do_upload('student_photo');
+	
+	    // Check uploads success
+		if ($student_photo) 
+		{
+			$file_name=array();
+		   if($student_photo)
+		  { // Both Upload Success
+			
+		  // Data of your cover file
+		  $student_photo = $this->student_photo->data();
+		  $file_name[0]=$student_photo['file_name']; 
+		  }
+		  
+		  return $file_name;
+		} 
+		else {
+		 echo 'Cover upload Error : ' . $this->student_photo->display_errors() . '<br/>';
+		
+		}
+	}
 }
