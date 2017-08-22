@@ -8,7 +8,7 @@
 	</div>
 	
 	<div class="submit_btn_all">
-		<a href="<?php echo base_url()?>backend_student/add"> 
+		<a href="<?php echo base_url()?>student-add"> 
 			<button type="button" class="btn btn-primary ">Add new</button>
 		</a>
 		<button  type="submit" name="publish" id="publish" class="btn btn-success addrecord">
@@ -48,7 +48,7 @@
 					<td>' . $student_list_data->entry_date_time. '</td>	
 					<td>' . (($student_list_data->status==1)? 
 					'<span class="label label-success">Publish</span>' :  '<span class="label label-warning">Unpublish</span>'). '</td>	
-					<td><a href="'.base_url().'backend_student/edit/'.$student_list_data->std_row_id.'"><i class="fa fa-edit"></i> Edit</a></td>	
+					<td><a href="'.base_url().'student-edit-'.$student_list_data->std_row_id.'"><i class="fa fa-edit"></i> Edit</a></td>	
 					</tr>';
 				}  
 			?> 

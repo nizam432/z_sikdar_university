@@ -1,8 +1,9 @@
 <div class="col-md-4 col-xs-12">
-  <!-- small box -->
+
+<!-- small box -->
   <div class="small-box bg-aqua">
 	<div class="inner">
-	  <h3><?php echo $total_category; ?></h3>
+	  <h3><?php //echo $total_category; ?></h3>
 
 	  <p>Category</p>
 	</div>
@@ -19,7 +20,7 @@
   <!-- small box -->
   <div class="small-box bg-green">
 	<div class="inner">
-	  <h3><?php echo $total_article; ?></h3>
+	  <h3><?php //echo $total_article; ?></h3>
 
 	  <p>Article</p>
 	</div>
@@ -36,7 +37,7 @@
   <!-- small box -->
   <div class="small-box bg-orange">
 	<div class="inner">
-	  <h3><?php echo $total_user; ?></h3>
+	  <h3><?php //echo $total_user; ?></h3>
 
 	  <p>User</p>
 	</div>

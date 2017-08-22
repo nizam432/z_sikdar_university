@@ -24,12 +24,12 @@ class Backend_dashboard extends CI_Controller
 			
 		$data = array();
 		//get total category
-		$data['total_category']=$this->model_dashboard->get_total_category();
+		//$data['total_category']=$this->model_dashboard->get_total_category();
 		//get total article
-		$data['total_article']=$this->model_dashboard->get_total_article();	
+		//$data['total_article']=$this->model_dashboard->get_total_article();	
 		//get total user
-		$data['total_user']=$this->model_dashboard->get_total_user();
-		$data['content'] = $this->load->view('admin/dashboard/dashboard',$data, TRUE);
+		//$data['total_user']=$this->model_dashboard->get_total_user();
+		$data['content'] = $this->load->view('admin/dashboard/dashboard','', TRUE);
 	
 		$this->load->view('admin/index',$data);
 	}

@@ -81,7 +81,7 @@
 			  <div class="input-group-addon">
 				<i class="fa fa-calendar"></i>
 			  </div>
-               <input type="text"  name="dob" class="form-control pull-right datepicker" required>
+               <input type="text" placeholder="yyyy-mm-dd"  name="dob" class="form-control pull-right datepicker" required>
             </div>
 			<div class="help-block with-errors"></div>
 		  </div>
@@ -116,12 +116,14 @@
 				
 		<div class="form-group ">
 		  <label class="col-sm-2 ">Present Address</label>
-		  <div class="col-sm-4">
+		  <div class="col-sm-10">
 			<input type="text" name="present_address" class="form-control" required>
 			<div class="help-block with-errors"></div>
 		  </div>
+		  </div>
+		<div class="form-group ">  
 		  <label class="col-sm-2 ">Permenent Address</label>
-		  <div class="col-sm-4">
+		  <div class="col-sm-10">
 			<input type="text" name="permanent_address" class="form-control" required>
 			<div class="help-block with-errors"></div>
 		  </div>
@@ -323,7 +325,7 @@
 			  <div class="input-group-addon">
 				<i class="fa fa-calendar"></i>
 			  </div>
-               <input type="text"  name="admission_date" class="form-control pull-right datepicker" required >
+               <input type="text"  placeholder="yyyy-mm-dd" name="admission_date" class="form-control pull-right datepicker" required >
             </div>			
 		   </div>
 		</div>	

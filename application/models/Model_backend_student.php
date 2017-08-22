@@ -139,6 +139,7 @@ class Model_backend_student extends  CI_Model
 		$result=$query->result();
 		return $result;
 	}	
+	
 	public function update_student_data($data, $id)
 	{
 		$this->db->where('std_row_id', $id);
@@ -146,7 +147,20 @@ class Model_backend_student extends  CI_Model
 		return $result;		
 	}
 	
-		public function publish_data($data,$ids)
+	public function delete_student_credit_data($std_row_id)
+	{
+		$this->db->where('std_row_id', $std_row_id);
+		$this->db->delete('student_credit_transfer');	
+	}
+	
+	public function delete_student_qualification_data($std_row_id)
+	{
+		$this->db->where('std_row_id', $std_row_id);
+		$this->db->delete('student_qualification');
+	}
+	
+	
+	public function publish_data($data,$ids)
 	{
 		echo $data;
 		echo $ids;

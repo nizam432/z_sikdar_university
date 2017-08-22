@@ -100,7 +100,7 @@ class Backend_student extends CI_Controller
 		$data['father_name']=$this->input->post('father_name', TRUE);
 		$data['mother_name']=$this->input->post('mother_name', TRUE);
 		$data['marital_status']=$this->input->post('marital_status', TRUE);
-		$data['marital_status']=$this->input->post('marital_status', TRUE);
+		$data['spouse_name']=$this->input->post('spouse_name', TRUE);
 		$data['sex']=$this->input->post('sex', TRUE);
 		$data['dob']=$this->input->post('dob', TRUE);
 		$data['blood_group']=$this->input->post('blood_group', TRUE);
@@ -210,7 +210,6 @@ class Backend_student extends CI_Controller
 				$this->model_backend_student->save_student_qualification_data($qualification,$std_row_id);
 			}
 			
-			
 			if ($this->db->trans_status() === FALSE)
 			{
 					$this->db->trans_rollback();
@@ -236,13 +235,14 @@ class Backend_student extends CI_Controller
 	 * @return void
 	 */	
 	 
-	public function update($id)
+	public function update($std_row_id)
 	{
 		$data = array();
 		$data['student_full_name']=$this->input->post('student_full_name', TRUE);
 		$data['father_name']=$this->input->post('father_name', TRUE);
 		$data['mother_name']=$this->input->post('mother_name', TRUE);
 		$data['marital_status']=$this->input->post('marital_status', TRUE);
+		$data['spouse_name']=$this->input->post('spouse_name', TRUE);
 		$data['sex']=$this->input->post('sex', TRUE);
 		$data['dob']=$this->input->post('dob', TRUE);
 		$data['blood_group']=$this->input->post('blood_group', TRUE);
@@ -276,6 +276,18 @@ class Backend_student extends CI_Controller
 		$data['update_by']=$this->session->userdata('admin_id');
 		$data['update_date_time']=date('Y-m-d H:i:s');
 		$data['status']=$this->input->post('status', TRUE);
+		
+		// Qtalification table field
+		$qualification=array();
+		$qualification['degree_title']= $this->input->post('degree_title',TRUE);
+		$qualification['passing_year']= $this->input->post('passing_year',TRUE);
+		$qualification['div_or_cgpa']= $this->input->post('div_or_cgpa',TRUE);
+		$qualification['board_or_institiute']= $this->input->post('board_or_institiute',TRUE);
+		
+		// Credit table field
+		$credit= array();
+		$credit['credit']= $this->input->post('credit',TRUE);
+		$credit['cgpa']= $this->input->post('cgpa',TRUE);
 
 		
 		//student table field
@@ -312,12 +324,39 @@ class Backend_student extends CI_Controller
 		if ($this->form_validation->run() == FALSE)
 		{
 			$this->session->set_flashdata('student_form_validation',validation_errors());
-			redirect("backend_student/edit/$id");
+			redirect("backend_student/edit/$std_row_id");
 		}
 		else
 		{
+			//commit rollback
+			$this->db->trans_begin();
+			
 			//update student data
-			$this->model_backend_student->update_student_data($data,$id);
+			$this->model_backend_student->update_student_data($data,$std_row_id);
+			//delete student qualification
+			$this->model_backend_student->delete_student_qualification_data($std_row_id);
+			//save student qalification
+			$this->model_backend_student->save_student_qualification_data($qualification,$std_row_id);
+			
+			if(!empty($credit['credit']))
+			{
+				//save student credit
+				$this->model_backend_student->delete_student_credit_data($std_row_id);
+				//student id
+				$credit['std_row_id']=$std_row_id;
+				//save student credit
+				$this->model_backend_student->save_student_credit_data($credit,$std_row_id);
+			}
+			
+			
+			if ($this->db->trans_status() === FALSE)
+			{
+					$this->db->trans_rollback();
+			}
+			else
+			{
+					$this->db->trans_commit();
+			}
 			
 			// Redirect with flash message
 			$sdata=array();

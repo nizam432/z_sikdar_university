@@ -54,9 +54,9 @@
 			<label class="col-sm-2 ">Marital Status</label>
 			<div class="col-sm-4">
 			  <select name="marital_status" class="form-control" id="marital_status" required>
-				<option value="1">Unmarried</option>
-				<option value="2">Married</option>
-				<option value="3">Other</option>
+				<option <?php if($student_edit->marital_status==1) echo ' selected="selected" ' ?>  value="1">Unmarried</option>
+				<option <?php if($student_edit->marital_status==2) echo ' selected="selected" ' ?> value="2">Married</option>
+				<option <?php if($student_edit->marital_status==3) echo ' selected="selected" ' ?> value="3">Other</option>
 			  </select>
 			  <div class="help-block with-errors"></div>
 			</div>
@@ -71,6 +71,14 @@
 		  </div>
 		</div>
 		<div id="spouse_field">
+		<?php if($student_edit->marital_status==2) { ?>
+			<div class="form-group remove_spouse"><label class="col-sm-2 ">Spouse Name</label>
+
+				<div class="col-sm-4">
+					<input type="text" name="spouse_name"  value="<?php echo $student_edit->spouse_name; ?>" required class="form-control">
+				</div>
+			</div>
+		<?php }?>
 		</div>
 		
 		<div class="form-group ">
@@ -112,15 +120,17 @@
 			<div class="help-block with-errors"></div>
 		  </div>
 		</div>	
-				
+		
 		<div class="form-group ">
 		  <label class="col-sm-2 ">Present Address</label>
-		  <div class="col-sm-4">
+		  <div class="col-sm-10">
 			<input type="text" name="present_address" value="<?php echo $student_edit->present_address; ?>" class="form-control" required>
 			<div class="help-block with-errors"></div>
 		  </div>
+		  </div>
+		<div class="form-group ">  
 		  <label class="col-sm-2 ">Permenent Address</label>
-		  <div class="col-sm-4">
+		  <div class="col-sm-10">
 			<input type="text" name="permanent_address" value="<?php echo $student_edit->permanent_address; ?>" class="form-control" required>
 			<div class="help-block with-errors"></div>
 		  </div>
@@ -444,7 +454,7 @@ $('#student_photo').bind('change', function() {
 		 if(marital_status==2)
 		 {
 			$('.remove_spouse').remove();
-			$('#spouse_field').append('<div class="form-group remove_spouse"><label class="col-sm-2 ">Spouse Name</label><div class="col-sm-4"><input type="text" name="spouse_name" required class="form-control"></div></div>');
+			$('#spouse_field').append('<div class="form-group remove_spouse"><label class="col-sm-2 ">Spouse Name</label><div class="col-sm-4"><input type="text" name="spouse_name" value="<?php echo $student_edit->spouse_name; ?>" required class="form-control"></div></div>');
 		 }else
 		 {
 			 $('.remove_spouse').remove();
