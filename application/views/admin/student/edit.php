@@ -166,13 +166,31 @@
 
 			 <label class="col-sm-2 ">Credit Transfer</label> 
 			 <div class="col-sm-4">
-				  Yes <input type="radio" <?php if($student_edit->credit_transfer==2) echo ' checked="checked" ' ?> name="credit_transfer" id="credit_t_yes" value="1" >
+				  Yes <input type="radio" <?php if($student_edit->credit_transfer==1) echo ' checked="checked" ' ?> name="credit_transfer" id="credit_t_yes" value="1" >
 				  No  <input type="radio" <?php if($student_edit->credit_transfer==2) echo ' checked="checked" ' ?> name="credit_transfer" id="credit_t_no" value="2">
 			</div>
 		</div>
 
 		<div class="form-group" id="credit_transfer_item">
-assdfsf
+		<?php 
+			if($student_edit->credit_transfer==1)
+			{
+				?>
+			
+		<div class="form-group credit_info">
+			<label class="col-sm-2 ">Completed Credit</label>
+			<div class="col-sm-4">
+
+				<label class="col-sm-6">Credit</label>
+				<label class="col-sm-6">CGPA</label>
+				<div class="col-sm-6">
+					<input type="text" name="credit" value="<?php if(!empty($credit->credit)) echo $credit->credit;?>" required class="form-control"></div>
+				<div class="col-sm-6">
+					<input type="text" required value="<?php  if(!empty($credit->cgpa)) echo $credit->cgpa; ?>" name="cgpa" class="form-control">
+				</div>
+			</div>
+		</div>
+			<?php }?>
 		</div>
 	</div> 
 </div>
@@ -284,7 +302,12 @@ assdfsf
 		  <label class="col-sm-2 ">Department</label>
 		  <div class="col-sm-4">		  
 			  <select name="department" class="form-control department" required>
-				<option value="">Please select</option>
+				<?php 
+					foreach($department as $department_data)
+					{		
+						 echo '<option '.(($department_data->department_id==$student_edit->department)? 'selected="selected"':'').' value="'.$department_data->department_id.'">'.$department_data->department_title.'</option>';
+					}
+				?>
 			  </select>
 		   </div>
 		</div>
@@ -293,7 +316,12 @@ assdfsf
 		  <label class="col-sm-2 ">Program</label>
 		  <div class="col-sm-4">			  
 			  <select name="program" class="form-control program" required>
-				<option value="">Please select</option>
+			  	<?php 
+					foreach($program as $program_data)
+					{		
+						 echo '<option '.(($program_data->program_id==$student_edit->program)? 'selected="selected"':'').' value="'.$program_data->program_id.'">'.$program_data->program_title.'</option>';
+					}
+				?>
 			  </select>
 		  </div>	  
 		  <label class="col-sm-2 ">Section</label>
@@ -338,25 +366,28 @@ assdfsf
 		  <label class="col-sm-2 ">Admission Status</label>
 		   <div class="col-sm-4">
 			  <select name="status" class="form-control">
-				<option value="1">Active</option>
-				<option value="2">Cancelled</option>
+				<option  <?php if($student_edit->graduation_type==2) echo ' checked="checked" ' ?>   value="1">Active</option>
+				<option  <?php if($student_edit->graduation_type==2) echo ' checked="checked" ' ?>   value="2">Cancelled</option>
 			  </select>
 		  </div>
 		  <label class="col-sm-2 ">Type</label>
 		  <div class="col-sm-4">
 		   <label class="">Undergraduate</label>
-			 <input type="radio" value="1" checked="checked" name="graduation_type" > &nbsp;&nbsp;&nbsp;
+			 <input type="radio" value="1"  <?php if($student_edit->graduation_type==2) echo ' checked="checked" ' ?>   name="graduation_type" > &nbsp;&nbsp;&nbsp;
 			 <label class="">Graduate</label>
-			<input type="radio" value="2" name="graduation_type">
+			<input type="radio"  <?php if($student_edit->graduation_type==2) echo ' checked="checked" ' ?> value="2" name="graduation_type">
 		  </div>		  
 		</div>
 		<div class="form-group">
 		  <label class="col-sm-2 ">Student Photo</label>
 		   <div class="col-sm-4">
-			  <input type="file" id="student_photo" name="student_photo" required><br>
+			  <input type="file" id="student_photo" name="student_photo"><br>
 			  Maximum photo size  200kb
 			  
-		  </div>		  
+		  </div>	
+		<div class="col-sm-2">
+			  <img src="<?php echo base_url().$student_edit->student_photo;?>" class="img-responsive">
+		  </div>			  
 		</div>		
 	  </div>
 </div>
@@ -402,7 +433,7 @@ $('#student_photo').bind('change', function() {
 	// Credit filed load
 	 $('#credit_t_yes').click(function () {
 		 $('.credit_info').remove();
-	   $('#credit_transfer_item').append('<div class="form-group credit_info"><label class="col-sm-2 ">Completed Credit</label><div class="col-sm-4"><label class="col-sm-6">Credit</label><label class="col-sm-6">CGPA</label><div class="col-sm-6"><input type="text" name="credit" required class="form-control"></div><div class="col-sm-6"><input type="text" required name="cgpa" class="form-control"></div</div></div></div>');
+	   $('#credit_transfer_item').append('<div class="form-group credit_info"><label class="col-sm-2 ">Completed Credit</label><div class="col-sm-4"><label class="col-sm-6">Credit</label><label class="col-sm-6">CGPA</label><div class="col-sm-6"><input type="text" name="credit" required value="<?php if(!empty($credit->credit)) echo $credit->credit;?>" class="form-control"></div><div class="col-sm-6"><input type="text" required value="<?php if(!empty($credit->cgpa)) echo $credit->cgpa;?>" name="cgpa" class="form-control"></div</div></div></div>');
 	 });	
 	 
 	 $('#credit_t_no').click(function () {

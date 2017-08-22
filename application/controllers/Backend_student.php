@@ -67,6 +67,7 @@ class Backend_student extends CI_Controller
 		//student row id
 		$std_row_id=$data['student_edit']->std_row_id;
 		$data['qualification']= $this->model_backend_student->get_student_qualification($std_row_id);
+		$data['credit']= $this->model_backend_student->get_student_credit($std_row_id);
 		$data['blood_group']=array(1=>'A+',2=>'A-',3=>'B+',4=>'B-',5=>'O+',6=>'O-',7=>'AB+',8=>'AB-');
 		$data['semester']= $this->model_backend_student->get_semester_data();
 		$data['session']= $this->model_backend_student->get_session_data();
@@ -74,7 +75,9 @@ class Backend_student extends CI_Controller
 		//faculty id
 		$faculty=$data['student_edit']->faculty;
 		$data['department']= $this->model_backend_student->get_department_edit_data($faculty);
-		$data['program']= $this->model_backend_student->get_program_edit_data();
+		//program id
+		$department=$data['student_edit']->department;
+		$data['program']= $this->model_backend_student->get_program_edit_data($department);
 		$data['section']= $this->model_backend_student->get_section_data();
 		$data['shift']= $this->model_backend_student->get_shift_data();		
 		$data['content']=$this->load->view('admin/student/edit',$data, TRUE);
@@ -125,7 +128,7 @@ class Backend_student extends CI_Controller
 		$result=$this->do_upload('student_photo');
 		if(!empty($result[0]))
 		{
-			echo $data['student_photo'] = "/uplaod_file/student_photo/$result[0]" ;	
+			echo $data['student_photo'] = "uplaod_file/student_photo/$result[0]" ;	
 		}
 
 		$data['entry_by']=$this->session->userdata('admin_id');
@@ -235,9 +238,36 @@ class Backend_student extends CI_Controller
 	{
 		$data = array();
 		$data['student_full_name']=$this->input->post('student_full_name', TRUE);
+		$data['father_name']=$this->input->post('father_name', TRUE);
+		$data['mother_name']=$this->input->post('mother_name', TRUE);
+		$data['marital_status']=$this->input->post('marital_status', TRUE);
+		$data['marital_status']=$this->input->post('marital_status', TRUE);
+		$data['sex']=$this->input->post('sex', TRUE);
+		$data['dob']=$this->input->post('dob', TRUE);
+		$data['blood_group']=$this->input->post('blood_group', TRUE);
+		$data['contact_self']=$this->input->post('contact_self', TRUE);
+		$data['contact_family']=$this->input->post('contact_family', TRUE);
+		$data['present_address']=$this->input->post('present_address', TRUE);
+		$data['permanent_address']=$this->input->post('permanent_address', TRUE);
+		$data['nationality']=$this->input->post('nationality', TRUE);
+		$data['email_id']=$this->input->post('email_id', TRUE);
+		$data['physical_challenge']=$this->input->post('physical_challenge', TRUE);
+		$data['credit_transfer']=$this->input->post('credit_transfer', TRUE);
+		$data['student_id']=$this->input->post('student_id', TRUE);
+		$data['reg_no']=$this->input->post('reg_no', TRUE);
+		$data['semester']=$this->input->post('semester', TRUE);
+		$data['session']=$this->input->post('session', TRUE);
+		$data['faculty']=$this->input->post('faculty', TRUE);
+		$data['department']=$this->input->post('department', TRUE);
+		$data['program']=$this->input->post('program', TRUE);
+		$data['section']=$this->input->post('section', TRUE);
+		$data['shift']=$this->input->post('shift', TRUE);
+		$data['admission_date']=$this->input->post('admission_date', TRUE);
+		$data['graduation_type']=$this->input->post('graduation_type', TRUE);		
 		$data['update_by']=$this->session->userdata('admin_id');
 		$data['update_date_time']=date('Y-m-d H:i:s');
 		$data['status']=$this->input->post('status', TRUE);
+
 		
 		//Form Validation
 		$this->form_validation->set_rules('student_full_name', 'student Name', 'required');

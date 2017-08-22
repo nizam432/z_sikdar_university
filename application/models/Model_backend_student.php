@@ -44,7 +44,7 @@ class Model_backend_student extends  CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('student');
-		$this->db->where('std_row_id',$id);
+		$this->db->where('student.std_row_id',$id);
 		$query=$this->db->get();
 		$result=$query->row();
 		return $result;
@@ -57,6 +57,16 @@ class Model_backend_student extends  CI_Model
 		$this->db->where('status',1);
 		$query=$this->db->get('');
 		$result=$query->result();
+		return $result;
+	}
+
+	public function get_student_credit($std_row_id)
+	{
+		$this->db->select('*');
+		$this->db->from('student_credit_transfer');
+		$this->db->where('std_row_id',$std_row_id);
+		$query=$this->db->get('');
+		$result=$query->row();
 		return $result;
 	}
 
@@ -80,11 +90,11 @@ class Model_backend_student extends  CI_Model
 		return $result;
 	}
 
-	public function get_department_edit_data($program)
+	public function get_program_edit_data($department)
 	{
 		$this->db->select('program_id,program_title');
 		$this->db->from('program');
-		$this->db->where('faculty',$faculty);
+		$this->db->where('department',$department);
 		$query=$this->db->get('');
 		$result=$query->result();
 		return $result;
