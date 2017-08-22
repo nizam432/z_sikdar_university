@@ -108,6 +108,8 @@ class Backend_student extends CI_Controller
 		$data['contact_family']=$this->input->post('contact_family', TRUE);
 		$data['present_address']=$this->input->post('present_address', TRUE);
 		$data['permanent_address']=$this->input->post('permanent_address', TRUE);
+		$data['national_id']=$this->input->post('national_id', TRUE);
+		$data['birth_id']=$this->input->post('birth_id', TRUE);
 		$data['nationality']=$this->input->post('nationality', TRUE);
 		$data['email_id']=$this->input->post('email_id', TRUE);
 		$data['physical_challenge']=$this->input->post('physical_challenge', TRUE);
@@ -177,7 +179,7 @@ class Backend_student extends CI_Controller
 		$this->form_validation->set_rules('degree_title[]', 'Degree required', 'required');
 		$this->form_validation->set_rules('passing_year[]', 'Passing Year', 'required');
 		$this->form_validation->set_rules('div_or_cgpa[]', 'Divition', 'required');
-		$this->form_validation->set_rules('board_or_institiute[]', 'Marital Status', 'required');
+		$this->form_validation->set_rules('board_or_institiute[]', 'Board or Institute', 'required');
 		//Credit table field
 		
 		
@@ -241,7 +243,6 @@ class Backend_student extends CI_Controller
 		$data['father_name']=$this->input->post('father_name', TRUE);
 		$data['mother_name']=$this->input->post('mother_name', TRUE);
 		$data['marital_status']=$this->input->post('marital_status', TRUE);
-		$data['marital_status']=$this->input->post('marital_status', TRUE);
 		$data['sex']=$this->input->post('sex', TRUE);
 		$data['dob']=$this->input->post('dob', TRUE);
 		$data['blood_group']=$this->input->post('blood_group', TRUE);
@@ -249,6 +250,8 @@ class Backend_student extends CI_Controller
 		$data['contact_family']=$this->input->post('contact_family', TRUE);
 		$data['present_address']=$this->input->post('present_address', TRUE);
 		$data['permanent_address']=$this->input->post('permanent_address', TRUE);
+		$data['national_id']=$this->input->post('national_id', TRUE);
+		$data['birth_id']=$this->input->post('birth_id', TRUE);
 		$data['nationality']=$this->input->post('nationality', TRUE);
 		$data['email_id']=$this->input->post('email_id', TRUE);
 		$data['physical_challenge']=$this->input->post('physical_challenge', TRUE);
@@ -263,14 +266,48 @@ class Backend_student extends CI_Controller
 		$data['section']=$this->input->post('section', TRUE);
 		$data['shift']=$this->input->post('shift', TRUE);
 		$data['admission_date']=$this->input->post('admission_date', TRUE);
-		$data['graduation_type']=$this->input->post('graduation_type', TRUE);		
+		$data['graduation_type']=$this->input->post('graduation_type', TRUE);	
+		//call photo upload function
+		$result=$this->do_upload('student_photo');
+		if(!empty($result[0]))
+		{
+			$data['student_photo'] = "uplaod_file/student_photo/$result[0]" ;	
+		}		
 		$data['update_by']=$this->session->userdata('admin_id');
 		$data['update_date_time']=date('Y-m-d H:i:s');
 		$data['status']=$this->input->post('status', TRUE);
 
 		
-		//Form Validation
-		$this->form_validation->set_rules('student_full_name', 'student Name', 'required');
+		//student table field
+		$this->form_validation->set_rules('student_full_name', 'Student Name', 'required');
+		$this->form_validation->set_rules('father_name', 'Father\'s Name', 'required');
+		$this->form_validation->set_rules('mother_name', 'Mother\'s Name', 'required');
+		$this->form_validation->set_rules('marital_status', 'Marital Status', 'required');
+		$this->form_validation->set_rules('sex', 'Sex', 'required');
+		$this->form_validation->set_rules('dob', 'Date of Birth', 'required');
+		$this->form_validation->set_rules('blood_group', 'Blood Group', 'required');
+		$this->form_validation->set_rules('email_id', 'Email ID', 'required');
+		$this->form_validation->set_rules('contact_self', 'Contact Self', 'required');
+		$this->form_validation->set_rules('contact_family', 'Contact Family', 'required');
+		$this->form_validation->set_rules('present_address', 'Present Address', 'required');
+		$this->form_validation->set_rules('permanent_address', 'Permanent Address', 'required');
+		$this->form_validation->set_rules('student_id', 'Student ID', 'required');
+		$this->form_validation->set_rules('reg_no', 'Registration ID', 'required');
+		$this->form_validation->set_rules('semester', 'Semester', 'required');
+		$this->form_validation->set_rules('session', 'session', 'required');
+		$this->form_validation->set_rules('faculty', 'Faculty', 'required');
+		$this->form_validation->set_rules('department', 'Dpartment', 'required');
+		$this->form_validation->set_rules('program', 'program', 'required');
+		$this->form_validation->set_rules('section', 'section', 'required');
+		$this->form_validation->set_rules('shift', 'shift', 'required');
+		$this->form_validation->set_rules('admission_date', 'Admission Date', 'required');
+		$this->form_validation->set_rules('status', 'status', 'required');
+		//Qualification table field
+		$this->form_validation->set_rules('degree_title[]', 'Degree required', 'required');
+		$this->form_validation->set_rules('passing_year[]', 'Passing Year', 'required');
+		$this->form_validation->set_rules('div_or_cgpa[]', 'Divition', 'required');
+		$this->form_validation->set_rules('board_or_institiute[]', 'Marital Status', 'required');
+		//Credit table field
 		
 		if ($this->form_validation->run() == FALSE)
 		{
