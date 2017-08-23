@@ -3,7 +3,8 @@
 	<!-- Optionally, you can add icons to the links -->
 	<li class="active"><a href="<?php echo base_url()?>backend_dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
 	<li><a href="<?php echo base_url()?>student-list"><i class="fa fa-user"></i> <span>Student</span></a></li>
-	<li><a href="<?php echo base_url()?>backend_user"><i class="fa fa-user"></i> <span>User</span></a></li>
+	<li><a href="<?php echo base_url()?>backend_course"><i class="fa fa-user"></i> <span>Course</span></a></li>
+	<li><a href="<?php echo base_url()?>backend_user"><i class="fa fa-user"></i> <span>User</span></a></li>	
 	<li class="treeview">
 	  <a href="#"><i class="fa fa-link"></i> <span>System Settings</span>
 		<span class="pull-right-container">
