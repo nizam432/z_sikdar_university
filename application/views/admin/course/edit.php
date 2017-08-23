@@ -36,7 +36,7 @@
 
 		<div class="form-group">
 		  <label>Course Type</label>
-		  <select name="Course_type" class="form-control">
+		  <select name="course_type" class="form-control">
 			<option value="">Please select</option>
 			<option <?php if($course_edit->status==1) echo ' selected="selected" ';?>  value="1">Option 1</option>
 			<option <?php if($course_edit->status==2) echo ' selected="selected" ';?>  value="2">Option 2</option>
