@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head> 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Nanosoft News Site | Starter</title>
+  <title>Sikder University | Student Management Software</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -26,7 +26,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/backend/dist/css/AdminLTE.css">
  
   <!-- Date Picker -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/backend/plugins/datepicker/bootstrap-datepicker.js"
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/backend/plugins/datepicker/datepicker3.css">
   
 
  <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
@@ -40,6 +40,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="<?php echo base_url(); ?>assets/backend/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- bootstrap validation -->
 <script src="<?php echo base_url(); ?>assets/backend/dist/js/validator.min.js"></script>
+
+
+
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -51,9 +54,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Logo -->
     <a href="<?php echo base_url();?>backend_dashboard" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>Ne</b>WS</span>
+      <span class="logo-mini"><b>Z</b>SK</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>NANOSOFT</b> NEWS</span>
+      <span class="logo-lg"><b>Sikder</b> University</span>
     </a>
 
     <!-- Header Navbar -->

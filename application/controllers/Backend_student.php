@@ -465,7 +465,7 @@ class Backend_student extends CI_Controller
 		} 
 		else {
 		 echo 'Cover upload Error : ' . $this->student_photo->display_errors() . '<br/>';
-		
+			
 		}
 	}
 }

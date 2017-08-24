@@ -81,12 +81,7 @@ class Backend_faculty_member extends CI_Controller
 		
 		
 		//call photo upload function
-		$result=$this->do_upload('faculty_member_photo');
-		if(!empty($result[0]))
-		{
-			echo $data['faculty_member_photo'] = "uplaod_file/faculty_member_photo/$result[0]" ;	
-		}
-		
+		$result=$this->do_upload('faculty_member_photo');	
 		$data['faculty_member_name']=$this->input->post('faculty_member_name', TRUE);
 		$data['faculty']=$this->input->post('faculty', TRUE);
 		$data['sex']=$this->input->post('sex', TRUE);
@@ -94,8 +89,8 @@ class Backend_faculty_member extends CI_Controller
 		$data['blood_group']=$this->input->post('blood_group', TRUE);
 		$data['email_id']=$this->input->post('email_id', TRUE);		
 		$data['contact_no']=$this->input->post('contact_no', TRUE);
-		$data['sex']=$this->input->post('designation', TRUE);
-		$data['dob']=$this->input->post('qualification', TRUE);
+		$data['designation']=$this->input->post('designation', TRUE);
+		$data['qualification']=$this->input->post('qualification', TRUE);
 		$data['join_date']=$this->input->post('join_date', TRUE);
 		$data['present_address']=$this->input->post('present_address', TRUE);
 		$data['permanent_address']=$this->input->post('permanent_address', TRUE);
@@ -109,8 +104,20 @@ class Backend_faculty_member extends CI_Controller
 		$data['entry_date_time']=date('Y-m-d H:i:s');
 		$data['status']=$this->input->post('status', TRUE);
 		
+
 		//Form Validation
-		$this->form_validation->set_rules('faculty_member_name', 'Faculty Member Name', 'required');
+		$this->form_validation->set_rules('faculty_member_name', 'Faculty Member Name Title', 'required');
+		$this->form_validation->set_rules('faculty', 'faculty', 'required');
+		$this->form_validation->set_rules('sex', 'sex', 'required');
+		$this->form_validation->set_rules('dob', 'dob', 'required');
+		$this->form_validation->set_rules('blood_group', 'Blood Group', 'required');
+		$this->form_validation->set_rules('email_id', 'Email ID', 'required');
+		$this->form_validation->set_rules('contact_no', 'Contact No', 'required');
+		$this->form_validation->set_rules('designation', 'designation', 'required');
+		$this->form_validation->set_rules('qualification', 'qualification', 'required');
+		$this->form_validation->set_rules('join_date', 'Joining Date', 'required');
+		$this->form_validation->set_rules('present_address', 'Present Address', 'required');
+		$this->form_validation->set_rules('permanent_address', 'Permanent Address', 'required');
 		
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -139,15 +146,45 @@ class Backend_faculty_member extends CI_Controller
 	 */	
 	 
 	public function update($id)
-	{
+	{	
+
 		$data = array();
-		$data['faculty_member_title']=$this->input->post('faculty_member_title', TRUE);
+		$data['faculty_member_name']=$this->input->post('faculty_member_name', TRUE);
+		$data['faculty']=$this->input->post('faculty', TRUE);
+		$data['sex']=$this->input->post('sex', TRUE);
+		$data['dob']=$this->input->post('dob', TRUE);
+		$data['blood_group']=$this->input->post('blood_group', TRUE);
+		$data['email_id']=$this->input->post('email_id', TRUE);		
+		$data['contact_no']=$this->input->post('contact_no', TRUE);
+		$data['designation']=$this->input->post('designation', TRUE);
+		$data['qualification']=$this->input->post('qualification', TRUE);
+		$data['join_date']=$this->input->post('join_date', TRUE);
+		$data['present_address']=$this->input->post('present_address', TRUE);
+		$data['permanent_address']=$this->input->post('permanent_address', TRUE);	
+		//call photo upload function
+		$result=$this->do_upload('faculty_member_photo');
+		if(!empty($result[0]))
+		{
+			echo $data['faculty_member_photo'] = "uplaod_file/faculty_member_photo/$result[0]" ;	
+		}				
 		$data['update_by']=$this->session->userdata('admin_id');
 		$data['update_date_time']=date('Y-m-d H:i:s');
 		$data['status']=$this->input->post('status', TRUE);
 		
+	
 		//Form Validation
-		$this->form_validation->set_rules('faculty_member_title', 'faculty_member Title', 'required');
+		$this->form_validation->set_rules('faculty_member_name', 'Faculty Member Name Title', 'required');
+		$this->form_validation->set_rules('faculty', 'faculty', 'required');
+		$this->form_validation->set_rules('sex', 'sex', 'required');
+		$this->form_validation->set_rules('dob', 'dob', 'required');
+		$this->form_validation->set_rules('blood_group', 'Blood Group', 'required');
+		$this->form_validation->set_rules('email_id', 'Email ID', 'required');
+		$this->form_validation->set_rules('contact_no', 'Contact No', 'required');
+		$this->form_validation->set_rules('designation', 'Designation No', 'required');
+		$this->form_validation->set_rules('qualification', 'Qualification No', 'required');
+		$this->form_validation->set_rules('join_date', 'Joining Date', 'required');
+		$this->form_validation->set_rules('present_address', 'Present Address', 'required');
+		$this->form_validation->set_rules('permanent_address', 'Permanent Address', 'required');
 		
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -158,6 +195,7 @@ class Backend_faculty_member extends CI_Controller
 		{
 			//update faculty_member data
 			$this->model_backend_faculty_member->update_faculty_member_data($data,$id);
+			
 			
 			// Redirect with flash message
 			$sdata=array();

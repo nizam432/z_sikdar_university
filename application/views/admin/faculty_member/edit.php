@@ -16,13 +16,13 @@
 	</div>
 	<!-- /.box-header -->
 	<!-- form start -->
-	<form action="<?php echo base_url(); ?>backend_faculty/update/<?php echo $faculty_edit->faculty_id ?>" method="post">
+	<form data-toggle="validator"  action="<?php echo base_url(); ?>backend_faculty_member/update/<?php echo $faculty_member_edit->faculty_member_id; ?>" enctype="multipart/form-data"  method="post">
 	  <div class="box-body">
 		<?php 
-			if(!empty($this->session->flashdata('faculty_form_validation')))
+			if(!empty($this->session->flashdata('faculty_member_form_validation')))
 			{?>
 				<div class="alert alert-danger">
-					<?php echo $this->session->flashdata('faculty_form_validation'); ?>
+					<?php echo $this->session->flashdata('faculty_member_form_validation'); ?>
 				</div>
 		<?php }?>	  
 		<div class="form-group ">
@@ -55,7 +55,12 @@
 		</div>
 		<div class="form-group ">
 		  <label>Date of Birth</label>
-		  <input type="text" name="dob" value="<?php echo $faculty_member_edit->dob?>" class="form-control" required>
+		  <div class="input-group date">
+			  <div class="input-group-addon">
+				<i class="fa fa-calendar"></i>
+			  </div>
+               <input type="text" placeholder="yyyy-mm-dd" value="<?php echo $faculty_member_edit->dob;?>"  name="dob" class="form-control pull-right datepicker" required>
+            </div>
 		  <div class="help-block with-errors"></div>
 		</div>			
 		<div class="form-group">
@@ -93,7 +98,12 @@
 		</div>	
 		<div class="form-group ">
 		  <label>Joining Date</label>
-		  <input type="text" name="join_date" value="<?php echo $faculty_member_edit->join_date; ?>" class="form-control" required>
+		  <div class="input-group date">
+			  <div class="input-group-addon">
+				<i class="fa fa-calendar"></i>
+			  </div>
+               <input type="text" placeholder="yyyy-mm-dd" value="<?php echo $faculty_member_edit->join_date;?>"  name="join_date" class="form-control pull-right datepicker" required>
+            </div>
 		  <div class="help-block with-errors"></div>
 		</div>	
 		<div class="form-group ">
@@ -107,11 +117,15 @@
 		  <div class="help-block with-errors"></div>
 		</div>			
 		<div class="form-group ">
-		  <label>Picture</label>
-		  <input type="file" name="faculty_member_photo" class="form-control" required><br>
+		  <label class="col-sm-2">Picture</label>
+		  <div class="col-sm-6">
+		  <input type="file" name="faculty_member_photo" id="faculty_member_photo" class="form-control" ><br>
 		  Maximum size 200KB 
-		  <div class="help-block with-errors"></div>
-		</div>	
+		  </div>
+		 	<div class="col-sm-4">
+			  <img src="<?php echo base_url().$faculty_member_edit->faculty_member_photo;?>" class="img-responsive">
+		  </div> 
+		</div>
 		<div class="form-group">
 		  <label>Status</label>
 		  <select name="status" class="form-control">
@@ -129,3 +143,17 @@
   </div>
   <!-- /.box -->
 </div>
+
+<script>
+	$('#faculty_member_photo').bind('change', function() {
+
+	  //this.files[0].size gets the size of your file.
+	  var file_size=this.files[0].size;
+	  if(file_size>204800)
+	  {
+		  alert('Maximum  student photo size 200KB.');
+		  this.value = null;
+	  }
+
+	});
+</script>

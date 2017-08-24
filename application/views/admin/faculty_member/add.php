@@ -57,8 +57,13 @@
 		</div>
 		<div class="form-group ">
 		  <label>Date of Birth</label>
-		  <input type="text" name="dob" class="form-control" required>
-		  <div class="help-block with-errors"></div>
+		 <div class="input-group date">
+			  <div class="input-group-addon">
+				<i class="fa fa-calendar"></i>
+			  </div>
+               <input type="text" placeholder="yyyy-mm-dd"  name="dob" class="form-control pull-right datepicker" required>
+            </div>
+			<div class="help-block with-errors"></div>
 		</div>			
 		<div class="form-group">
 		  <label>Blood Group</label>
@@ -95,8 +100,13 @@
 		</div>	
 		<div class="form-group ">
 		  <label>Joining Date</label>
-		  <input type="text" name="join_date" class="form-control" required>
-		  <div class="help-block with-errors"></div>
+		 <div class="input-group date">
+			  <div class="input-group-addon">
+				<i class="fa fa-calendar"></i>
+			  </div>
+               <input type="text" placeholder="yyyy-mm-dd"  name="join_date" class="form-control pull-right datepicker" required>
+            </div>
+			<div class="help-block with-errors"></div>		  
 		</div>	
 		<div class="form-group ">
 		  <label>Present Address</label>
@@ -110,7 +120,7 @@
 		</div>			
 		<div class="form-group ">
 		  <label>Picture</label>
-		  <input type="file" name="faculty_member_photo" class="form-control" required><br>
+		  <input type="file" name="faculty_member_photo" id="faculty_member_photo" class="form-control" required><br>
 		  Maximum size 200KB 
 		  <div class="help-block with-errors"></div>
 		</div>	
@@ -130,3 +140,17 @@
   </div>
   <!-- /.box -->
 </div>
+
+<script>
+	$('#faculty_member_photo').bind('change', function() {
+
+	  //this.files[0].size gets the size of your file.
+	  var file_size=this.files[0].size;
+	  if(file_size>204800)
+	  {
+		  alert('Maximum  student photo size 200KB.');
+		  this.value = null;
+	  }
+
+	});
+</script>
