@@ -152,7 +152,46 @@
 					<th>Reg.No</th>
 					<td><?php echo $student_info->reg_no;?></td>
 				</tr>	
-				
+				<tr>
+					<th>Semester</th>
+					<td><?php echo $student_info->semester;?></td>
+					<th>Session</th>
+					<td><?php echo $student_info->session;?></td>
+				</tr>	
+				<tr>
+					<th>faculty</th>
+					<td><?php echo $student_info->faculty;?></td>
+					<th>department</th>
+					<td><?php echo $student_info->department;?></td>
+				</tr>		
+				<tr>
+					<th>Program</th>
+					<td><?php echo $student_info->program;?></td>
+					<th>Section</th>
+					<td><?php echo $student_info->section;?></td>
+				</tr>
+				<tr>
+					<th>Admission Date</th>
+					<td><?php echo $student_info->admission_date;?></td>
+					<th>Admission status</th>
+					<td>
+						<?php 						
+							if($student_info->status==1) echo 'Active';
+							if($student_info->status==2) echo 'Cancel';
+						?>					
+					</td>
+				</tr>	
+				<tr>
+					<th>Type</th>
+					<td>
+						<?php 						
+							if($student_info->graduation_type==1) echo 'TypeUndergraduate';
+							if($student_info->graduation_type==2) echo 'Graduate';
+						?>
+					</td>
+					<th>Student Photo</th>
+					<td><img src="<?php echo base_url().$student_info->student_photo;?>" class="img-responsive" width="100" height="100"></td>
+				</tr>				
 			</table>		
 		</div>
 	</div>
