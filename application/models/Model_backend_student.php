@@ -196,4 +196,14 @@ class Model_backend_student extends  CI_Model
         $count = 0;
 	}
 	
+	public function get_view_data($std_row_id)
+	{
+		$this->db->select('*');
+		$this->db->from('student');
+		$this->db->where('std_row_id',$std_row_id);
+		$this->db->order_by("student.std_row_id", "DESC");
+		$query=$this->db->get('');
+		$result=$query->row();
+		return $result;
+	}
 }

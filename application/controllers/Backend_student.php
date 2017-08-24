@@ -468,4 +468,24 @@ class Backend_student extends CI_Controller
 			
 		}
 	}
+	
+
+	/**
+	 * View student info
+	 *
+	 * @return array
+	 */	
+	public function view($std_row_id)
+	{
+		$data = array();
+		$data['student_info']= $this->model_backend_student->get_view_data($std_row_id);
+		$data['blood_group']=array(1=>'A+',2=>'A-',3=>'B+',4=>'B-',5=>'O+',6=>'O-',7=>'AB+',8=>'AB-');
+		//get_student_id
+		$std_row_id=$data['student_info']->std_row_id;
+		$data['qualification']= $this->model_backend_student->get_student_qualification($std_row_id);
+		
+		$data['content']=$this->load->view('admin/student/view',$data, TRUE);
+		$this->load->view('admin/index', $data);		
+	}
+		
 }

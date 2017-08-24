@@ -35,6 +35,7 @@
 				<th>Entry Date & Time</th>
 				<th>status</th>
 				<th>Edit</th>
+				<th>View</th>
 			</tr>
 			<?php 	
 				$sl=1;
@@ -49,7 +50,9 @@
 					<td>' . (($student_list_data->status==1)? 
 					'<span class="label label-success">Publish</span>' :  '<span class="label label-warning">Unpublish</span>'). '</td>	
 					<td><a href="'.base_url().'student-edit-'.$student_list_data->std_row_id.'"><i class="fa fa-edit"></i> Edit</a></td>	
-					</tr>';
+					<td><a href="'.base_url().'student-view-'.$student_list_data->std_row_id.'"><i class="fa fa-eye"></i> View</a></td>
+					</tr>
+					';
 				}  
 			?> 
 		  </table > 

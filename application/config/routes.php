@@ -54,5 +54,6 @@ $route['admin'] = 'backend_login';
 $route['student-list'] = 'backend_student';
 $route['student-add'] = 'backend_student/add';
 $route['student-edit-(:num)'] = 'backend_student/edit/$1';
+$route['student-view-(:num)'] = 'backend_student/view/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
