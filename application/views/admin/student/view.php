@@ -90,7 +90,16 @@
 				</tr>		
 				<tr>
 					<th>Nationality</td>
-					<td><?php echo $student_info->nationality;?></td>
+					<td>
+						<?php 
+						if($student_info->nationality)
+						{
+							if($student_info->nationality==1) echo 'Bangladeshi';
+							if($student_info->nationality==2) echo 'Foreign';
+						}
+							
+						?>
+					</td>
 					<th>Email ID</th>
 					<td><?php echo $student_info->email_id;?></td>
 				</tr>	
@@ -154,21 +163,21 @@
 				</tr>	
 				<tr>
 					<th>Semester</th>
-					<td><?php echo $student_info->semester;?></td>
+					<td><?php echo $student_info->semester_title;?></td>
 					<th>Session</th>
-					<td><?php echo $student_info->session;?></td>
+					<td><?php echo $student_info->session_title;?></td>
 				</tr>	
 				<tr>
 					<th>faculty</th>
-					<td><?php echo $student_info->faculty;?></td>
+					<td><?php echo $student_info->faculty_title;?></td>
 					<th>department</th>
-					<td><?php echo $student_info->department;?></td>
+					<td><?php echo $student_info->department_title;?></td>
 				</tr>		
 				<tr>
 					<th>Program</th>
-					<td><?php echo $student_info->program;?></td>
+					<td><?php echo $student_info->program_title;?></td>
 					<th>Section</th>
-					<td><?php echo $student_info->section;?></td>
+					<td><?php echo $student_info->section_title;?></td>
 				</tr>
 				<tr>
 					<th>Admission Date</th>

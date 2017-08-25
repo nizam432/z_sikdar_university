@@ -141,7 +141,7 @@
 		  <div class="col-sm-4">
 			  <select name="nationality" class="form-control" required>
 				<option  <?php if($student_edit->nationality==1) echo ' selected="selected" ' ?> value="1">Bangladeshi</option>
-				<option  <?php if($student_edit->nationality==1) echo ' selected="selected" ' ?> value="2">Forieng</option>
+				<option  <?php if($student_edit->nationality==1) echo ' selected="selected" ' ?> value="2">Foreign</option>
 			  </select>
 			  <div class="help-block with-errors"></div>
 		  </div>

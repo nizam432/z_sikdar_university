@@ -18,7 +18,36 @@ class Model_backend_course extends  CI_Model
 		$this->db->insert('course',$data);
 	}
 	
+	public function get_faculty_data()
+	{
+		$this->db->select('faculty_id,faculty_title');
+		$this->db->from('faculty');
+		$this->db->where('status',1);
+		$query=$this->db->get('');
+		$result=$query->result();
+		return $result;
+	}
 
+	public function get_department_edit_data($faculty)
+	{
+		$this->db->select('department_id,department_title');
+		$this->db->from('department');
+		$this->db->where('faculty',$faculty);
+		$query=$this->db->get('');
+		$result=$query->result();
+		return $result;
+	}
+
+	public function get_program_edit_data($department)
+	{
+		$this->db->select('program_id,program_title');
+		$this->db->from('program');
+		$this->db->where('department',$department);
+		$query=$this->db->get('');
+		$result=$query->result();
+		return $result;
+	}
+	
 	public function get_course_row($id)
 	{
 		$this->db->select('*');

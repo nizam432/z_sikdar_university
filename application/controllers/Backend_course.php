@@ -43,8 +43,9 @@ class Backend_course extends CI_Controller
 	 */	
 	public function add()
 	{
-		$data = array();
-		$data['content']=$this->load->view('admin/course/add','', TRUE);
+		$data = array();	
+		$data['faculty']= $this->model_backend_course->get_faculty_data();
+		$data['content']=$this->load->view('admin/course/add',$data, TRUE);
 		$this->load->view('admin/index', $data);
 	}
 
@@ -57,7 +58,14 @@ class Backend_course extends CI_Controller
 	public function edit($id)
 	{
 		$data = array();
+		$data['faculty']= $this->model_backend_course->get_faculty_data();
 		$data['course_edit']= $this->model_backend_course->get_course_row($id);
+		//faculty id
+		$faculty=$data['course_edit']->faculty;
+		$data['department']= $this->model_backend_course->get_department_edit_data($faculty);
+		//program id
+		$department=$data['course_edit']->department;
+		$data['program']= $this->model_backend_course->get_program_edit_data($department);		
 		$data['content']=$this->load->view('admin/course/edit',$data, TRUE);
 		$this->load->view('admin/index', $data);
 	}
@@ -76,6 +84,9 @@ class Backend_course extends CI_Controller
 		$data['course_code']=$this->input->post('course_code', TRUE);
 		$data['course_type']=$this->input->post('course_type', TRUE);
 		$data['credit']=$this->input->post('credit', TRUE);
+		$data['faculty']=$this->input->post('faculty', TRUE);
+		$data['department']=$this->input->post('department', TRUE);
+		$data['program']=$this->input->post('program', TRUE);
 		$data['entry_by']=$this->session->userdata('admin_id');
 		$data['entry_date_time']=date('Y-m-d H:i:s');
 		$data['status']=$this->input->post('status', TRUE);
@@ -85,6 +96,9 @@ class Backend_course extends CI_Controller
 		$this->form_validation->set_rules('course_code', 'Course Code', 'required');
 		$this->form_validation->set_rules('course_type', 'Course Type', 'required');
 		$this->form_validation->set_rules('credit', 'Course Credit', 'required');
+		$this->form_validation->set_rules('faculty', 'Faculty', 'required');
+		$this->form_validation->set_rules('department', 'Dpartment', 'required');
+		$this->form_validation->set_rules('program', 'program', 'required');
 		
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -119,6 +133,9 @@ class Backend_course extends CI_Controller
 		$data['course_code']=$this->input->post('course_code', TRUE);
 		$data['course_type']=$this->input->post('course_type', TRUE);
 		$data['credit']=$this->input->post('credit', TRUE);
+		$data['faculty']=$this->input->post('faculty', TRUE);
+		$data['department']=$this->input->post('department', TRUE);
+		$data['program']=$this->input->post('program', TRUE);
 		$data['update_by']=$this->session->userdata('admin_id');
 		$data['update_date_time']=date('Y-m-d H:i:s');
 		$data['status']=$this->input->post('status', TRUE);
@@ -128,6 +145,9 @@ class Backend_course extends CI_Controller
 		$this->form_validation->set_rules('course_code', 'Course Code', 'required');
 		$this->form_validation->set_rules('course_type', 'Course Type', 'required');
 		$this->form_validation->set_rules('credit', 'Course Credit', 'required');
+		$this->form_validation->set_rules('faculty', 'Faculty', 'required');
+		$this->form_validation->set_rules('department', 'Dpartment', 'required');
+		$this->form_validation->set_rules('program', 'program', 'required');
 		
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -171,4 +191,51 @@ class Backend_course extends CI_Controller
 		$ids = ( explode( ',', $this->input->get_post('ids') ));
 		$this->model_backend_course->unpublish_data($data,$ids);
 	}
+	
+	/**
+	 * Get Department Data
+	 *
+	 * @return array
+	 */		
+	Public function get_department()
+	{
+		
+
+		  $result=$this->db->where('faculty',$_POST['id'])
+						->get('department')
+						->result();
+     
+        $data=array();
+		foreach($result as $r)
+		{
+			$data['value']=$r->department_id;
+			$data['label']=$r->department_title;
+			$json[]=$data;
+		}
+		echo json_encode($json);
+	}	
+
+	/**
+	 * Get Department Data
+	 *
+	 * @return array
+	 */		
+	Public function get_program()
+	{
+		
+
+		  $result=$this->db->where('department',$_POST['id'])
+						->get('program')
+						->result();
+     
+        $data=array();
+		foreach($result as $r)
+		{
+			$data['value']=$r->program_id;
+			$data['label']=$r->program_title;
+			$json[]=$data;
+		}
+		echo json_encode($json);
+	}		
+	
 }

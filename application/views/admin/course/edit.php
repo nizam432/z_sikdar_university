@@ -38,8 +38,50 @@
 		  <label>Course Type</label>
 		  <select name="course_type" class="form-control">
 			<option value="">Please select</option>
-			<option <?php if($course_edit->status==1) echo ' selected="selected" ';?>  value="1">Option 1</option>
-			<option <?php if($course_edit->status==2) echo ' selected="selected" ';?>  value="2">Option 2</option>
+			<option <?php if($course_edit->status==1) echo ' selected="selected" ';?>  value="1">A</option>
+			<option <?php if($course_edit->status==2) echo ' selected="selected" ';?>  value="2">B</option>
+			<option <?php if($course_edit->status==3) echo ' selected="selected" ';?>  value="1">C</option>
+			<option <?php if($course_edit->status==4) echo ' selected="selected" ';?>  value="2">D</option>
+
+			</select>
+		</div>
+		
+		<div class="form-group">
+		  <label>Faculty</label>
+		  <select name="faculty" class="form-control faculty">
+			<option value="">Please select</option>
+				<?php 
+					foreach($faculty as $faculty_data)
+					{		
+						 echo '<option '.(($faculty_data->faculty_id==$course_edit->faculty)? 'selected="selected"':'').' value="'.$faculty_data->faculty_id.'">'.$faculty_data->faculty_title.'</option>';
+					}
+				?>
+		  </select>
+		</div>	
+
+		<div class="form-group">
+		  <label>Department</label>
+		  <select name="department"  class="form-control department">
+			<option value="">Please select</option>
+				<?php 
+					foreach($department as $department_data)
+					{		
+						 echo '<option '.(($department_data->department_id==$course_edit->department)? 'selected="selected"':'').' value="'.$department_data->department_id.'">'.$department_data->department_title.'</option>';
+					}
+				?>			
+		  </select>
+		</div>
+		
+		<div class="form-group">
+		  <label>Program</label>
+		  <select name="program"  class="form-control program">
+			<option value="">Please select</option>
+			  	<?php 
+					foreach($program as $program_data)
+					{		
+						 echo '<option '.(($program_data->program_id==$course_edit->program)? 'selected="selected"':'').' value="'.$program_data->program_id.'">'.$program_data->program_title.'</option>';
+					}
+				?>			
 		  </select>
 		</div>		
 		<div class="form-group ">
@@ -62,3 +104,59 @@
   </div>
   <!-- /.box -->
 </div>
+
+<script>
+	 // Faculty data load
+	$('.faculty').change(function(){
+	  $.ajax({
+		type: "POST",
+		url: "<?php echo base_url();?>backend_course/get_department",
+		data:{id:$(this).val()}, 
+		beforeSend :function(){
+		$(".department option:gt(0)").remove(); 
+		$('.department').find("option:eq(0)").html("Please wait..");
+
+		},                         
+		success: function (data) {
+		  /*get response as json */
+		   $('.department').find("option:eq(0)").html("Please Select");
+		  var obj=jQuery.parseJSON(data);
+		  $(obj).each(function()
+		  {
+		   var option = $('<option />');
+		   option.attr('value', this.value).text(this.label);           
+		   $('.department').append(option);
+		 });  
+
+		  /*ends */
+
+		}
+	  });
+	});	 
+
+	//Department data load 
+	$('.department').change(function(){
+	  $.ajax({
+		type: "POST",
+		url: "<?php echo base_url();?>backend_course/get_program",
+		data:{id:$(this).val()}, 
+		beforeSend :function(){
+		$(".program option:gt(0)").remove(); 
+		$('.program').find("option:eq(0)").html("Please wait..");
+
+		},                         
+		success: function (data) {
+		  /*get response as json */
+		   $('.program').find("option:eq(0)").html("Please Select");
+		  var obj=jQuery.parseJSON(data);
+		  $(obj).each(function()
+		  {
+		   var option = $('<option />');
+		   option.attr('value', this.value).text(this.label);           
+		   $('.program').append(option);
+		 });  
+		  /*ends */
+		}
+	  });
+	});	
+</script>

@@ -13,8 +13,7 @@
   <div class="box box-primary">
 	<div class="box-header with-border">
 	  <h3 class="box-title">Add New Student</h3>
-	</div>
-	<!-- /.box-header -->
+	</div> 
 	<!-- form start -->
 	<form action="<?php echo base_url(); ?>backend_student/save" method="post" data-toggle="validator"  class="form-horizontal" enctype="multipart/form-data">
 	  <div class="box-body">
@@ -135,7 +134,7 @@
 			  <select name="nationality" class="form-control" required>
 				<option value="">Please select</option>
 				<option value="1">Bangladeshi</option>
-				<option value="2">Forieng</option>
+				<option value="2">Foreign</option>
 			  </select>
 			  <div class="help-block with-errors"></div>
 		  </div>

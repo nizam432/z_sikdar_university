@@ -198,9 +198,15 @@ class Model_backend_student extends  CI_Model
 	
 	public function get_view_data($std_row_id)
 	{
-		$this->db->select('*');
+		$this->db->select('*,section.section_title as section_title,session.session_title as session_title,semester.semester_title as semester_title,faculty.faculty_title as faculty_title,department.department_title as department_title,program.program_title as program_title');
 		$this->db->from('student');
-		$this->db->where('std_row_id',$std_row_id);
+		$this->db->join('program', 'program.program_id = student.program');
+		$this->db->join('department', 'department.department_id = student.department');
+		$this->db->join('faculty', 'faculty.faculty_id = student.faculty');
+		$this->db->join('semester', 'semester.semester_id = student.semester');
+		$this->db->join('section', 'section.section_id = student.section');
+		$this->db->join('session', 'session.session_id = student.session');
+		$this->db->where('student.std_row_id',$std_row_id);
 		$this->db->order_by("student.std_row_id", "DESC");
 		$query=$this->db->get('');
 		$result=$query->row();
