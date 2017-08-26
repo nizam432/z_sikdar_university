@@ -11,8 +11,10 @@
 	  <div class="form-group">
 		  <label class="col-sm-2">Course</label>
 		  <label class="col-sm-2">Faculty Member</label>
-		  <label class="col-sm-2">Semester</label>
-		  <label class="col-sm-2">Section</label>
+		  <label class="col-sm-1">Semester</label>
+		  <label class="col-sm-1">Section</label>
+		  <label class="col-sm-1">Year</label>
+		  <label class="col-sm-1">Day</label>
 		  <label class="col-sm-1">Start Time</label>
 		  <label class="col-sm-1">End Time</label>
 		  <label class="col-sm-1">Room No</label>		  
@@ -36,7 +38,7 @@
 					?>
 				</select>				
 		   </div>
-		   <div class="col-sm-2">
+		   <div class="col-sm-1">
 			  <select name="semester" class="form-control faculty" required>
 				<option value="">Please select</option>
 					<?php 
@@ -47,7 +49,7 @@
 					?>
 			  </select>
 		   </div>		   
-		   <div class="col-sm-2">
+		   <div class="col-sm-1">
 			  <select name="section" class="form-control faculty" required>
 				<option value="">Please select</option>
 					<?php 
@@ -58,6 +60,15 @@
 					?>
 			  </select>
 		   </div>
+		   <div class="col-sm-1">
+				<input type="text" name="year"  class="form-control" >
+		   </div>	
+		   <div class="col-sm-1">
+				<select name="day" class="form-control">
+					<option value="">Please Select</option>
+					<option>Sturday</option>
+				</select>
+		   </div>			   
 		   <div class="col-sm-1">
 				<input type="text"  class="form-control" >
 		   </div>
