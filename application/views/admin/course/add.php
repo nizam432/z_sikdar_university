@@ -37,7 +37,7 @@
 
 		<div class="form-group">
 		  <label>Course Type</label>
-		  <select name="course_type" class="form-control faculty" required>
+		  <select name="course_type" class="form-control" required>
 			<option value="">Please select</option>
 				<option value="1">A</option>
 				<option value="2">B</option>
