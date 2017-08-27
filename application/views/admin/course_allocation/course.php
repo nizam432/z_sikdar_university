@@ -8,26 +8,31 @@
 	<!-- form start -->
 	<form class="form-horizontal" action="<?php echo base_url(); ?>backend_course_allocation/save" method="post">
 	  <div class="box-body">
-	  <div class="form-group">
-		  <label class="col-sm-2">Course</label>
-		  <label class="col-sm-2">Faculty Member</label>
-		  <label class="col-sm-1">Semester</label>
-		  <label class="col-sm-1">Section</label>
-		  <label class="col-sm-1">Year</label>
-		  <label class="col-sm-1">Day</label>
-		  <label class="col-sm-1">Start Time</label>
-		  <label class="col-sm-1">End Time</label>
-		  <label class="col-sm-1">Room No</label>		  
+	  <table class="table">
+		<tr>
+			<th>SL</th>
+			<th >Course</th>
+			<th width="150">Faculty Member</th>
+			<th width="85">Room No</th>			
+			<th width="100">Section</th>
+			<th width="100">Day</th>
+			<th width="100">Start Time</th>
+			<th width="100">End Time</th>
+			<th width="50">Edit</th>
+			<th width="50">Trash</th>
+	
+		</tr>		
 	 </div>
 	  <?php 
+		$sl=1;
 		foreach($course as $course_data)
 		{?>
-
-		<div class="form-group">
-		   <div class="col-sm-2">
-				<input type="text" value="<?php echo $course_data->course_title ?>" class="form-control" readonly="readonly">
-		   </div>
-		   <div class="col-sm-2">
+		<tr>
+			<td><?php echo $sl++; ?></td>
+			<td>
+				<?php echo $course_data->course_title ?> ( <?php echo $course_data->course_code ?> )
+		   </td>
+		   <td>
 				<select name="faculty_member" class="form-control faculty_member" required>
 				<option value="">Please select</option>
 					<?php 
@@ -37,19 +42,11 @@
 						}
 					?>
 				</select>				
-		   </div>
-		   <div class="col-sm-1">
-			  <select name="semester" class="form-control faculty" required>
-				<option value="">Please select</option>
-					<?php 
-						foreach($semester as $semester_data)
-						{		
-							 echo '<option value="'.$semester_data->semester_id.'">'.$semester_data->semester_title.'</option>';
-						}
-					?>
-			  </select>
-		   </div>		   
-		   <div class="col-sm-1">
+		   </td>
+		   <td>
+				<input type="text" class="form-control">
+		   </td>		   
+		   <td>
 			  <select name="section" class="form-control faculty" required>
 				<option value="">Please select</option>
 					<?php 
@@ -59,29 +56,32 @@
 						}
 					?>
 			  </select>
-		   </div>
-		   <div class="col-sm-1">
-				<input type="text" name="year"  class="form-control" >
-		   </div>	
-		   <div class="col-sm-1">
+		   </td>	
+		   <td>
 				<select name="day" class="form-control">
 					<option value="">Please Select</option>
-					<option>Sturday</option>
+					<?php 
+						foreach($day as $key_day=>$day_data)
+						{		
+							 echo '<option value="'.$key_day.'">'.$day_data.'</option>';
+						}
+					?>
 				</select>
-		   </div>			   
-		   <div class="col-sm-1">
+		   </td>			   
+		   <td>
 				<input type="text"  class="form-control" >
-		   </div>
-		   <div class="col-sm-1">
+		   </td>
+		   <td>
 				<input type="text"  class="form-control">
-		   </div>
-		   <div class="col-sm-1">
-				<input type="text" class="form-control">
-		   </div>
-		   <div class="col-sm-1">
-				<input type="submit" value="submit" class="form-control btn btn-primary" >
-		   </div>			   
-		</div>
+		   </td>
+
+		   <td>
+				<button type="submit" value="Add" class="btn btn-success" ><span class="fa fa-plus"></span></button>
+		   </td>	
+		   <td>
+				<button type="submit" value="Add" class="btn btn-danger" ><span class="fa fa-trash"></span></button>
+		   </td>		   
+		</tr>
 		<?php } ?>	
 		
 	  </div>

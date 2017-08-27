@@ -44,7 +44,8 @@ class Backend_course_allocation extends CI_Controller
 	public function add()
 	{
 		$data = array();
-		$data['faculty']= $this->model_backend_course_allocation->get_faculty_data();	
+		$data['faculty']= $this->model_backend_course_allocation->get_faculty_data();
+		$data['semester']=$this->model_backend_course_allocation->get_semester_data();		
 		$data['content']=$this->load->view('admin/course_allocation/add',$data, TRUE);
 		$this->load->view('admin/index', $data);
 	}
@@ -176,6 +177,7 @@ class Backend_course_allocation extends CI_Controller
 		 $data['faculty_member']=$this->model_backend_course_allocation->get_faculty_member_data();
 		 $data['semester']=$this->model_backend_course_allocation->get_semester_data();
 		 $data['section']=$this->model_backend_course_allocation->get_section_data();
+		 $data['day']=array(1=>'Saturday',2=>'Sunday',3=>'Monday',4=>'Tuesday',5=>'Wednesday',6=>'Thusday',7=>'Friday');
 		 $this->load->view('admin/course_allocation/course',$data);
 	}
 }

@@ -20,7 +20,7 @@ class Model_backend_course_allocation extends  CI_Model
 	
 	public function get_course_data($data)
 	{
-		$this->db->select('course_id,course_title');
+		$this->db->select('course_id,course_title,course_code');
 		$this->db->from('course');
 		$this->db->where($data);
 		$query=$this->db->get('');

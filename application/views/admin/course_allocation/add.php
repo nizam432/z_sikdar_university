@@ -17,8 +17,8 @@
 		<form class="form-horizontal" action="<?php echo base_url()?>backend_dashboard/resgister_search" method="post">
 			<div class="box-body">
 				<div class="form-group">
-					<label class="col-sm-1 control-label">Faculty</label>
-					<div class="col-sm-3">
+					<label class="col-sm-2 control-label">Faculty</label>
+					<div class="col-sm-4">
 					  <select name="faculty" class="form-control faculty" required>
 						<option value="">Please select</option>
 							<?php 
@@ -29,16 +29,30 @@
 							?>
 					  </select>
 					</div>
-					<label class="col-sm-1 control-label">Department</label>
-					<div class="col-sm-3">
+					<label class="col-sm-2 control-label">Department</label>
+					<div class="col-sm-4">
 					  <select name="department"  class="form-control department" required>
 						<option value="">Please select</option>
 					  </select>
 					</div>
-					<label class="col-sm-1 control-label">Program</label>
-					<div class="col-sm-3">
+				</div>
+				<div class="form-group">				
+					<label class="col-sm-2 control-label">Program</label>
+					<div class="col-sm-4">
 						  <select name="program"  class="form-control program" required>
 							<option value="">Please select</option>
+						  </select>
+					</div>
+					<label class="col-sm-2 control-label">Semester</label>
+					<div class="col-sm-4">
+						  <select name="semester" class="form-control semester" required>
+							<option value="">Please select</option>
+								<?php 
+									foreach($semester as $semester_data)
+									{		
+										 echo '<option value="'.$semester_data->semester_id.'">'.$semester_data->semester_title.'</option>';
+									}
+								?>
 						  </select>
 					</div>
 				</div>
@@ -124,5 +138,21 @@
         }); 
         return false;
     });
+	
+    $(".search").click(function(){
+        $.ajax({
+            url:"<?php echo base_url();?>backend_course_allocation/get_course",
+			data:{
+				faculty:$('.faculty').val(),
+				department:$('.department').val(),
+				program:$('.program').val()
+			},
+            success: function(response) {
+                $("#course").html(response);
+            }
+        }); 
+        return false;
+    });	
+	
 </script>
 
