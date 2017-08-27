@@ -6,7 +6,6 @@
 	</div>
 	<!-- /.box-header -->
 	<!-- form start -->
-	<form class="form-horizontal" action="<?php echo base_url(); ?>backend_course_allocation/save" method="post">
 	  <div class="box-body">
 	  <table class="table">
 		<tr>
@@ -22,18 +21,20 @@
 			<th width="50">Trash</th>
 	
 		</tr>		
-	 </div>
+	
 	  <?php 
 		$sl=1;
 		foreach($course as $course_data)
 		{?>
+		<form action="#" method="post">
 		<tr>
 			<td><?php echo $sl++; ?></td>
 			<td>
 				<?php echo $course_data->course_title ?> ( <?php echo $course_data->course_code ?> )
+				<input type="hidden" name="course_id" id="course_id">
 		   </td>
 		   <td>
-				<select name="faculty_member" class="form-control faculty_member" required>
+				<select name="faculty_member" id="faculty_member" class="form-control faculty_member" required>
 				<option value="">Please select</option>
 					<?php 
 						foreach($faculty_member as $faculty_member_data)
@@ -47,7 +48,7 @@
 				<input type="text" class="form-control">
 		   </td>		   
 		   <td>
-			  <select name="section" class="form-control faculty" required>
+			  <select name="section" id="section" class="form-control faculty" required>
 				<option value="">Please select</option>
 					<?php 
 						foreach($section as $section_data)
@@ -58,7 +59,7 @@
 			  </select>
 		   </td>	
 		   <td>
-				<select name="day" class="form-control">
+				<select name="day" id="day" class="form-control">
 					<option value="">Please Select</option>
 					<?php 
 						foreach($day as $key_day=>$day_data)
@@ -69,23 +70,23 @@
 				</select>
 		   </td>			   
 		   <td>
-				<input type="text"  class="form-control" >
+				<input type="text" name="start_time" id="start_time"  class="form-control" >
 		   </td>
 		   <td>
-				<input type="text"  class="form-control">
+				<input type="text" name="end_time" id="end_time"  class="form-control">
 		   </td>
 
 		   <td>
-				<button type="submit" value="Add" class="btn btn-success" ><span class="fa fa-plus"></span></button>
+				<button type="submit" value="Add" class="btn btn-success add_course" ><span class="fa fa-plus"></span></button>
 		   </td>	
 		   <td>
-				<button type="submit" value="Add" class="btn btn-danger" ><span class="fa fa-trash"></span></button>
+				<!--<button type="submit" value="Add" class="btn btn-danger" ><span class="fa fa-trash"></span></button>--> N/A
 		   </td>		   
 		</tr>
+		</form>
 		<?php } ?>	
 		
-	  </div>
-	</form>
-  </div>
+	 </div>
+</div>
   <!-- /.box -->
 </div>

@@ -19,7 +19,7 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">Faculty</label>
 					<div class="col-sm-4">
-					  <select name="faculty" class="form-control faculty" required>
+					  <select name="faculty" class="form-control faculty">
 						<option value="">Please select</option>
 							<?php 
 								foreach($faculty as $faculty_data)
@@ -31,7 +31,7 @@
 					</div>
 					<label class="col-sm-2 control-label">Department</label>
 					<div class="col-sm-4">
-					  <select name="department"  class="form-control department" required>
+					  <select name="department"  class="form-control department" >
 						<option value="">Please select</option>
 					  </select>
 					</div>
@@ -39,13 +39,13 @@
 				<div class="form-group">				
 					<label class="col-sm-2 control-label">Program</label>
 					<div class="col-sm-4">
-						  <select name="program"  class="form-control program" required>
+						  <select name="program"  class="form-control program" >
 							<option value="">Please select</option>
 						  </select>
 					</div>
 					<label class="col-sm-2 control-label">Semester</label>
 					<div class="col-sm-4">
-						  <select name="semester" class="form-control semester" required>
+						  <select name="semester" class="form-control semester" >
 							<option value="">Please select</option>
 								<?php 
 									foreach($semester as $semester_data)
@@ -154,5 +154,6 @@
         return false;
     });	
 	
+
 </script>
 
