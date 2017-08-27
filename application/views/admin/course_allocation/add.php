@@ -139,20 +139,7 @@
         return false;
     });
 	
-    $(".search").click(function(){
-        $.ajax({
-            url:"<?php echo base_url();?>backend_course_allocation/get_course",
-			data:{
-				faculty:$('.faculty').val(),
-				department:$('.department').val(),
-				program:$('.program').val()
-			},
-            success: function(response) {
-                $("#course").html(response);
-            }
-        }); 
-        return false;
-    });	
+	
 	
 
 </script>
