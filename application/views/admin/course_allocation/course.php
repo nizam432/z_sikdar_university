@@ -82,6 +82,8 @@
 				<!--<button type="submit" value="Add" class="btn btn-danger" ><span class="fa fa-trash"></span></button>--> N/A
 		   </td>		   
 		</tr>
+		
+		
 		<?php } ?>	
 		
 	 </div>

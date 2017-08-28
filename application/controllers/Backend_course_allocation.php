@@ -85,32 +85,6 @@ class Backend_course_allocation extends CI_Controller
 		$data['entry_by']=$this->session->userdata('admin_id');
 		$data['entry_date_time']=date('Y-m-d H:i:s');
 		$this->model_backend_course_allocation->save_course_allocation_data($data);
-		
-		exit;
-		$data['course_allocation_title']=$this->input->post('course_allocation_title', TRUE);
-		$data['entry_by']=$this->session->userdata('admin_id');
-		$data['entry_date_time']=date('Y-m-d H:i:s');
-		$data['status']=$this->input->post('status', TRUE);
-		
-		//Form Validation
-		$this->form_validation->set_rules('course_allocation_title', 'course_allocation Title', 'required');
-		
-		if ($this->form_validation->run() == FALSE)
-		{
-			$this->session->set_flashdata('course_allocation_form_validation',validation_errors());
-			redirect('backend_course_allocation/add');
-		}
-		else
-		{
-			//save course_allocation
-			$this->model_backend_course_allocation->save_course_allocation_data($data);
-			
-			// Redirect with flash message
-			$result=array();
-			$result['message']="Data insert successfully";
-			$this->session->set_userdata($result);
-			redirect('backend_course_allocation');
-		}
 	}
 
 	
@@ -187,6 +161,12 @@ class Backend_course_allocation extends CI_Controller
 		 $data['department']=$this->input->get_post('department'); 
 		 $data['program']=$this->input->get_post('program'); 
 		 $data['course']=$this->model_backend_course_allocation->get_course_data($data);
+		 
+		 echo  '<pre>'; print_r($data['course']); echo '</pre>';
+		 //course id
+		echo  $course_id=$data['course']->course_id;echo 'test'; exit;
+		 $data['course_allocation']=$this->model_backend_course_allocation->get_course_allocation_data($course_id);
+		 
 		 $data['faculty_member']=$this->model_backend_course_allocation->get_faculty_member_data();
 		 $data['semester']=$this->model_backend_course_allocation->get_semester_data();
 		 $data['section']=$this->model_backend_course_allocation->get_section_data();
