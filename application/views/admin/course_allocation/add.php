@@ -45,7 +45,7 @@
 					</div>
 					<label class="col-sm-2 control-label">Semester</label>
 					<div class="col-sm-4">
-						  <select name="semester" class="form-control semester" >
+						  <select name="semester" class="form-control semester" id="semester">
 							<option value="">Please select</option>
 								<?php 
 									foreach($semester as $semester_data)
@@ -139,7 +139,7 @@
         return false;
     });
 	
-	
+
 	
 
 </script>
