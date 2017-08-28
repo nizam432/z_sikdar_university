@@ -109,7 +109,7 @@
 			},
             success: function(response) {
                // $("#course").html(response);
-			   $('.content'+increment).find('input,select,textarea').val("");
+				$('.content'+increment).find('input[type=text],select').val("");
 			   alert("Save Data Successfully");
             }
         }); 
