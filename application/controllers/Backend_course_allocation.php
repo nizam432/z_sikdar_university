@@ -161,20 +161,15 @@ class Backend_course_allocation extends CI_Controller
 		 $data['department']=$this->input->get_post('department'); 
 		 $data['program']=$this->input->get_post('program'); 
 		 $data['course']=$this->model_backend_course_allocation->get_course_data($data);
-		 $array = json_decode(json_encode($data['course']), True);
-		 foreach($array as $kye=>$value)
+		 $course_info = json_decode(json_encode($data['course']), True);
+		 foreach($course_info as $key=>$value)
 		 {
-			$data['faculty_member']=$this->model_backend_course_allocation->get_faculty_member_data();
-			$array[$kye]['course_ddd']='1ddd';
+			$couse_id=$course_info[$key]['course_id'];
+			$data['allocated_course']=$this->model_backend_course_allocation->get_course_allocation_data($couse_id);
+			$allocated_course = json_decode(json_encode($data['allocated_course']), True);
+			$course_info[$key]['course_ddd']=$allocated_course;
 		 }
-		 
-	echo  '<pre>'; print_r($array); echo '</pre>'; 
-	exit;
-		 //course id
-		//echo  $course_id=$data['course']->course_id;
-		//echo 'test'; exit;
-		
-		 
+		 $data['course_info']=$course_info ;
 		 $data['faculty_member']=$this->model_backend_course_allocation->get_faculty_member_data();
 		 $data['semester']=$this->model_backend_course_allocation->get_semester_data();
 		 $data['section']=$this->model_backend_course_allocation->get_section_data();

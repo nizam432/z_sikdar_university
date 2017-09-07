@@ -32,7 +32,7 @@ class Model_backend_course_allocation extends  CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('course_allocation');
-		$this->db->where('course_id',$course_id);
+		$this->db->where('course',$course_id);
 		$query=$this->db->get('');
 		$result=$query->result();
 		return $result;
