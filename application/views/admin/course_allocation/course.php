@@ -21,7 +21,7 @@
 			<th width="50">Edit</th>
 			<th width="50">Trash</th>
 		</tr>		
-	
+		
 	  <?php 
 		$sl=1;
 		foreach($course as $course_data)
@@ -92,7 +92,6 @@
 </div>
 
 <script>
-
   $('.add_course').click(function(){
 	  var increment=$(this).val();
 	  var semester=$('#semester').val();
@@ -116,5 +115,4 @@
             }
         }); 
     });
-	
 </script>
