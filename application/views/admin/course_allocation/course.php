@@ -24,13 +24,14 @@
 		
 	  <?php 
 		$sl=1;
-		foreach($course as $course_data)
-		{?>
+		foreach($course_info as $course_data)
+		{
+?>
 		<tr class="content<?php echo $sl; ?>">
-			<td><?php echo $sl++; ?></td>
+			<td><b><?php echo $sl++; ?></b></td>
 			<td>
-				<?php echo $course_data->course_title ?> ( <?php echo $course_data->course_code ?> )
-				<input type="hidden" name="course" value="<?php echo  $course_data->course_id; ?>" id="course_id<?php echo $sl-1; ?>">
+				<?php echo $course_data['course_title']; ?> ( <?php echo $course_data['course_code'] ?> )
+				<input type="hidden" name="course" value="<?php echo  $course_data['course_id']; ?>" id="course_id<?php echo $sl-1; ?>">
 		   </td>
 		   <td>
 				<select name="faculty_member" id="faculty_member<?php echo $sl-1; ?>" class="form-control" required>
@@ -82,10 +83,41 @@
 				<!--<button type="submit" value="Add" class="btn btn-danger" ><span class="fa fa-trash"></span></button>--> N/A
 		   </td>		   
 		</tr>
-		
+
+		<?php 	$j=1;
+			foreach($course_data['course_allocated'] as $course_allocated_data)
+			{
+				
+			//if($check_row['skt']==$rows['id'])
+			//{	
+                                       ?>              
+				 <tr>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $j; ?></td>
+					<td><?php echo $course_data['course_title']; ?> ( <?php echo $course_data['course_code'] ?> )</td>
+					<td><?php echo $course_allocated_data['faculty_member']; ?></td>
+					<td><?php echo $course_allocated_data['room_no']; ?></td>
+					<td><?php echo $course_allocated_data['section']; ?></td>
+					<td><?php echo $course_allocated_data['day']; ?></td>
+					<td><?php echo $course_allocated_data['start_time']; ?></td>
+					<td><?php echo $course_allocated_data['end_time']; ?></td>					
+					<td><button class="btn btn-danger" onclick="fnc_assign_course_edit('<?php //echo $check_row['id']; ?>')">
+					 <span class="glyphicon glyphicon-pencil"></span> 
+					 </button></td>
+				   <td>
+					
+					<button class="btn btn-danger" onclick="fnc_assign_course_delete(<?php //echo $check_row['id']; ?>)">
+					 <span class="glyphicon glyphicon-trash"></span> 
+					 </button>
+					</td>
+				 </tr>
+		   
+	
+	   <?php $j++;} ?>		
 		
 		<?php } ?>	
-		
+	
+
+	
 	 </div>
 </div>
   <!-- /.box -->

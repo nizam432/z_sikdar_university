@@ -162,14 +162,18 @@ class Backend_course_allocation extends CI_Controller
 		 $data['program']=$this->input->get_post('program'); 
 		 $data['course']=$this->model_backend_course_allocation->get_course_data($data);
 		 $course_info = json_decode(json_encode($data['course']), True);
+		 
 		 foreach($course_info as $key=>$value)
 		 {
 			$couse_id=$course_info[$key]['course_id'];
 			$data['allocated_course']=$this->model_backend_course_allocation->get_course_allocation_data($couse_id);
 			$allocated_course = json_decode(json_encode($data['allocated_course']), True);
-			$course_info[$key]['course_ddd']=$allocated_course;
+			$course_info[$key]['course_allocated']=$allocated_course;
 		 }
+		 
 		 $data['course_info']=$course_info ;
+		 echo '<pre>'; print_r($data['course_info']); echo '</pre>';
+	//	 exit;
 		 $data['faculty_member']=$this->model_backend_course_allocation->get_faculty_member_data();
 		 $data['semester']=$this->model_backend_course_allocation->get_semester_data();
 		 $data['section']=$this->model_backend_course_allocation->get_section_data();
