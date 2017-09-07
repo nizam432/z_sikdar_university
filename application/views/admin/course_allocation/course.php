@@ -87,10 +87,7 @@
 		<?php 	$j=1;
 			foreach($course_data['course_allocated'] as $course_allocated_data)
 			{
-				
-			//if($check_row['skt']==$rows['id'])
-			//{	
-                                       ?>              
+             ?>              
 				 <tr>
 					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $j; ?></td>
 					<td><?php echo $course_data['course_title']; ?> ( <?php echo $course_data['course_code'] ?> )</td>

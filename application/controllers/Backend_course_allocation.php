@@ -172,8 +172,7 @@ class Backend_course_allocation extends CI_Controller
 		 }
 		 
 		 $data['course_info']=$course_info ;
-		 echo '<pre>'; print_r($data['course_info']); echo '</pre>';
-	//	 exit;
+		 
 		 $data['faculty_member']=$this->model_backend_course_allocation->get_faculty_member_data();
 		 $data['semester']=$this->model_backend_course_allocation->get_semester_data();
 		 $data['section']=$this->model_backend_course_allocation->get_section_data();
