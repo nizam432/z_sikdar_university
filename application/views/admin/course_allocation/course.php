@@ -8,7 +8,7 @@
 	
 	<!-- form start -->
 	  <div class="box-body">
-	  <table class="table">
+	  <table class="table table-striped table-bordered">
 		<tr>
 			<th>SL</th>
 			<th >Course</th>
@@ -34,7 +34,7 @@
 				<input type="hidden" name="course" value="<?php echo  $course_data['course_id']; ?>" id="course_id<?php echo $sl-1; ?>">
 		   </td>
 		   <td>
-				<select name="faculty_member" id="faculty_member<?php echo $sl-1; ?>" class="form-control" required>
+				<select name="faculty_member" id="faculty_member<?php echo $sl-1; ?>" class="form-control" >
 				<option value="">Please select</option>
 					<?php 
 						foreach($faculty_member as $faculty_member_data)
@@ -77,19 +77,19 @@
 		   </td>
 
 		   <td>
-				<button  id="add_course" onclick="a(<?php echo $sl-1; ?>)" value="<?php echo $sl-1; ?>" class="btn btn-success add_course" ><span class="glyphicon glyphicon-plus-sign"></span></button>
+				<button  id="add_course" onclick="a(<?php echo $sl-1; ?>)" value="<?php echo $sl-1; ?>" class="btn btn-success add_course search" ><span class="glyphicon glyphicon-plus-sign"></span></button>
 		   </td>	
 		   <td>
 				<!--<button type="submit" value="Add" class="btn btn-danger" ><span class="fa fa-trash"></span></button>--> N/A
 		   </td>		   
 		</tr>
 
-		<?php 	$j=1;
+		<?php 	$sl2=1;
 			foreach($course_data['course_allocated'] as $course_allocated_data)
 			{
              ?>              
 				 <tr>
-					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $j; ?></td>
+					<td align="right"><?php echo $sl2; ?></td>
 					<td><?php echo $course_data['course_title']; ?> ( <?php echo $course_data['course_code'] ?> )</td>
 					<td><?php echo $course_allocated_data['faculty_member']; ?></td>
 					<td><?php echo $course_allocated_data['room_no']; ?></td>
@@ -109,7 +109,7 @@
 				 </tr>
 		   
 	
-	   <?php $j++;} ?>		
+	   <?php $sl2++;} ?>		
 		
 		<?php } ?>	
 	
@@ -119,29 +119,87 @@
 </div>
   <!-- /.box -->
 </div>
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<div id="dialog" title="Basic dialog">
+  
+</div>
 
 <script>
   $('.add_course').click(function(){
 	  var increment=$(this).val();
+	   
+	   
+	  if(fn_validation('semester'+'*faculty_member'+increment+'*room_no'+increment+'*section'+increment+'*day'+increment+'*start_time'+increment+'*end_time'+increment)==0) return ;
 	  var semester=$('#semester').val();
+	  var course_id=$('#course_id'+increment).val();
+	  var faculty_member=$('#faculty_member'+increment).val();
+	  var room_no=$('#room_no'+increment).val();
+	  var section=$('#section'+increment).val();
+	  var day=$('#day'+increment).val();
+	  var start_time=$('#start_time'+increment).val();
+	  var end_time=$('#end_time'+increment).val();
+
         $.ajax({
             url:"<?php echo base_url();?>backend_course_allocation/save",
 			type: 'POST',
 			data:{
-				course:$('#course_id'+increment).val(),
-				faculty_member:$('#faculty_member'+increment).val(),
+				course:course_id,
+				faculty_member:faculty_member,
 				semester:semester,
-				room_no:$('#room_no'+increment).val(),
-				section:$('#section'+increment).val(),
-				day:$('#day'+increment).val(),
-				start_time:$('#start_time'+increment).val(),
-				end_time:$('#end_time'+increment).val()
+				room_no:room_no,
+				section:section,
+				day:day,
+				start_time:start_time,
+				end_time:end_time
 			},
             success: function(response) {
                // $("#course").html(response);
 				$('.content'+increment).find('input[type=text],select').val("");
-			   alert("Save Data Successfully");
-            }
+			    alert("Save Data Successfully");
+				
+				$.ajax({
+					url:"<?php echo base_url();?>backend_course_allocation/get_course",
+					data:{
+						faculty:$('.faculty').val(),
+						department:$('.department').val(),
+						program:$('.program').val()
+					},
+					success: function(response) {
+						$("#course").html(response);
+					}
+				}); 			
+			}
         }); 
     });
+	
+	function fn_validation(id)
+	{
+		var id=id.split("*");
+		
+		for(var i=0; i<id.length; i++)
+		{
+			
+			var x=document.getElementById(id[i]);
+			if(x.value=="" || x.value==0)
+			{
+				/*$("#msg").fadeTo( 200, 0.1, function() {
+				$(this).text('Validating......').addClass('messagebox_ok').fadeTo(900,1);
+				$(this).fadeOut(2000);});
+	;	*/
+				x.style.border = "1px solid red";
+				x.style.background = "#E5E6E5";
+				$("#"+id[i]).focus();		    
+				return 0;	
+			}else{
+				 x.style.border = "1px solid #E2E2E2";
+				x.style.background = "#FFFFFF";
+			}
+			
+		}
+		
+	}	
 </script>
+
