@@ -97,12 +97,12 @@
 					<td><?php echo $course_allocated_data['day']; ?></td>
 					<td><?php echo $course_allocated_data['start_time']; ?></td>
 					<td><?php echo $course_allocated_data['end_time']; ?></td>					
-					<td><button class="btn btn-danger" onclick="fnc_assign_course_edit('<?php //echo $check_row['id']; ?>')">
+					<td><button class="btn btn-danger " onclick="fnc_assign_course_edit('<?php //echo $check_row['id']; ?>')">
 					 <span class="glyphicon glyphicon-pencil"></span> 
 					 </button></td>
 				   <td>
 					
-					<button class="btn btn-danger" onclick="fnc_assign_course_delete(<?php //echo $check_row['id']; ?>)">
+					<button class="btn btn-danger delete_course" value="<?php echo $course_allocated_data['course_allocation_id']; ?>" onclick="deleteItem()">
 					 <span class="glyphicon glyphicon-trash"></span> 
 					 </button>
 					</td>
@@ -122,11 +122,44 @@
 
 
 <script>
-alert('test');
+	  $('.delete_course').click(function(){
+		if (confirm("Are you sure?")) {
+			var course_allocation_id=$(this).val();
+			$.ajax({
+            url:"<?php echo base_url();?>backend_course_allocation/delete",
+			type: 'POST',
+			data:{
+				course_allocation_id:course_allocation_id
+			},
+			
+			beforeSend :function(){
+			$('#course').html('<div style="width:100%;background:#fff; height:100px; text-align:center"><img src="<?php echo base_url();?>assets/backend/images/loading.gif"/></div>');
+			}, 
+					
+            success: function(response) {
+			    alert("Save Data Successfully");
+				
+				$.ajax({
+					url:"<?php echo base_url();?>backend_course_allocation/get_course",
+					data:{
+						faculty:$('.faculty').val(),
+						department:$('.department').val(),
+						program:$('.program').val()
+					},
+					success: function(response) {
+						$("#course").html(response);
+					}
+				}); 			
+			}
+        }); 
+    });
+			  
+		}
+		return false;
+	});
+
   $('.add_course').click(function(){
 	  var increment=$(this).val();
-	   
-	   
 	  if(fn_validation('semester'+'*faculty_member'+increment+'*room_no'+increment+'*section'+increment+'*day'+increment+'*start_time'+increment+'*end_time'+increment)==0) return ;
 	  var semester=$('#semester').val();
 	  var course_id=$('#course_id'+increment).val();
@@ -150,6 +183,11 @@ alert('test');
 				start_time:start_time,
 				end_time:end_time
 			},
+			
+			beforeSend :function(){
+			$('#course').html('<div style="width:100%;background:#fff; height:100px; text-align:center"><img src="<?php echo base_url();?>assets/backend/images/loading.gif"/></div>');
+			}, 
+					
             success: function(response) {
                // $("#course").html(response);
 				$('.content'+increment).find('input[type=text],select').val("");

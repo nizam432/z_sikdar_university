@@ -179,4 +179,19 @@ class Backend_course_allocation extends CI_Controller
 		 $data['day']=array(1=>'Saturday',2=>'Sunday',3=>'Monday',4=>'Tuesday',5=>'Wednesday',6=>'Thusday',7=>'Friday');
 		 $this->load->view('admin/course_allocation/course',$data);
 	}
+	
+	/**
+	 * Delete course defend on Program  
+	 *
+	 * 
+	 * @return success
+	 */	
+	public function delete_course()
+	{
+		 $data=array();
+		 $data['course_allocation_id']=$this->input->get_post('course_allocation_id');
+		 $data['course_allocation_id']=$this->model_backend_course_allocation->delete_course_data();
+		 $data['day']=array(1=>'Saturday',2=>'Sunday',3=>'Monday',4=>'Tuesday',5=>'Wednesday',6=>'Thusday',7=>'Friday');
+		 $this->load->view('admin/course_allocation/course',$data);
+	}
 }
