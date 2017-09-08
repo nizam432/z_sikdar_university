@@ -126,18 +126,18 @@
 		if (confirm("Are you sure?")) {
 			var course_allocation_id=$(this).val();
 			$.ajax({
-            url:"<?php echo base_url();?>backend_course_allocation/delete",
+            url:"<?php echo base_url();?>backend_course_allocation/delete_course",
 			type: 'POST',
 			data:{
 				course_allocation_id:course_allocation_id
 			},
 			
 			beforeSend :function(){
-			$('#course').html('<div style="width:100%;background:#fff; height:100px; text-align:center"><img src="<?php echo base_url();?>assets/backend/images/loading.gif"/></div>');
+			//$('#course').html('<div style="width:100%;background:#fff; height:100px; text-align:center"><img src="<?php echo base_url();?>assets/backend/images/loading.gif"/></div>');
 			}, 
 					
             success: function(response) {
-			    alert("Save Data Successfully");
+			    alert("Delete Data Successfully");
 				
 				$.ajax({
 					url:"<?php echo base_url();?>backend_course_allocation/get_course",
@@ -152,8 +152,7 @@
 				}); 			
 			}
         }); 
-    });
-			  
+	  
 		}
 		return false;
 	});

@@ -49,14 +49,10 @@ class Model_backend_course_allocation extends  CI_Model
 		return $result;
 	}		
 	
-	public function get_faculty_member_data($delete_course_data)
+	public function delete_course_data($delete_course_data)
 	{
-		$this->db->select('faculty_member_id,faculty_member_name');
-		$this->db->from('faculty_member');
-		$this->db->where('status',1);
-		$query=$this->db->get('');
-		$result=$query->result();
-		return $result;
+		$this->db->where('course_allocation_id', $delete_course_data);
+		$this->db->delete('course_allocation'); 
 	}	
 	
 	public function get_section_data()
