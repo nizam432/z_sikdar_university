@@ -18,13 +18,13 @@
 			<th width="100">Day</th>
 			<th width="100">Start Time</th>
 			<th width="100">End Time</th>
-			<th width="50">Edit</th>
-			<th width="50">Trash</th>
+			<th width="50">Update</th>
+
 		</tr>		
 
 		<tr>
 			<td>
-				<?php //echo $course_data['course_title']; ?> ( <?php //echo $course_data['course_code'] ?> )
+				<?php echo $allocated_course->course_title; ?> ( <?php echo $allocated_course->course_code; ?> )
 				<input type="hidden" name="course" value="<?php //echo  $course_data['course_id']; ?>" id="course_id">
 		   </td>
 		   <td>
@@ -71,7 +71,7 @@
 		   </td>
 
 		   <td>
-				<button  id="add_course" onclick="a()" value="" class="btn btn-success add_course search" ><span class="glyphicon glyphicon-plus-sign"></span></button>
+				<button  id="add_course" onclick="a()" value="" class="btn btn-success add_course search" ><span class="glyphicon glyphicon-plus-sign"></span> Update</button>
 		   </td>	
 		   <td>
 				<!--<button type="submit" value="Add" class="btn btn-danger" ><span class="fa fa-trash"></span></button>--> N/A

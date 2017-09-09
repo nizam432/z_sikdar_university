@@ -37,7 +37,16 @@ class Model_backend_course_allocation extends  CI_Model
 		$query=$this->db->get('');
 		$result=$query->result();
 		return $result;
-	}	
+	}
+	public function get_course_allocation_row_data($course_allocation_id)
+	{
+		$this->db->select('*');
+		$this->db->from('course_allocation');
+		$this->db->where('course_allocation_id',$course_allocation_id);
+		$query=$this->db->get('');
+		$result=$query->row();
+		return $result;
+	}		
 	
 	public function get_faculty_member_data()
 	{

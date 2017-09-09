@@ -189,13 +189,14 @@ class Backend_course_allocation extends CI_Controller
 	public function edit_course()
 	{
 		 $data=array();
-		 $data['course_allocation_id']=$this->input->get_post('course_allocation_id');
-		 $data['allocated_course']=$this->model_backend_course_allocation->get_course_allocation_data($course_allocation_id);
+		 $course_allocation_id=$this->input->get_post('course_allocation_id');
+		 
+		 $data['allocated_course']=$this->model_backend_course_allocation->get_course_allocation_row_data($course_allocation_id);
 		 $data['faculty_member']=$this->model_backend_course_allocation->get_faculty_member_data();
 		 $data['semester']=$this->model_backend_course_allocation->get_semester_data();
 		 $data['section']=$this->model_backend_course_allocation->get_section_data();
 		 $data['day']=array(1=>'Saturday',2=>'Sunday',3=>'Monday',4=>'Tuesday',5=>'Wednesday',6=>'Thusday',7=>'Friday');
-		 $this->load->view('admin/course_allocation/course',$data);
+		 $this->load->view('admin/course_allocation/course_edit',$data);
 	}
 		
 	/**
