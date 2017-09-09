@@ -124,6 +124,7 @@
 	  });
 	});	
 	
+	// search course
     $(".search").click(function(){
         $.ajax({
             url:"<?php echo base_url();?>backend_course_allocation/get_course",
@@ -139,8 +140,5 @@
         return false;
     });
 	
-
-	
-
 </script>
 

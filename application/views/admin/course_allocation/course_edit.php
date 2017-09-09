@@ -21,97 +21,62 @@
 			<th width="50">Edit</th>
 			<th width="50">Trash</th>
 		</tr>		
-		
-	  <?php 
-		$sl=1;
-		foreach($course_info as $course_data)
-		{
-?>
-		<tr class="content<?php echo $sl; ?>">
-			<td><b><?php echo $sl++; ?></b></td>
+
+		<tr>
 			<td>
-				<?php echo $course_data['course_title']; ?> ( <?php echo $course_data['course_code'] ?> )
-				<input type="hidden" name="course" value="<?php echo  $course_data['course_id']; ?>" id="course_id<?php echo $sl-1; ?>">
+				<?php //echo $course_data['course_title']; ?> ( <?php //echo $course_data['course_code'] ?> )
+				<input type="hidden" name="course" value="<?php //echo  $course_data['course_id']; ?>" id="course_id">
 		   </td>
 		   <td>
-				<select name="faculty_member" id="faculty_member<?php echo $sl-1; ?>" class="form-control" >
+				<select name="faculty_member" id="faculty_member<?php //echo $sl-1; ?>" class="form-control" >
 				<option value="">Please select</option>
 					<?php 
-						foreach($faculty_member as $faculty_member_data)
-						{		
-							 echo '<option value="'.$faculty_member_data->faculty_member_id.'">'.$faculty_member_data->faculty_member_name.'</option>';
-						}
+						//foreach($faculty_member as $faculty_member_data)
+						//{		
+							 //echo '<option value="'.$faculty_member_data->faculty_member_id.'">'.$faculty_member_data->faculty_member_name.'</option>';
+						//}
 					?>
 				</select>				
 		   </td>
 		   <td>
-				<input type="text" name="room_no" id="room_no<?php echo $sl-1; ?>" class="form-control">
+				<input type="text" name="room_no" id="room_no" class="form-control">
 		   </td>		   
 		   <td>
-			  <select name="section" id="section<?php echo $sl-1; ?>" class="form-control faculty" required>
+			  <select name="section" id="section" class="form-control faculty" required>
 				<option value="">Please select</option>
 					<?php 
-						foreach($section as $section_data)
-						{		
-							 echo '<option value="'.$section_data->section_id.'">'.$section_data->section_title.'</option>';
-						}
+						//foreach($section as $section_data)
+						//{		
+						//	 echo '<option value="'.$section_data->section_id.'">'.$section_data->section_title.'</option>';
+						//}
 					?>
 			  </select>
 		   </td>	
 		   <td>
-				<select name="day" id="day<?php echo $sl-1; ?>" class="form-control">
+				<select name="day" id="day" class="form-control">
 					<option value="">Please Select</option>
 					<?php 
-						foreach($day as $key_day=>$day_data)
-						{		
-							 echo '<option value="'.$key_day.'">'.$day_data.'</option>';
-						}
+						//foreach($day as $key_day=>$day_data)
+						//{		
+						//	 echo '<option value="'.$key_day.'">'.$day_data.'</option>';
+						//}
 					?>
 				</select>
 		   </td>			   
 		   <td>
-				<input type="text" name="start_time" id="start_time<?php echo $sl-1; ?>"  class="form-control" >
+				<input type="text" name="start_time" id="start_time"  class="form-control" >
 		   </td>
 		   <td>
-				<input type="text" name="end_time" id="end_time<?php echo $sl-1; ?>"  class="form-control">
+				<input type="text" name="end_time" id="end_time"  class="form-control">
 		   </td>
 
 		   <td>
-				<button  id="add_course" onclick="a(<?php echo $sl-1; ?>)" value="<?php echo $sl-1; ?>" class="btn btn-success add_course search" ><span class="glyphicon glyphicon-plus-sign"></span></button>
+				<button  id="add_course" onclick="a()" value="" class="btn btn-success add_course search" ><span class="glyphicon glyphicon-plus-sign"></span></button>
 		   </td>	
 		   <td>
 				<!--<button type="submit" value="Add" class="btn btn-danger" ><span class="fa fa-trash"></span></button>--> N/A
 		   </td>		   
 		</tr>
-
-		<?php 	$sl2=1;
-			foreach($course_data['course_allocated'] as $course_allocated_data)
-			{
-             ?>              
-				 <tr>
-					<td align="right"><?php echo $sl2; ?></td>
-					<td><?php echo $course_data['course_title']; ?> ( <?php echo $course_data['course_code'] ?> )</td>
-					<td><?php echo $course_allocated_data['faculty_member']; ?></td>
-					<td><?php echo $course_allocated_data['room_no']; ?></td>
-					<td><?php echo $course_allocated_data['section']; ?></td>
-					<td><?php echo $course_allocated_data['day']; ?></td>
-					<td><?php echo $course_allocated_data['start_time']; ?></td>
-					<td><?php echo $course_allocated_data['end_time']; ?></td>					
-					<td><button class="btn btn-danger edit_course" value="<?php echo $course_allocated_data['course_allocation_id']; ?>">
-					 <span class="glyphicon glyphicon-pencil"></span> 
-					 </button></td>
-				   <td>
-					
-					<button class="btn btn-danger delete_course" value="<?php echo $course_allocated_data['course_allocation_id']; ?>" onclick="deleteItem()">
-					 <span class="glyphicon glyphicon-trash"></span> 
-					 </button>
-					</td>
-				 </tr>
-		   
-	
-	   <?php $sl2++;} ?>		
-		
-		<?php } ?>	
 	
 
 	
@@ -232,22 +197,6 @@
 			
 		}
 		
-	}
-
-	// search course
-    $(".edit_course").click(function(){
-		var course_allocation_id=$(this).val();
-		//return false;
-        $.ajax({
-            url:"<?php echo base_url();?>backend_course_allocation/edit_course",
-			data:{
-				course_allocation_id:course_allocation_id
-			},
-            success: function(response) {
-                $("#course").html(response);
-            }
-        }); 
-        return false;
-    });	
+	}	
 </script>
 
