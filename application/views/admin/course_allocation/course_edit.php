@@ -10,7 +10,6 @@
 	  <div class="box-body">
 	  <table class="table table-striped table-bordered">
 		<tr>
-			<th>SL</th>
 			<th >Course</th>
 			<th width="150">Faculty Member</th>
 			<th width="85">Room No</th>			
@@ -24,7 +23,7 @@
 
 		<tr>
 			<td>
-				<?php echo $allocated_course->course_title; ?> ( <?php echo $allocated_course->course_code; ?> )
+				<?php echo $allocated_course->course; ?> ( <?php //echo $allocated_course->course_code; ?> )
 				<input type="hidden" name="course" value="<?php //echo  $course_data['course_id']; ?>" id="course_id">
 		   </td>
 		   <td>
@@ -72,10 +71,7 @@
 
 		   <td>
 				<button  id="add_course" onclick="a()" value="" class="btn btn-success add_course search" ><span class="glyphicon glyphicon-plus-sign"></span> Update</button>
-		   </td>	
-		   <td>
-				<!--<button type="submit" value="Add" class="btn btn-danger" ><span class="fa fa-trash"></span></button>--> N/A
-		   </td>		   
+		   </td>			   
 		</tr>
 	
 
