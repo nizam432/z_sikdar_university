@@ -44,10 +44,10 @@
 			  <select name="section" id="section" class="form-control faculty" required>
 				<option value="">Please select</option>
 					<?php 
-						//foreach($section as $section_data)
-						//{		
-						//	 echo '<option value="'.$section_data->section_id.'">'.$section_data->section_title.'</option>';
-						//}
+						foreach($section as $section_data)
+						{		
+							 echo '<option value="'.$section_data->section_id.'">'.$section_data->section_title.'</option>';
+						}
 					?>
 			  </select>
 		   </td>	
@@ -55,10 +55,10 @@
 				<select name="day" id="day" class="form-control">
 					<option value="">Please Select</option>
 					<?php 
-						//foreach($day as $key_day=>$day_data)
-						//{		
-						//	 echo '<option value="'.$key_day.'">'.$day_data.'</option>';
-						//}
+						foreach($day as $key_day=>$day_data)
+						{		
+							 echo '<option value="'.$key_day.'">'.$day_data.'</option>';
+						}
 					?>
 				</select>
 		   </td>			   
