@@ -30,15 +30,15 @@
 				<select name="faculty_member" id="faculty_member<?php //echo $sl-1; ?>" class="form-control" >
 				<option value="">Please select</option>
 					<?php 
-						//foreach($faculty_member as $faculty_member_data)
-						//{		
-							 //echo '<option value="'.$faculty_member_data->faculty_member_id.'">'.$faculty_member_data->faculty_member_name.'</option>';
-						//}
+						foreach($faculty_member as $faculty_member_data)
+						{		
+							 echo '<option value="'.$faculty_member_data->faculty_member_id.'">'.$faculty_member_data->faculty_member_name.'</option>';
+						}
 					?>
 				</select>				
 		   </td>
 		   <td>
-				<input type="text" name="room_no" id="room_no" class="form-control">
+				<input type="text" name="room_no" value="<?php echo $allocated_course->room_no; ?>" id="room_no" class="form-control">
 		   </td>		   
 		   <td>
 			  <select name="section" id="section" class="form-control faculty" required>
@@ -63,10 +63,10 @@
 				</select>
 		   </td>			   
 		   <td>
-				<input type="text" name="start_time" id="start_time"  class="form-control" >
+				<input type="text" name="start_time" id="start_time" value="<?php echo $allocated_course->start_time; ?>"  class="form-control" >
 		   </td>
 		   <td>
-				<input type="text" name="end_time" id="end_time"  class="form-control">
+				<input type="text" name="end_time" id="end_time" value="<?php echo $allocated_course->end_time; ?>"  class="form-control">
 		   </td>
 
 		   <td>
