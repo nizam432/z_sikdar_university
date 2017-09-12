@@ -120,7 +120,7 @@
 
   $('.add_course').click(function(){
 	  var increment=$(this).val();
-	  if(fn_validation('semester'+'*faculty_member'+increment+'*room_no'+increment+'*section'+increment+'*day'+increment+'*start_time'+increment+'*end_time'+increment)==0) return ;
+	  if(fn_validation('semester'+'*faculty_member'+'*room_no'+'*section'+'*day'+'*start_time'+'*end_time')==0) return ;
 	  var semester=$('#semester').val();
 	  var course_id=$('#course_id'+increment).val();
 	  var faculty_member=$('#faculty_member'+increment).val();

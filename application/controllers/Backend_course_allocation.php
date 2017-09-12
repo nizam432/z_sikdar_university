@@ -87,6 +87,26 @@ class Backend_course_allocation extends CI_Controller
 		$this->model_backend_course_allocation->save_course_allocation_data($data);
 	}
 
+	/**
+	 * Save course_allocation
+	 *
+	 * @return void
+	 */	
+	public function update($id)
+	{
+		$data=array();
+		$data['course']=$this->input->post('course', TRUE);
+		$data['faculty_member']=$this->input->post('faculty_member', TRUE);
+		$data['semester']=$this->input->post('semester', TRUE);
+		$data['room_no']=$this->input->post('room_no', TRUE);
+		$data['section']=$this->input->post('section', TRUE);
+		$data['day']=$this->input->post('day', TRUE);
+		$data['start_time']=$this->input->post('start_time', TRUE);
+		$data['end_time']=$this->input->post('end_time', TRUE);
+		$data['entry_by']=$this->session->userdata('admin_id');
+		$data['entry_date_time']=date('Y-m-d H:i:s');
+		$this->model_backend_course_allocation->save_course_allocation_data($data);
+	}
 	
 	/**
 	 * Update course_allocation
