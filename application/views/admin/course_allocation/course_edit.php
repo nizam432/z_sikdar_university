@@ -24,10 +24,10 @@
 		<tr>
 			<td>
 				<?php echo $allocated_course->course_title; ?> ( <?php echo $allocated_course->course_code; ?> )
-				<input type="hidden" name="course" value="<?php //echo  $course_data['course_id']; ?>" id="course_id">
+				<input type="hidden" name="course" value="<?php echo  $allocated_course->course_allocation_id;?>" id="course_id">
 		   </td>
 		   <td>
-				<select name="faculty_member" id="faculty_member<?php //echo $sl-1; ?>" class="form-control" >
+				<select name="faculty_member" id="faculty_member" class="form-control" >
 				<option value="">Please select</option>
 					<?php 
 						foreach($faculty_member as $faculty_member_data)
@@ -70,7 +70,7 @@
 		   </td>
 
 		   <td>
-				<button  id="add_course" onclick="a()" value="" class="btn btn-success add_course search" ><span class="glyphicon glyphicon-plus-sign"></span> Update</button>
+				<button  id="add_course" onclick="a()" value="" class="btn btn-success  search" ><span class="glyphicon glyphicon-plus-sign"></span> Update</button>
 		   </td>			   
 		</tr>
 	
@@ -83,52 +83,16 @@
 
 
 <script>
-	  $('.delete_course').click(function(){
-		if (confirm("Are you sure?")) {
-			var course_allocation_id=$(this).val();
-			$.ajax({
-            url:"<?php echo base_url();?>backend_course_allocation/delete_course",
-			type: 'POST',
-			data:{
-				course_allocation_id:course_allocation_id
-			},
-			
-			beforeSend :function(){
-			//$('#course').html('<div style="width:100%;background:#fff; height:100px; text-align:center"><img src="<?php echo base_url();?>assets/backend/images/loading.gif"/></div>');
-			}, 
-					
-            success: function(response) {
-			    alert("Delete Data Successfully");
-				
-				$.ajax({
-					url:"<?php echo base_url();?>backend_course_allocation/get_course",
-					data:{
-						faculty:$('.faculty').val(),
-						department:$('.department').val(),
-						program:$('.program').val()
-					},
-					success: function(response) {
-						$("#course").html(response);
-					}
-				}); 			
-			}
-        }); 
-	  
-		}
-		return false;
-	});
-
-  $('.add_course').click(function(){
-	  var increment=$(this).val();
+  $('#add_course').click(function(){
 	  if(fn_validation('semester'+'*faculty_member'+'*room_no'+'*section'+'*day'+'*start_time'+'*end_time')==0) return ;
 	  var semester=$('#semester').val();
-	  var course_id=$('#course_id'+increment).val();
-	  var faculty_member=$('#faculty_member'+increment).val();
-	  var room_no=$('#room_no'+increment).val();
-	  var section=$('#section'+increment).val();
-	  var day=$('#day'+increment).val();
-	  var start_time=$('#start_time'+increment).val();
-	  var end_time=$('#end_time'+increment).val();
+	  var course_id=$('#course_id').val();
+	  var faculty_member=$('#faculty_member').val();
+	  var room_no=$('#room_no').val();
+	  var section=$('#section').val();
+	  var day=$('#day').val();
+	  var start_time=$('#start_time').val();
+	  var end_time=$('#end_time').val();
 
         $.ajax({
             url:"<?php echo base_url();?>backend_course_allocation/update",
@@ -145,14 +109,13 @@
 			},
 			
 			beforeSend :function(){
-			$('#course').html('<div style="width:100%;background:#fff; height:100px; text-align:center"><img src="<?php echo base_url();?>assets/backend/images/loading.gif"/></div>');
+				//$('#course').html('<div style="width:100%;background:#fff; height:100px; text-align:center"><img src="<?php echo base_url();?>assets/backend/images/loading.gif"/></div>');
 			}, 
 					
             success: function(response) {
                // $("#course").html(response);
-				$('.content'+increment).find('input[type=text],select').val("");
+				//$('.content').find('input[type=text],select').val("");
 			    alert("Save Data Successfully");
-				
 				$.ajax({
 					url:"<?php echo base_url();?>backend_course_allocation/get_course",
 					data:{
@@ -163,7 +126,7 @@
 					success: function(response) {
 						$("#course").html(response);
 					}
-				}); 			
+				}); 		
 			}
         }); 
     });

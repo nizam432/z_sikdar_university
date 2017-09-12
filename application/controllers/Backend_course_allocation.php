@@ -92,10 +92,11 @@ class Backend_course_allocation extends CI_Controller
 	 *
 	 * @return void
 	 */	
-	public function update($id)
+	public function update()
 	{
+		
 		$data=array();
-		$data['course']=$this->input->post('course', TRUE);
+		$course_allocation_id=$this->input->post('course', TRUE);
 		$data['faculty_member']=$this->input->post('faculty_member', TRUE);
 		$data['semester']=$this->input->post('semester', TRUE);
 		$data['room_no']=$this->input->post('room_no', TRUE);
@@ -103,46 +104,13 @@ class Backend_course_allocation extends CI_Controller
 		$data['day']=$this->input->post('day', TRUE);
 		$data['start_time']=$this->input->post('start_time', TRUE);
 		$data['end_time']=$this->input->post('end_time', TRUE);
-		$data['entry_by']=$this->session->userdata('admin_id');
-		$data['entry_date_time']=date('Y-m-d H:i:s');
-		$this->model_backend_course_allocation->save_course_allocation_data($data);
-	}
-	
-	/**
-	 * Update course_allocation
-	 *
-	 * @param int $id
-	 * @return void
-	 */	
-	 
-	public function update($id)
-	{
-		$data = array();
-		$data['course_allocation_title']=$this->input->post('course_allocation_title', TRUE);
 		$data['update_by']=$this->session->userdata('admin_id');
 		$data['update_date_time']=date('Y-m-d H:i:s');
-		$data['status']=$this->input->post('status', TRUE);
 		
-		//Form Validation
-		$this->form_validation->set_rules('course_allocation_title', 'course_allocation Title', 'required');
-		
-		if ($this->form_validation->run() == FALSE)
-		{
-			$this->session->set_flashdata('course_allocation_form_validation',validation_errors());
-			redirect("backend_course_allocation/edit/$id");
-		}
-		else
-		{
-			//update course_allocation data
-			$this->model_backend_course_allocation->update_course_allocation_data($data,$id);
-			
-			// Redirect with flash message
-			$sdata=array();
-			$sdata['message']="update insert successfully";
-			$this->session->set_userdata($sdata);
-			redirect('backend_course_allocation');
-		}
+
+		$this->model_backend_course_allocation->update_course_allocation_data($data,$course_allocation_id);
 	}
+	
 	/**
 	 * publish course_allocation
 	 *
@@ -210,7 +178,6 @@ class Backend_course_allocation extends CI_Controller
 	{
 		 $data=array();
 		 $course_allocation_id=$this->input->get_post('course_allocation_id');
-		 
 		 $data['allocated_course']=$this->model_backend_course_allocation->get_course_allocation_row_data($course_allocation_id);
 		 $data['faculty_member']=$this->model_backend_course_allocation->get_faculty_member_data();
 		 $data['semester']=$this->model_backend_course_allocation->get_semester_data();

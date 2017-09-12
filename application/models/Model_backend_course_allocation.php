@@ -76,6 +76,7 @@ class Model_backend_course_allocation extends  CI_Model
 		$result=$query->result();
 		return $result;
 	}	
+	
 	public function get_semester_data()
 	{
 		$this->db->select('semester_id,semester_title');
@@ -106,10 +107,14 @@ class Model_backend_course_allocation extends  CI_Model
 		return $result;
 	}
 	
-	public function update_course_allocation_data($data, $id)
+	public function update_course_allocation_data($data, $course_allocation_id)
 	{
-		$this->db->where('course_allocation_id', $id);
+		echo $course_allocation_id;
+		print_r($data);
+		$this->db->where('course_allocation_id', $course_allocation_id);
 		$result=$this->db->update('course_allocation', $data);
+		echo 'ddddd'; exit;
+		
 		return $result;		
 	}
 	

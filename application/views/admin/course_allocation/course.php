@@ -172,7 +172,7 @@
 	  var increment=$(this).val();
 	  if(fn_validation('semester'+'*faculty_member'+increment+'*room_no'+increment+'*section'+increment+'*day'+increment+'*start_time'+increment+'*end_time'+increment)==0) return ;
 	  var semester=$('#semester').val();
-	  var course=$('#course'+increment).val();
+	  var course_id=$('#course_id'+increment).val();
 	  var faculty_member=$('#faculty_member'+increment).val();
 	  var room_no=$('#room_no'+increment).val();
 	  var section=$('#section'+increment).val();
@@ -184,7 +184,7 @@
             url:"<?php echo base_url();?>backend_course_allocation/save",
 			type: 'POST',
 			data:{
-				course:course,
+				course:course_id,
 				faculty_member:faculty_member,
 				semester:semester,
 				room_no:room_no,
@@ -195,7 +195,7 @@
 			},
 			
 			beforeSend :function(){
-			$('#course').html('<div style="width:100%;background:#fff; height:100px; text-align:center"><img src="<?php echo base_url();?>assets/backend/images/loading.gif"/></div>');
+			//$('#course').html('<div style="width:100%;background:#fff; height:100px; text-align:center"><img src="<?php echo base_url();?>assets/backend/images/loading.gif"/></div>');
 			}, 
 					
             success: function(response) {
