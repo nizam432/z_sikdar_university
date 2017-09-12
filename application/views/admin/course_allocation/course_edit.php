@@ -23,7 +23,7 @@
 
 		<tr>
 			<td>
-				<?php echo $allocated_course->course; ?> ( <?php //echo $allocated_course->course_code; ?> )
+				<?php echo $allocated_course->course_title; ?> ( <?php echo $allocated_course->course_code; ?> )
 				<input type="hidden" name="course" value="<?php //echo  $course_data['course_id']; ?>" id="course_id">
 		   </td>
 		   <td>
@@ -32,7 +32,7 @@
 					<?php 
 						foreach($faculty_member as $faculty_member_data)
 						{		
-							 echo '<option value="'.$faculty_member_data->faculty_member_id.'">'.$faculty_member_data->faculty_member_name.'</option>';
+							 echo '<option '.(($allocated_course->faculty_member==$faculty_member_data->faculty_member_id)? ' selected="selected" ':'').' value="'.$faculty_member_data->faculty_member_id.'">'.$faculty_member_data->faculty_member_name.'</option>';
 						}
 					?>
 				</select>				
@@ -46,7 +46,7 @@
 					<?php 
 						foreach($section as $section_data)
 						{		
-							 echo '<option value="'.$section_data->section_id.'">'.$section_data->section_title.'</option>';
+							 echo '<option '.(($allocated_course->section==$section_data->section_id)? ' selected="selected" ':'').' value="'.$section_data->section_id.'">'.$section_data->section_title.'</option>';
 						}
 					?>
 			  </select>
@@ -57,13 +57,13 @@
 					<?php 
 						foreach($day as $key_day=>$day_data)
 						{		
-							 echo '<option value="'.$key_day.'">'.$day_data.'</option>';
+							 echo '<option '.(($allocated_course->day==$key_day)? ' selected="selected" ':'').'  value="'.$key_day.'">'.$day_data.'</option>';
 						}
 					?>
 				</select>
 		   </td>			   
 		   <td>
-				<input type="text" name="start_time" id="start_time" value="<?php echo $allocated_course->start_time; ?>"  class="form-control" >
+				<input type="text" name="start_time" id="start_time" value="<?php echo $allocated_course->start_time;?>"  class="form-control" >
 		   </td>
 		   <td>
 				<input type="text" name="end_time" id="end_time" value="<?php echo $allocated_course->end_time; ?>"  class="form-control">
@@ -131,7 +131,7 @@
 	  var end_time=$('#end_time'+increment).val();
 
         $.ajax({
-            url:"<?php echo base_url();?>backend_course_allocation/save",
+            url:"<?php echo base_url();?>backend_course_allocation/update",
 			type: 'POST',
 			data:{
 				course:course_id,

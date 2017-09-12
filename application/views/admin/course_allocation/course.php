@@ -91,10 +91,21 @@
 				 <tr>
 					<td align="right"><?php echo $sl2; ?></td>
 					<td><?php echo $course_data['course_title']; ?> ( <?php echo $course_data['course_code'] ?> )</td>
-					<td><?php echo $course_allocated_data['faculty_member']; ?></td>
+					<td><?php echo $course_allocated_data['faculty_member_name']; ?></td>
 					<td><?php echo $course_allocated_data['room_no']; ?></td>
-					<td><?php echo $course_allocated_data['section']; ?></td>
-					<td><?php echo $course_allocated_data['day']; ?></td>
+					<td><?php echo $course_allocated_data['section_title']; ?></td>
+					<td>
+						<?php 
+							foreach($day as $key=>$value)
+							{
+								if($key==$course_allocated_data['day'])
+								{
+									echo $value;
+									break;
+								}
+							}
+						?>
+					</td>
 					<td><?php echo $course_allocated_data['start_time']; ?></td>
 					<td><?php echo $course_allocated_data['end_time']; ?></td>					
 					<td><button class="btn btn-danger edit_course" value="<?php echo $course_allocated_data['course_allocation_id']; ?>">

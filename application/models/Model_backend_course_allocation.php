@@ -30,8 +30,10 @@ class Model_backend_course_allocation extends  CI_Model
 	
 	public function get_course_allocation_data($course_id)
 	{
-		$this->db->select('*');
+		$this->db->select('*,faculty_member.faculty_member_name as faculty_member_name,section.section_title as section_title');
 		$this->db->from('course_allocation');
+		$this->db->join('faculty_member', 'faculty_member.faculty_member_id = course_allocation.faculty_member');
+		$this->db->join('section', 'section.section_id = course_allocation.section');
 		$this->db->where('course',$course_id);
 		$this->db->order_by('course_allocation_id', "DESC");
 		$query=$this->db->get('');
@@ -40,8 +42,9 @@ class Model_backend_course_allocation extends  CI_Model
 	}
 	public function get_course_allocation_row_data($course_allocation_id)
 	{
-		$this->db->select('*');
+		$this->db->select('*,course.course_title as course_title,course.course_code as course_code');
 		$this->db->from('course_allocation');
+		$this->db->join('course', 'course.course_id = course_allocation.course');
 		$this->db->where('course_allocation_id',$course_allocation_id);
 		$query=$this->db->get('');
 		$result=$query->row();

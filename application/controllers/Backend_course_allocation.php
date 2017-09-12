@@ -192,8 +192,6 @@ class Backend_course_allocation extends CI_Controller
 		 $course_allocation_id=$this->input->get_post('course_allocation_id');
 		 
 		 $data['allocated_course']=$this->model_backend_course_allocation->get_course_allocation_row_data($course_allocation_id);
-		// print_r($data['allocated_course']);
-		 //exit;
 		 $data['faculty_member']=$this->model_backend_course_allocation->get_faculty_member_data();
 		 $data['semester']=$this->model_backend_course_allocation->get_semester_data();
 		 $data['section']=$this->model_backend_course_allocation->get_section_data();
