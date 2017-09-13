@@ -9,7 +9,7 @@
 </div>
 <?php // echo '<pre>'; print_r($student_info); echo '</pre>';?>
 
-<div class="col-md-12">
+<div class="col-md-12 printablediv" id="printablediv">
   <!-- general form elements  -->
   <div class="box box-primary">
 	<div class="box-header with-border">
@@ -206,4 +206,30 @@
 	</div>
   <!-- /.box -->
 </div>
+
+</div>
+
+<input type="button" class="btn btn-primary col-offset-12" value="Print" onclick="javascript:printDiv('printablediv')" />
+
+<script language="javascript" type="text/javascript">
+	function printDiv(divID) {
+		//Get the HTML of div
+		var divElements = document.getElementById(divID).innerHTML;
+		//Get the HTML of whole page
+		var oldPage = document.body.innerHTML;
+
+		//Reset the page's HTML with div's HTML only
+		document.body.innerHTML = 
+		  "<html><head><title></title></head><body>" + 
+		  divElements + "</body>";
+
+		//Print Page
+		window.print();
+
+		//Restore orignal HTML
+		document.body.innerHTML = oldPage;
+
+	  
+	}
+</script>
 

@@ -109,8 +109,6 @@ class Model_backend_course_allocation extends  CI_Model
 	
 	public function update_course_allocation_data($data, $course_allocation_id)
 	{
-		echo $course_allocation_id;
-		print_r($data);
 		$this->db->where('course_allocation_id', $course_allocation_id);
 		$result=$this->db->update('course_allocation', $data);
 		echo 'ddddd'; exit;
