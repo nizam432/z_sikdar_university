@@ -32,7 +32,8 @@ class Backend_course_allocation extends CI_Controller
 	public function index()
 	{
 		$data = array();
-		$data['course_allocation_list'] =$this->model_backend_course_allocation->get_course_allocation_list_data();
+		$data['faculty']= $this->model_backend_course_allocation->get_faculty_data();
+		$data['semester']=$this->model_backend_course_allocation->get_semester_data();
 		$data['content'] = $this->load->view('admin/course_allocation/add',$data, TRUE);
 		$this->load->view('admin/index', $data);
 	}
