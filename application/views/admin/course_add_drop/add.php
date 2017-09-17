@@ -80,11 +80,12 @@
 	// search course
     $(".search").click(function(){
         $.ajax({
-            url:"<?php echo base_url();?>backend_course_allocation/get_course",
+            url:"<?php echo base_url();?>backend_course_allocation/get_assing_course",
 			data:{
 				faculty:$('.faculty').val(),
 				department:$('.department').val(),
-				program:$('.program').val()
+				program:$('.program').val(),
+				student_id:$('.student_id').val(),
 			},
             success: function(response) {
                 $("#course_add_drop").html(response);
