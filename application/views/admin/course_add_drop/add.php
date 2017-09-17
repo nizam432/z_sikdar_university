@@ -56,6 +56,12 @@
 						  </select>
 					</div>
 				</div>
+				<div class="form-group">				
+					<label class="col-sm-2 control-label">Student ID</label>
+					<div class="col-sm-4">
+						  <input type="text" name="student_id" id="student_id">
+					</div>
+				</div>				
 				<div class="form-group">
 					<div class="col-sm-offset-4 col-sm-5">
 						<button class="btn btn-primary search">Search</button>
