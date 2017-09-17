@@ -5,7 +5,16 @@
 	<li><a href="<?php echo base_url()?>student-list"><i class="fa fa-user"></i> <span>Student</span></a></li>
 	<li><a href="<?php echo base_url()?>backend_faculty_member"><i class="fa fa-user"></i> <span>Faculty Member</span></a></li>
 	<li><a href="<?php echo base_url()?>backend_course"><i class="fa fa-user"></i> <span>Course</span></a></li>
-	<li><a href="<?php echo base_url()?>backend_course_allocation"><i class="fa fa-user"></i> <span>Course Allocation</span></a></li>
+	<li>
+		<a href="<?php echo base_url()?>backend_course_allocation">
+			<i class="fa fa-user"></i> <span>Course Allocation</span>
+		</a>
+	</li>
+	<li>
+		<a href="<?php echo base_url()?>backend_course_add_drop">
+			<i class="fa fa-user"></i> <span>Course ADD DROP</span>
+		</a>
+	</li>	
 	<li><a href="<?php echo base_url()?>backend_user"><i class="fa fa-user"></i> <span>User</span></a></li>	
 	
 	<li class="treeview">
