@@ -34,7 +34,7 @@ class Backend_course_add_drop extends CI_Controller
 		$data = array();
 		$data['faculty']= $this->model_backend_course_add_drop->get_faculty_data();
 		$data['semester']=$this->model_backend_course_add_drop->get_semester_data();
-		$data['content'] = $this->load->view('admin/course_allocation/add',$data, TRUE);
+		$data['content'] = $this->load->view('admin/course_add_drop/add',$data, TRUE);
 		$this->load->view('admin/index', $data);
 	}
 	 /**

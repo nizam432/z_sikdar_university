@@ -59,7 +59,7 @@
 				<div class="form-group">				
 					<label class="col-sm-2 control-label">Student ID</label>
 					<div class="col-sm-4">
-						  <input type="text" name="student_id" id="student_id">
+						  <input type="text" name="student_id" id="student_id" class="form-control">
 					</div>
 				</div>				
 				<div class="form-group">
@@ -72,63 +72,10 @@
 	</div>
 </div>
 
-<div id="course">
-</div>
+<div id="course_add_drop"></div>
 
 <script>
-	 // Faculty data load
-	$('.faculty').change(function(){
-	  $.ajax({
-		type: "POST",
-		url: "<?php echo base_url();?>backend_course/get_department",
-		data:{id:$(this).val()}, 
-		beforeSend :function(){
-		$(".department option:gt(0)").remove(); 
-		$('.department').find("option:eq(0)").html("Please wait..");
-
-		},                         
-		success: function (data) {
-		  /*get response as json */
-		   $('.department').find("option:eq(0)").html("Please Select");
-		  var obj=jQuery.parseJSON(data);
-		  $(obj).each(function()
-		  {
-		   var option = $('<option />');
-		   option.attr('value', this.value).text(this.label);           
-		   $('.department').append(option);
-		 });  
-
-		  /*ends */
-
-		}
-	  });
-	});	 
-
-	//Department data load 
-	$('.department').change(function(){
-	  $.ajax({
-		type: "POST",
-		url: "<?php echo base_url();?>backend_course/get_program",
-		data:{id:$(this).val()}, 
-		beforeSend :function(){
-		$(".program option:gt(0)").remove(); 
-		$('.program').find("option:eq(0)").html("Please wait..");
-
-		},                         
-		success: function (data) {
-		  /*get response as json */
-		   $('.program').find("option:eq(0)").html("Please Select");
-		  var obj=jQuery.parseJSON(data);
-		  $(obj).each(function()
-		  {
-		   var option = $('<option />');
-		   option.attr('value', this.value).text(this.label);           
-		   $('.program').append(option);
-		 });  
-		  /*ends */
-		}
-	  });
-	});	
+	
 	
 	// search course
     $(".search").click(function(){
@@ -140,7 +87,7 @@
 				program:$('.program').val()
 			},
             success: function(response) {
-                $("#course").html(response);
+                $("#course_add_drop").html(response);
             }
         }); 
         return false;
