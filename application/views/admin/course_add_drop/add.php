@@ -75,13 +75,16 @@
 <div id="course_add_drop"></div>
 
 			<tbody id="data_load_list">
+			<?php foreach($assing_course_data_day_wise as $course_day_info): ?>
 			<?php
 			//$i=1;
+			
+			
 			//$sql_day=mysql_query("select * from fbs_assign_course where semester_id='$txt_semister_id' and revised='//$batch_code'  group by course_date");
 			//while($row_day=mysql_fetch_assoc($sql_day)){
 				?>
 			 <tr>
-				<td valign="middle"><b><?php //echo $row_day['course_date']; ?></b></td>
+				<td valign="middle"><b><?php echo [$course_day_info->day]; ?></b></td>
 				<td colspan="7">
 			 
 		   <table class="table table-striped table-bordered table-hover" width="100%">
@@ -122,7 +125,7 @@
 					 </table>
 				</td>
 				</tr>
-			<?php //} ?>
+			<?php endforeach; ?>
 			
 		 </tbody>
 	</table>

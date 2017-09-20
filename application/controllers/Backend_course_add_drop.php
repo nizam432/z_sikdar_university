@@ -34,6 +34,8 @@ class Backend_course_add_drop extends CI_Controller
 		$data = array();
 		$data['faculty']= $this->model_backend_course_add_drop->get_faculty_data();
 		$data['semester']=$this->model_backend_course_add_drop->get_semester_data();
+		$semester=1;
+		$data['assing_course_data_day_wise']=$this->model_backend_course_add_drop->get_assing_course_data_day_wise($semester);
 		$data['content'] = $this->load->view('admin/course_add_drop/add',$data, TRUE);
 		$this->load->view('admin/index', $data);
 	}
@@ -46,9 +48,10 @@ class Backend_course_add_drop extends CI_Controller
 	{
 		$data = array();
 		$data['faculty']= $this->model_backend_course_add_drop->get_faculty_data();
-		$data['semester']=$this->model_backend_course_add_drop->get_semester_data();		
+		$data['semester']=$this->model_backend_course_add_drop->get_semester_data();
+
 		$data['content']=$this->load->view('admin/course_allocation/add',$data, TRUE);
-		$this->load->view('admin/index', $data);
+		$this->load->view('admin/index', $data);  
 	}
 
 	 /**

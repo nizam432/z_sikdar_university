@@ -2,12 +2,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed'); 
 class Model_backend_course_add_drop extends  CI_Model
 {
-	public function get_course_allocation_list_data()
+	public function get_assing_course_data_day_wise($semester)
 	{
-		$this->db->select('course_allocation.course_allocation_id as course_allocation_id,course_allocation.entry_date_time as entry_date_time,users.name as entry_by');
+		$this->db->select('*,');
 		$this->db->from('course_allocation');
-		$this->db->join('users', 'users.id = course_allocation.entry_by');
-		$this->db->order_by("course_allocation.course_allocation_id", "DESC");
+		$this->db->group_by("course_allocation.day");
 		$query=$this->db->get('');
 		$result=$query->result();
 		return $result;
