@@ -102,7 +102,7 @@
 					
 					<tr class="odd gradeA">
 							<td width="5%">
-							 <input type="button" value="Add" onclick="fnc_course_registration('<?php //echo //$row['course_id'].'##'.$txt_semister_id.'##'.$student_id.'##'.$row['section'].'##'.$batch.'##'.$row['course_date']; ?>')">
+							 <input type="button" class="btn btn-success" value="Add" onclick="fnc_course_registration('<?php //echo //$row['course_id'].'##'.$txt_semister_id.'##'.$student_id.'##'.$row['section'].'##'.$batch.'##'.$row['course_date']; ?>')">
 							</td>
 
 							<td width="5%"><?php //echo $i; ?></td>
