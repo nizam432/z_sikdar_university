@@ -12,6 +12,16 @@ class Model_backend_course_add_drop extends  CI_Model
 		return $result;
 	}	
 	
+	public function get_assing_course_data($semester)
+	{
+		$this->db->select('*,');
+		$this->db->from('course_allocation');
+		$this->db->group_by("course_allocation.day");
+		$query=$this->db->get('');
+		$result=$query->result();
+		return $result;
+	}
+	
 	public function save_course_allocation_data($data)
 	{
 		$this->db->insert('course_allocation',$data);

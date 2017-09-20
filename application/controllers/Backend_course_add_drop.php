@@ -33,10 +33,19 @@ class Backend_course_add_drop extends CI_Controller
 	{
 		$data = array();
 		$data['faculty']= $this->model_backend_course_add_drop->get_faculty_data();
-		$data['semester']=$this->model_backend_course_add_drop->get_semester_data();
-		$semester=1;
-		$data['day']=array(1=>'Saturday',2=>'Sunday',3=>'Monday',4=>'Tuesday',5=>'Wednesday',6=>'Thusday',7=>'Friday');		
+		$data['semester']=$this->model_backend_course_add_drop->get_semester_data();		
+		$data['day']=array(1=>'Saturday',2=>'Sunday',3=>'Monday',4=>'Tuesday',5=>'Wednesday',6=>'Thusday',7=>'Friday');	
+		$semester=1;	
 		$data['get_assing_course_day_wise']=$this->model_backend_course_add_drop->get_assing_course_day_wise($semester);
+		foreach($get_assing_course_day_wise as $key=>$value)
+		 {
+			echo $day=$get_assing_course_day_wise[$key]['day'];
+			
+			exit
+			$data['get_assing_course_data']=$this->model_backend_course_add_drop->get_assing_course_data($day);
+			$allocated_course = json_decode(json_encode($data['allocated_course']), True);
+			$course_info[$key]['course_allocated']=$allocated_course;
+		 }
 		$data['content'] = $this->load->view('admin/course_add_drop/add',$data, TRUE);
 		$this->load->view('admin/index', $data);
 	}
