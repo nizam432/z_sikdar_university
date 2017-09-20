@@ -75,7 +75,7 @@
 <div id="course_add_drop"></div>
 
 			<tbody id="data_load_list">
-			<?php foreach($get_assing_course_day_group as $course_assing_day_info): ?>
+			<?php foreach($get_assing_course_day_wise as $course_assing_day_info): ?>
 			<?php
 			//$i=1;
 			
@@ -84,7 +84,7 @@
 			//while($row_day=mysql_fetch_assoc($sql_day)){
 				?>
 			 <tr>
-				<td valign="middle"><b><?php echo $day[$course_day_info->day]; ?></b></td>
+				<td valign="middle"><b><?php echo $day[$course_assing_day_info->day]; ?></b></td>
 				<td colspan="7">
 			 
 		   <table class="table table-striped table-bordered table-hover" width="100%">

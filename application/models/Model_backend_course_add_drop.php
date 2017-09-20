@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed'); 
 class Model_backend_course_add_drop extends  CI_Model
 {
-	public function get_assing_course_data_day_wise($semester)
+	public function get_assing_course_day_wise($semester)
 	{
 		$this->db->select('*,');
 		$this->db->from('course_allocation');
