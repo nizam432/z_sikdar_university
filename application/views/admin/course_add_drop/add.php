@@ -84,7 +84,7 @@
 			//while($row_day=mysql_fetch_assoc($sql_day)){
 				?>
 			 <tr>
-				<td valign="middle"><b><?php echo [$course_day_info->day]; ?></b></td>
+				<td valign="middle"><b><?php echo $day[$course_day_info->day]; ?></b></td>
 				<td colspan="7">
 			 
 		   <table class="table table-striped table-bordered table-hover" width="100%">
