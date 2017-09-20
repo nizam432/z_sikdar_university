@@ -75,7 +75,7 @@
 <div id="course_add_drop"></div>
 
 			<tbody id="data_load_list">
-			<?php foreach($assing_course_data_day_wise as $course_day_info): ?>
+			<?php foreach($get_assing_course_day_group as $course_assing_day_info): ?>
 			<?php
 			//$i=1;
 			
