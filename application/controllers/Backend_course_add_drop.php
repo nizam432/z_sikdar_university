@@ -40,12 +40,11 @@ class Backend_course_add_drop extends CI_Controller
 		foreach($get_assing_course_day_wise as $key=>$value)
 		 {
 			echo $day=$get_assing_course_day_wise[$key]['day'];
-			
-			exit
 			$data['get_assing_course_data']=$this->model_backend_course_add_drop->get_assing_course_data($day);
-			$allocated_course = json_decode(json_encode($data['allocated_course']), True);
-			$course_info[$key]['course_allocated']=$allocated_course;
+			$assigned_course = json_decode(json_encode($data['allocated_course']), True);
+			$assigned_course_info[$key]['assigned_course']=$assigned_course;
 		 }
+                 $data['assigned_course_info']=$assigned_course_info ;
 		$data['content'] = $this->load->view('admin/course_add_drop/add',$data, TRUE);
 		$this->load->view('admin/index', $data);
 	}
