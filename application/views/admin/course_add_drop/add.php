@@ -129,7 +129,7 @@
 			
 		 </tbody>
 	</table>
-<script>
+<script> 
 	
 	
 	// search course
