@@ -72,6 +72,7 @@
 	</div>
 </div>
 
+<div id="student_registerd_course"></div>
 <div id="course_add_drop"></div>
 
 <script>
@@ -89,6 +90,19 @@
                 $("#course_add_drop").html(response);
             }
         }); 
+
+        $.ajax({
+            url:"<?php echo base_url();?>backend_course_add_drop/get_student_registerd_course",
+            type:"POST",
+			data:{
+                semester:$('#semester').val(),
+				student_id:$('#student_id').val()
+			},
+            success: function(response) {
+                $("#student_registerd_course").html(response);
+            }
+        }); 
+
         return false;
     });	
 	

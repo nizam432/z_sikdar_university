@@ -12,6 +12,17 @@ class Model_backend_course_add_drop extends  CI_Model
 		$result=$query->result();
 		return $result;
 	}	
+
+    public function get_student_registerd_course($student_id,$semester)
+	{
+		$this->db->select('*,course.course_title as course_title,course.course_code as course_code');
+		$this->db->from('course_add_drop');
+        $this->db->join('course', 'course.course_code = course_add_drop.course_code', 'left');
+        $this->db->where(array('student_id'=>$student_id,'semester'=>$semester));
+		$query=$this->db->get('');
+		$result=$query->result();
+		return $result;
+	}	
 	
 	public function get_assing_course_data($semester,$day)
 	{
@@ -26,9 +37,9 @@ class Model_backend_course_add_drop extends  CI_Model
 		return $result;
 	}
 	
-	public function save_course_allocation_data($data)
+	public function save_course_registration_data($data)
 	{
-		$this->db->insert('course_allocation',$data);
+		$this->db->insert('course_add_drop',$data);
 	}
 	
 	public function get_course_data($data)

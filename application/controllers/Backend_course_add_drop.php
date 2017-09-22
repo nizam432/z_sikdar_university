@@ -25,7 +25,7 @@ class Backend_course_add_drop extends CI_Controller
 	   date_default_timezone_set('Asia/Dhaka');
 	}
  	/**
-	 * Show course_allocation List
+	 * Show search 
 	 *
 	 * @return void
 	 */	
@@ -38,7 +38,7 @@ class Backend_course_add_drop extends CI_Controller
 		$this->load->view('admin/index', $data);
 	}
 	 /**
-	 * Add course_allocation 
+	 * Get Assigned course
 	 *
 	 * @return void
 	 */	
@@ -64,13 +64,23 @@ class Backend_course_add_drop extends CI_Controller
 		 }
 
         $data['assing_course_data']=$assing_course_data ;
-
-   // echo '<pre>'; print_r($data['assing_course_data']); echo '</pre>';
-    //exit;
-$data['name']='nizam';
 		$data['content'] = $this->load->view('admin/course_add_drop/add',$data, TRUE);
 		$this->load->view('admin/course_add_drop/course_add_drop_form',$data);
     }
+
+	public function get_student_registerd_course()
+	{
+        $data = array();
+		$data['faculty']= $this->model_backend_course_add_drop->get_faculty_data();
+		$data['semester']=$this->model_backend_course_add_drop->get_semester_data();		
+		$data['day']=array(1=>'Saturday',2=>'Sunday',3=>'Monday',4=>'Tuesday',5=>'Wednesday',6=>'Thusday',7=>'Friday');	
+		$semester=$this->input->post('semester');
+        $student_id=$this->input->post('student_id');
+        $data['student_registerd_course']=$this->model_backend_course_add_drop->get_student_registerd_course($student_id,$semester);
+		$data['content'] = $this->load->view('admin/course_add_drop/add',$data, TRUE);
+		$this->load->view('admin/course_add_drop/student_registerd_course',$data);
+    }
+
 	 /**
 	 * Edit course_allocation 
 	 *
@@ -86,26 +96,24 @@ $data['name']='nizam';
 	}
 	
 
-	
+
 	/**
 	 * Save course_allocation
 	 *
 	 * @return void
 	 */	
-	public function save()
+	public function save_course_registration()
 	{
 		$data=array();
-		$data['course']=$this->input->post('course', TRUE);
-		$data['faculty_member']=$this->input->post('faculty_member', TRUE);
-		$data['semester']=$this->input->post('semester', TRUE);
-		$data['room_no']=$this->input->post('room_no', TRUE);
-		$data['section']=$this->input->post('section', TRUE);
-		$data['day']=$this->input->post('day', TRUE);
-		$data['start_time']=$this->input->post('start_time', TRUE);
-		$data['end_time']=$this->input->post('end_time', TRUE);
+		$data['course_code']=$this->input->get_post('course_code', TRUE);
+		$data['student_id']=$this->input->get_post('student_id', TRUE);
+		$data['semester']=$this->input->get_post('semester', TRUE);
+		$data['section']=$this->input->get_post('section', TRUE);
+		$data['day']=$this->input->get_post('day', TRUE);
 		$data['entry_by']=$this->session->userdata('admin_id');
 		$data['entry_date_time']=date('Y-m-d H:i:s');
-		$this->model_backend_course_add_drop->save_course_allocation_data($data);
+        $data['status']=1;
+		$this->model_backend_course_add_drop->save_course_registration_data($data);
 	}
 
 	/**
