@@ -64,7 +64,8 @@
 				</div>				
 				<div class="form-group">
 					<div class="col-sm-offset-4 col-sm-5">
-						<button  value="39" class="btn btn-primary search">Search</button>
+						<!--<button  value="39" class="btn btn-primary search" onclick="fnc_search_course()">Search</button>-->
+                    <input type="button" class="btn btn-primary" value="Search" onclick="fnc_search_course()">
 					</div>
 				</div>
 			</div>
@@ -77,8 +78,8 @@
 
 <script>
 	
-    $(".search").click(function(){
-//alert()
+	 function fnc_search_course()
+	 {
         $.ajax({
             url:"<?php echo base_url();?>backend_course_add_drop/get_assigned_course",
             type:"POST",
@@ -102,9 +103,54 @@
                 $("#student_registerd_course").html(response);
             }
         }); 
+ return false;
+        
+    }
 
+	 function fnc_course_registration(val)
+	 {
+        var valueData=val.split(',');
+        var course_code=valueData[0];
+        var semester=valueData[1];
+        var student_id=valueData[2];
+        var section=valueData[3];
+        var day=valueData[4];
+        var course=valueData[5];
+
+
+        $.ajax({
+            url:"<?php echo base_url();?>backend_course_add_drop/save_course_registration",
+			data:{
+				course_code:course_code,
+				semester:semester,
+				student_id:student_id,
+                section:section,
+                day:day,
+                course:course
+			},
+            success: function(response) {
+                alert('data save successfully');
+                fnc_search_course();
+            }
+        }); 
         return false;
-    });	
-	
+    }	
+
+	 function student_assing_course_delete(course_add_drop_id)
+	 {
+        if (confirm("Are you want to delete?")) {
+        $.ajax({
+            url:"<?php echo base_url();?>backend_course_add_drop/delete_registerd_course_row",
+			data:{
+				course_add_drop_id:course_add_drop_id
+            },
+            success: function(response) {
+                alert('Deleted row successfully');
+                fnc_search_course();
+            }
+        }); 
+        }
+        return false;
+    }	
 </script>
 

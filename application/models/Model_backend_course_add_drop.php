@@ -15,10 +15,13 @@ class Model_backend_course_add_drop extends  CI_Model
 
     public function get_student_registerd_course($student_id,$semester)
 	{
-		$this->db->select('*,course.course_title as course_title,course.course_code as course_code');
+		$this->db->select('*,course.course_title as course_title,course.course_code as course_code,semester.semester_title as semester_title,section.section_title as section_title');
 		$this->db->from('course_add_drop');
         $this->db->join('course', 'course.course_code = course_add_drop.course_code', 'left');
+        $this->db->join('semester', 'semester.semester_id = course_add_drop.semester', 'left');
+        $this->db->join('section', 'section.section_id = course_add_drop.section','left');
         $this->db->where(array('student_id'=>$student_id,'semester'=>$semester));
+        $this->db->order_by("course_add_drop.course_add_drop_id", "DESC");
 		$query=$this->db->get('');
 		$result=$query->result();
 		return $result;
@@ -26,7 +29,7 @@ class Model_backend_course_add_drop extends  CI_Model
 	
 	public function get_assing_course_data($semester,$day)
 	{
-		$this->db->select('*,course.course_title as course_title,course.course_code as course_code,course.credit as credit,section.section_title as section_title');
+		$this->db->select('*,course.course_title as course_title,course.course_code as course_code,course.credit as credit,section.section_title as section_title,course.course_id as course');
 		$this->db->from('course_allocation');
         $this->db->join('course', 'course.course_id = course_allocation.course', 'left');
         $this->db->join('section', 'section.section_id = course_allocation.section','left');
@@ -85,10 +88,10 @@ class Model_backend_course_add_drop extends  CI_Model
 		return $result;
 	}		
 	
-	public function delete_course_data($delete_course_data)
+	public function delete_registerd_course_row_data($course_add_drop_id)
 	{
-		$this->db->where('course_allocation_id', $delete_course_data);
-		$this->db->delete('course_allocation'); 
+		$this->db->where('course_add_drop_id', $course_add_drop_id);
+		$this->db->delete('course_add_drop'); 
 	}	
 	
 	public function get_section_data()
@@ -121,59 +124,4 @@ class Model_backend_course_add_drop extends  CI_Model
 		return $result;
 	}
 
-	public function get_course_allocation_row($id)
-	{
-		$this->db->select('*');
-		$this->db->from('course_allocation');
-		$this->db->where('course_allocation_id',$id);
-		$query=$this->db->get();
-		$result=$query->row();
-		return $result;
-	}
-	
-	public function update_course_allocation_data($data, $course_allocation_id)
-	{
-		$this->db->where('course_allocation_id', $course_allocation_id);
-		$result=$this->db->update('course_allocation', $data);
-		echo 'ddddd'; exit;
-		
-		return $result;		
-	}
-	
-		public function publish_data($data,$ids)
-	{
-		echo $data;
-		echo $ids;
-		$count = 0;
-        foreach ($ids as $id){
-           $did = intval($id).'<br>';
-            $this->db->where('course_allocation_id',$id);
-			$this->db->update('course_allocation',$data);
-            $count = $count+1;
-       }
-       
-        echo'<div class="alert alert-success" style="margin-top:-17px;font-weight:bold">
-            '.$count.' Item Published successfully
-            </div>';
-        $count = 0;
-	}
-	
-	public function unpublish_data($data,$ids)
-	{
-		echo $data;
-		echo $ids;
-		$count = 0;
-        foreach ($ids as $id){
-           $did = intval($id).'<br>';
-            $this->db->where('course_allocation_id',$id);
-			$this->db->update('course_allocation',$data);
-            $count = $count+1;
-       }
-       
-        echo'<div class="alert alert-success" style="margin-top:-17px;font-weight:bold">
-            '.$count.' Item UnPublished successfully
-            </div>';
-        $count = 0;
-	}
-	
 }

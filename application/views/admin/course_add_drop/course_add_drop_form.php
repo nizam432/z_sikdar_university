@@ -124,7 +124,7 @@
                            </table>     
  
 </div>  
--->
+
  
 
 <div class="panel-body" align="left">
@@ -139,19 +139,17 @@
     Click Confirm for Registration
     </button>   
 </div>
-
-<table class="table table-striped table-bordered table-hover">
+-->
+<div class="col-md-12">
+  <!-- general form elements -->
+  <div class="box box-primary">
+	<div class="box-header with-border">
+	  <h3 class="box-title">Available course  for Registration</h3>
+	</div>
+<table class="table  table-bordered">
 
             <input type="hidden" value="<?php //echo $txt_semister_id; ?>" name="txt_semister_id" id="txt_semister_id" />
             <input type="hidden" value="<?php //echo $txt_semister_id; ?>" name="student_id" id="student_id" />
-
-        <thead>
-            <tr>
-                <th  colspan="8"><h4 style="margin:0px; color:#3276B1; padding:0px;">Available course  for Registration</h4></th>
-            </tr>
-    
-        </thead>
-<div id="course_add_drop"></div>
 
 			<tbody id="data_load_list">
 			<?php foreach($assing_course_data as $course_assing_day_info): ?>
@@ -179,10 +177,11 @@
 			//if($check_row_when_while_loop['course_code']!=$row['course_id']){
             $sl=1;
             foreach($course_assing_day_info['assing_course'] as $assing_course): ?>
+<?php //echo $assing_course['course']; exit;?>
 					<tr class="odd gradeA">
 							<td width="5%">
 
-							 <input type="button" class="btn btn-success" value="Add" onclick="fnc_course_registration('<?php echo $assing_course['course_code']?>,<?php echo $semester?>,<?php echo $student_id?>,<?php echo $assing_course['section']?>,<?php echo $course_assing_day_info['day']; ?>')">
+							 <input type="button" class="btn btn-success" value="Add" onclick="fnc_course_registration('<?php echo $assing_course['course_code']?>,<?php echo $semester?>,<?php echo $student_id?>,<?php echo $assing_course['section']?>,<?php echo $course_assing_day_info['day']; ?>,<?php echo $assing_course['course']?>')">
 							</td>
 
 							<td width="5%"><?php echo $sl; ?></td>
@@ -206,29 +205,5 @@
 			
 		 </tbody>
 	</table>
-<script>
-	 function fnc_course_registration(val)
-	 {
-        var valueData=val.split(',');
-        var course_code=valueData[0];
-        var semester=valueData[1];
-        var student_id=valueData[2];
-        var section=valueData[3];
-        var day=valueData[4];
-
-        $.ajax({
-            url:"<?php echo base_url();?>backend_course_add_drop/save_course_registration",
-			data:{
-				course_code:course_code,
-				semester:semester,
-				student_id:student_id,
-                section:section,
-                day:day
-			},
-            success: function(response) {
-                alert(student_id);
-            }
-        }); 
-        return false;
-    }
-</script>
+</div>
+</div>

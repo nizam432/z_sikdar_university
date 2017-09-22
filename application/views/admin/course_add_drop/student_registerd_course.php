@@ -1,15 +1,16 @@
-<div class="panel-body">
+<div class="col-md-12">
+  <!-- general form elements -->
+  <div class="box box-primary">
+	<div class="box-header with-border">
+	  <h3 class="box-title">Added Courses</h3>
+	</div>
 <table class="table table-striped table-bordered table-hover">
                             <thead>
-                                <tr  style="background:#0072C6;">
-                                <th colspan="8"><h4 style="margin:0px; font-weight:bolder; color:#fff; padding:0px;"> Added Courses</h4></th>
-                                </tr>
                                 <tr style="font-size:12px; text-align:center;">
                                     <th  width="25">Sl</th>
                                     <th>Name of the course</th>
                                     <th  align="center">Course Code </th>
                                     <th  align="center">Semester </th>
-                                    <th  align="center">Course type</th>
                                     <th  align="center">Day</th>
                                     <th  align="center">Section</th>
 									<th  align="center">Action</th>
@@ -26,15 +27,14 @@
                         foreach($student_registerd_course as $student_registerd_course) : ?>
                                 <tr class="odd gradeA">
                                   
-                                        <td width="25"><?php //echo $i; ?></td>
+                                        <td width="25"><?php echo $sl; ?></td>
                                         <td><?php echo $student_registerd_course->course_title; ?> </td>
                                         <td align="left"><?php echo $student_registerd_course->course_code;?> </td>
-                                        <td align="left"><?php //echo $semester_array[$RowNewAddedCourse['semester']]; ?> </td>
-                                        <td align="left"> <?php //echo $course_type_Arr[$course_name_arrays_type[$RowNewAddedCourse['course_id']]]; ?> </td>
+                                        <td align="left"><?php echo $student_registerd_course->semester_title;?> </td>
+                                        <td align="left"> <?php echo $day[$student_registerd_course->day]; ?> </td>
                                         
-                                        <td align="left"><?php //echo $RowNewAddedCourse['course_date']; ?> </td>
-                                        <td align="left" style="text-align:center;"><?php //echo  $Section_Arr[$RowNewAddedCourse['section']]; ?> </td>
-										<td align="left" style="text-align:center;"> <button class="btn btn-danger" onclick="fnc_day_cancel('<?php //echo $RowNewAddedCourse['id']; ?>')">Delete</button></td>
+                                        <td align="left"><?php echo $student_registerd_course->section_title;?> </td>
+										<td align="left" style="text-align:center;"> <button class="btn btn-danger" onclick="student_assing_course_delete('<?php echo $student_registerd_course->course_add_drop_id;?>')">Delete</button></td>
 
                                        
                                   
@@ -48,4 +48,6 @@
                                 </tbody>
                            </table>     
  
+</div> 
+</div> 
 </div> 
