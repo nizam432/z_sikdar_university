@@ -4,19 +4,23 @@ class Model_backend_course_add_drop extends  CI_Model
 {
 	public function get_assing_course_day_wise($semester)
 	{
-		$this->db->select('*,');
+		$this->db->select('day,semester');
 		$this->db->from('course_allocation');
+        $this->db->where('semester',$semester);
 		$this->db->group_by("course_allocation.day");
 		$query=$this->db->get('');
 		$result=$query->result();
 		return $result;
 	}	
 	
-	public function get_assing_course_data($semester)
+	public function get_assing_course_data($semester,$day)
 	{
-		$this->db->select('*,');
+		$this->db->select('*,course.course_title as course_title,course.course_code as course_code,course.credit as credit,section.section_title as section_title');
 		$this->db->from('course_allocation');
-		$this->db->group_by("course_allocation.day");
+        $this->db->join('course', 'course.course_id = course_allocation.course', 'left');
+        $this->db->join('section', 'section.section_id = course_allocation.section','left');
+       // $this->db->join('course', 'course.course_code != tabulation_sheet.course_code','left');
+        $this->db->where(array('semester'=>$semester,'day'=>$day));
 		$query=$this->db->get('');
 		$result=$query->result();
 		return $result;
