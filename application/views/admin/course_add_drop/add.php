@@ -45,7 +45,7 @@
 					</div>
 					<label class="col-sm-2 control-label">Semester</label>
 					<div class="col-sm-4">
-						  <select name="semester" class="form-control semester" id="semester">
+						  <select  class="form-control" id="semester">
 							<option value="">Please select</option>
 								<?php 
 									foreach($semester as $semester_data)
@@ -59,12 +59,13 @@
 				<div class="form-group">				
 					<label class="col-sm-2 control-label">Student ID</label>
 					<div class="col-sm-4">
-						  <input type="text" name="student_id" id="student_id" class="form-control">
+						  <input type="text" id="student_id" class="form-control">
 					</div>
 				</div>				
 				<div class="form-group">
 					<div class="col-sm-offset-4 col-sm-5">
-						<button class="btn btn-primary search">Search</button>
+						<!--<button  value="39" class="btn btn-primary search" onclick="fnc_search_course()">Search</button>-->
+                    <input type="button" class="btn btn-primary" value="Search" onclick="fnc_search_course()">
 					</div>
 				</div>
 			</div>
@@ -72,8 +73,10 @@
 	</div>
 </div>
 
+<div id="student_registerd_course"></div>
 <div id="course_add_drop"></div>
 
+<<<<<<< HEAD
 			<tbody id="data_load_list">
 			<?php foreach($get_assing_course_day_wise as $course_assing_day_info): ?>
 			<?php
@@ -130,24 +133,83 @@
 		 </tbody>
 	</table>
 <script> 
+=======
+<script>
+>>>>>>> c72e90a6ca1fdded7932fa44c3d3d1285ca7870a
 	
-	
-	// search course
-    $(".search").click(function(){
+	 function fnc_search_course()
+	 {
         $.ajax({
-            url:"<?php echo base_url();?>backend_course_allocation/get_assing_course",
+            url:"<?php echo base_url();?>backend_course_add_drop/get_assigned_course",
+            type:"POST",
 			data:{
-				faculty:$('.faculty').val(),
-				department:$('.department').val(),
-				program:$('.program').val(),
-				student_id:$('.student_id').val(),
+                semester:$('#semester').val(),
+				student_id:$('#student_id').val()
 			},
             success: function(response) {
                 $("#course_add_drop").html(response);
             }
         }); 
+
+        $.ajax({
+            url:"<?php echo base_url();?>backend_course_add_drop/get_student_registerd_course",
+            type:"POST",
+			data:{
+                semester:$('#semester').val(),
+				student_id:$('#student_id').val()
+			},
+            success: function(response) {
+                $("#student_registerd_course").html(response);
+            }
+        }); 
+ return false;
+        
+    }
+
+	 function fnc_course_registration(val)
+	 {
+        var valueData=val.split(',');
+        var course_code=valueData[0];
+        var semester=valueData[1];
+        var student_id=valueData[2];
+        var section=valueData[3];
+        var day=valueData[4];
+        var course=valueData[5];
+
+
+        $.ajax({
+            url:"<?php echo base_url();?>backend_course_add_drop/save_course_registration",
+			data:{
+				course_code:course_code,
+				semester:semester,
+				student_id:student_id,
+                section:section,
+                day:day,
+                course:course
+			},
+            success: function(response) {
+                alert('data save successfully');
+                fnc_search_course();
+            }
+        }); 
         return false;
-    });
-	
+    }	
+
+	 function student_assing_course_delete(course_add_drop_id)
+	 {
+        if (confirm("Are you want to delete?")) {
+        $.ajax({
+            url:"<?php echo base_url();?>backend_course_add_drop/delete_registerd_course_row",
+			data:{
+				course_add_drop_id:course_add_drop_id
+            },
+            success: function(response) {
+                alert('Deleted row successfully');
+                fnc_search_course();
+            }
+        }); 
+        }
+        return false;
+    }	
 </script>
 

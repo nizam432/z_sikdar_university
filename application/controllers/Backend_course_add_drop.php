@@ -25,7 +25,7 @@ class Backend_course_add_drop extends CI_Controller
 	   date_default_timezone_set('Asia/Dhaka');
 	}
  	/**
-	 * Show course_allocation List
+	 * Show search 
 	 *
 	 * @return void
 	 */	
@@ -34,6 +34,7 @@ class Backend_course_add_drop extends CI_Controller
 		$data = array();
 		$data['faculty']= $this->model_backend_course_add_drop->get_faculty_data();
 		$data['semester']=$this->model_backend_course_add_drop->get_semester_data();		
+<<<<<<< HEAD
 		$data['day']=array(1=>'Saturday',2=>'Sunday',3=>'Monday',4=>'Tuesday',5=>'Wednesday',6=>'Thusday',7=>'Friday');	
 		$semester=1;	
 		$data['get_assing_course_day_wise']=$this->model_backend_course_add_drop->get_assing_course_day_wise($semester);
@@ -45,158 +46,80 @@ class Backend_course_add_drop extends CI_Controller
 			$assigned_course_info[$key]['assigned_course']=$assigned_course;
 		 }
                  $data['assigned_course_info']=$assigned_course_info ;
+=======
+>>>>>>> c72e90a6ca1fdded7932fa44c3d3d1285ca7870a
 		$data['content'] = $this->load->view('admin/course_add_drop/add',$data, TRUE);
 		$this->load->view('admin/index', $data);
 	}
 	 /**
-	 * Add course_allocation 
+	 * Get Assigned course
 	 *
 	 * @return void
 	 */	
-	public function add()
+	public function get_assigned_course()
 	{
-		$data = array();
+        $data = array();
 		$data['faculty']= $this->model_backend_course_add_drop->get_faculty_data();
-		$data['semester']=$this->model_backend_course_add_drop->get_semester_data();
+		$data['semester']=$this->model_backend_course_add_drop->get_semester_data();		
+		$data['day']=array(1=>'Saturday',2=>'Sunday',3=>'Monday',4=>'Tuesday',5=>'Wednesday',6=>'Thusday',7=>'Friday');	
+		$data['semester']=$semester=$this->input->post('semester');
+        $data['student_id']=$student_id=$this->input->post('student_id');
+		$data['get_assing_course_day_wise']=$this->model_backend_course_add_drop->get_assing_course_day_wise($semester);
+        $assing_course_data = json_decode(json_encode($data['get_assing_course_day_wise']), True);
 
-		$data['content']=$this->load->view('admin/course_allocation/add',$data, TRUE);
-		$this->load->view('admin/index', $data);  
-	}
+		foreach($assing_course_data as $key=>$value)
+		{
+			  $day=$assing_course_data[$key]['day'];
+              $semester=$assing_course_data[$key]['semester'];  
+			
+			$data['get_assing_course_data']=$this->model_backend_course_add_drop->get_assing_course_data($semester,$day);
+			$get_assing_course_data = json_decode(json_encode($data['get_assing_course_data']), True);
+			$assing_course_data[$key]['assing_course']=$get_assing_course_data;
+		 }
 
-	 /**
-	 * Edit course_allocation 
-	 *
-     * @param int $id
-	 * @return void
-	 */	
-	public function edit($id)
+        $data['assing_course_data']=$assing_course_data ;
+
+//echo '<pre>';print_r($data['assing_course_data']); echo '</pre>';
+//exit;
+		$data['content'] = $this->load->view('admin/course_add_drop/add',$data, TRUE);
+		$this->load->view('admin/course_add_drop/course_add_drop_form',$data);
+    }
+
+	public function get_student_registerd_course()
 	{
-		$data = array();
-		$data['course_allocation_edit']= $this->model_backend_course_add_drop->get_course_allocation_row($id);
-		$data['content']=$this->load->view('admin/course_allocation/edit',$data, TRUE);
-		$this->load->view('admin/index', $data);
-	}
-	
+        $data = array();
+		$data['faculty']= $this->model_backend_course_add_drop->get_faculty_data();
+		$data['semester']=$this->model_backend_course_add_drop->get_semester_data();		
+		$data['day']=array(1=>'Saturday',2=>'Sunday',3=>'Monday',4=>'Tuesday',5=>'Wednesday',6=>'Thusday',7=>'Friday');	
+		$semester=$this->input->post('semester');
+        $student_id=$this->input->post('student_id');
+        $data['student_registerd_course']=$this->model_backend_course_add_drop->get_student_registerd_course($student_id,$semester);
+		$data['content'] = $this->load->view('admin/course_add_drop/add',$data, TRUE);
+		$this->load->view('admin/course_add_drop/student_registerd_course',$data);
+    }
 
-	
+
+
+
 	/**
 	 * Save course_allocation
 	 *
 	 * @return void
 	 */	
-	public function save()
+	public function save_course_registration()
 	{
 		$data=array();
-		$data['course']=$this->input->post('course', TRUE);
-		$data['faculty_member']=$this->input->post('faculty_member', TRUE);
-		$data['semester']=$this->input->post('semester', TRUE);
-		$data['room_no']=$this->input->post('room_no', TRUE);
-		$data['section']=$this->input->post('section', TRUE);
-		$data['day']=$this->input->post('day', TRUE);
-		$data['start_time']=$this->input->post('start_time', TRUE);
-		$data['end_time']=$this->input->post('end_time', TRUE);
+		$data['course_code']=$this->input->get_post('course_code', TRUE);
+		$data['student_id']=$this->input->get_post('student_id', TRUE);
+		$data['semester']=$this->input->get_post('semester', TRUE);
+		$data['section']=$this->input->get_post('section', TRUE);
+		$data['day']=$this->input->get_post('day', TRUE);
+		$data['course']=$this->input->get_post('course', TRUE);  
+   
 		$data['entry_by']=$this->session->userdata('admin_id');
 		$data['entry_date_time']=date('Y-m-d H:i:s');
-		$this->model_backend_course_add_drop->save_course_allocation_data($data);
-	}
-
-	/**
-	 * Save course_allocation
-	 *
-	 * @return void
-	 */	
-	public function update()
-	{
-		
-		$data=array();
-		$course_allocation_id=$this->input->post('course', TRUE);
-		$data['faculty_member']=$this->input->post('faculty_member', TRUE);
-		$data['semester']=$this->input->post('semester', TRUE);
-		$data['room_no']=$this->input->post('room_no', TRUE);
-		$data['section']=$this->input->post('section', TRUE);
-		$data['day']=$this->input->post('day', TRUE);
-		$data['start_time']=$this->input->post('start_time', TRUE);
-		$data['end_time']=$this->input->post('end_time', TRUE);
-		$data['update_by']=$this->session->userdata('admin_id');
-		$data['update_date_time']=date('Y-m-d H:i:s');
-		
-
-		$this->model_backend_course_add_drop->update_course_allocation_data($data,$course_allocation_id);
-	}
-	
-	/**
-	 * publish course_allocation
-	 *
-	 * @return void
-	 */		
-	public function publish()
-	{
-		$data=array();
-		$data['status']=1;
-		 $ids = ( explode( ',', $this->input->get_post('ids') ));
-		$this->model_backend_course_add_drop->publish_data($data,$ids);
-	}
-
-	/**
-	 * Unpublish course_allocation
-	 *
-	 * @return void
-	 */	
-	public function unpublish()
-	{
-		$data=array();
-		$data['status']=0;
-		$ids = ( explode( ',', $this->input->get_post('ids') ));
-		$this->model_backend_course_add_drop->unpublish_data($data,$ids);
-	}
-	/**
-	 * Get course defend on Program  
-	 *
-	 * 
-	 * @return array
-	 */	
-	public function get_course()
-	{
-		 $data=array();
-		 $data['faculty']=$this->input->get_post('faculty');
-		 $data['department']=$this->input->get_post('department'); 
-		 $data['program']=$this->input->get_post('program'); 
-		 $data['course']=$this->model_backend_course_add_drop->get_course_data($data);
-		 $course_info = json_decode(json_encode($data['course']), True);
-		 
-		 foreach($course_info as $key=>$value)
-		 {
-			$couse_id=$course_info[$key]['course_id'];
-			$data['allocated_course']=$this->model_backend_course_add_drop->get_course_allocation_data($couse_id);
-			$allocated_course = json_decode(json_encode($data['allocated_course']), True);
-			$course_info[$key]['course_allocated']=$allocated_course;
-		 }
-		 
-		 $data['course_info']=$course_info ;
-		 
-		 $data['faculty_member']=$this->model_backend_course_add_drop->get_faculty_member_data();
-		 $data['semester']=$this->model_backend_course_add_drop->get_semester_data();
-		 $data['section']=$this->model_backend_course_add_drop->get_section_data();
-		 $data['day']=array(1=>'Saturday',2=>'Sunday',3=>'Monday',4=>'Tuesday',5=>'Wednesday',6=>'Thusday',7=>'Friday');
-		 $this->load->view('admin/course_allocation/course',$data);
-	}
-	
-	/**
-	 * Edit course defend on Program  
-	 *
-	 * 
-	 * @return array
-	 */	
-	public function edit_course()
-	{
-		 $data=array();
-		 $course_allocation_id=$this->input->get_post('course_allocation_id');
-		 $data['allocated_course']=$this->model_backend_course_add_drop->get_course_allocation_row_data($course_allocation_id);
-		 $data['faculty_member']=$this->model_backend_course_add_drop->get_faculty_member_data();
-		 $data['semester']=$this->model_backend_course_add_drop->get_semester_data();
-		 $data['section']=$this->model_backend_course_add_drop->get_section_data();
-		 $data['day']=array(1=>'Saturday',2=>'Sunday',3=>'Monday',4=>'Tuesday',5=>'Wednesday',6=>'Thusday',7=>'Friday');
-		 $this->load->view('admin/course_allocation/course_edit',$data);
+        $data['status']=1;
+		$this->model_backend_course_add_drop->save_course_registration_data($data);
 	}
 		
 	/**
@@ -205,11 +128,11 @@ class Backend_course_add_drop extends CI_Controller
 	 * 
 	 * @return success
 	 */	
-	public function delete_course()
+	public function delete_registerd_course_row()
 	{
 		 $data=array();
-		 $course_allocation_id=$this->input->get_post('course_allocation_id');
-		 $data['course_allocation_id']=$this->model_backend_course_add_drop->delete_course_data($course_allocation_id);
-		 $this->load->view('admin/course_allocation/course',$data);
+		 $course_add_drop_id=$this->input->get_post('course_add_drop_id');
+		 $data['course_add_drop_id']=$this->model_backend_course_add_drop->delete_registerd_course_row_data($course_add_drop_id);
+		 //$this->load->view('admin/course_allocation/course',$data);
 	}
 }
