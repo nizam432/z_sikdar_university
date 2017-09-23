@@ -64,9 +64,6 @@ class Backend_course_add_drop extends CI_Controller
 		 }
 
         $data['assing_course_data']=$assing_course_data ;
-
-//echo '<pre>';print_r($data['assing_course_data']); echo '</pre>';
-//exit;
 		$data['content'] = $this->load->view('admin/course_add_drop/add',$data, TRUE);
 		$this->load->view('admin/course_add_drop/course_add_drop_form',$data);
     }
@@ -83,9 +80,6 @@ class Backend_course_add_drop extends CI_Controller
 		$data['content'] = $this->load->view('admin/course_add_drop/add',$data, TRUE);
 		$this->load->view('admin/course_add_drop/student_registerd_course',$data);
     }
-
-
-
 
 	/**
 	 * Save course_allocation
@@ -104,9 +98,22 @@ class Backend_course_add_drop extends CI_Controller
    
 		$data['entry_by']=$this->session->userdata('admin_id');
 		$data['entry_date_time']=date('Y-m-d H:i:s');
-        $data['status']=1;
 		$this->model_backend_course_add_drop->save_course_registration_data($data);
 	}
+	
+	/**
+	 * Save course_allocation
+	 *
+	 * @return void
+	 */	
+	public function final_registration()
+	{
+		$data=array();
+		$data['semester']=$this->input->get_post('semester', TRUE);
+		$data['entry_by']=$this->session->userdata('admin_id');
+		$data['entry_date_time']=date('Y-m-d H:i:s');
+		$this->model_backend_course_add_drop->save_course_registration_data($data);
+	}	
 		
 	/**
 	 * Delete course defend on Program  
