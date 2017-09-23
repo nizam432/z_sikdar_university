@@ -72,7 +72,7 @@
 		</form>
 	</div>
 </div>
-
+<div id="inprogress_crouse"></div>
 <div id="student_registerd_course"></div>
 <div id="course_add_drop"></div>
 
@@ -152,5 +152,27 @@
         }
         return false;
     }	
+	
+	function course_registration_final(val) 
+	{
+		
+		var valData=val.split('##');
+		var semester=valData[0];
+		var student_id=valData[1];
+        $.ajax({
+            url:"<?php echo base_url();?>backend_course_add_drop/final_registration",
+			data:{
+				semester:semester,
+				student_id:student_id
+			},
+            success: function(response) {
+                alert('data save successfully');
+				 $("#inprogress_crouse").html(response);
+                fnc_search_course();
+            }
+        }); 
+        return false;			
+	}	
+	
 </script>
 

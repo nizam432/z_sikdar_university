@@ -52,7 +52,7 @@
     //$final_confirm=mysql_fetch_assoc($SQLMinandMax_CourseCheck);
     ?>
       
-    <button type="button" class="btn btn-primary" style="background:green; font-weight:bolder;"  onclick="fnc_course_registration_final('<?php //echo $final_confirm['semester'].'##'.$final_confirm['student_id']; ?>')">
+    <button type="button" class="btn btn-primary" style="background:green; font-weight:bolder;"  onclick="course_registration_final('<?php echo $semester.'##'.$student_id; ?>')">
     <span class="glyphicon glyphicon-ok-circle"></span> 
     Click Confirm for Registration
     </button>   

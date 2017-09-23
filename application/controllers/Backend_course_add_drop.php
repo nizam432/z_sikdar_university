@@ -110,9 +110,23 @@ class Backend_course_add_drop extends CI_Controller
 	{
 		$data=array();
 		$data['semester']=$this->input->get_post('semester', TRUE);
+		$data['student_id']=$this->input->get_post('student_id', TRUE);
+		$data['student_registerd_course']=$this->model_backend_course_add_drop->get_student_registerd_course($data['student_id'],$data['semester']);
+		$student_registerd_course_data = json_decode(json_encode($data['student_registerd_course']), True);
+		$data2=array();
+		foreach($student_registerd_course_data as $key=>$value)
+		{
+			  $data2['student_id']=$student_registerd_course_data[$key]['student_id'];
+              $data2['semester']=$student_registerd_course_data[$key]['semester_id'];  
+			
+		}
+		
+		echo '<pre>';print_r($data['student_registerd_course']);echo '</pre>';
+		echo 'test';
+		exit;
 		$data['entry_by']=$this->session->userdata('admin_id');
 		$data['entry_date_time']=date('Y-m-d H:i:s');
-		$this->model_backend_course_add_drop->save_course_registration_data($data);
+		$this->model_backend_course_add_drop->save_final_registration_data($data);
 	}	
 		
 	/**
