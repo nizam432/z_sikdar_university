@@ -20,21 +20,33 @@ class Model_backend_course_add_drop extends  CI_Model
         $this->db->join('course', 'course.course_code = course_add_drop.course_code', 'left');
         $this->db->join('semester', 'semester.semester_id = course_add_drop.semester', 'left');
         $this->db->join('section', 'section.section_id = course_add_drop.section','left');
-        $this->db->where(array('student_id'=>$student_id,'semester'=>$semester));
+        $this->db->where(array('course_add_drop.student_id'=>$student_id,'course_add_drop.semester'=>$semester,'course_add_drop.status'=>'0'));
         $this->db->order_by("course_add_drop.course_add_drop_id", "DESC");
 		$query=$this->db->get('');
 		$result=$query->result();
 		return $result;
 	}	
-	
+		
 	public function get_assing_course_data($semester,$day)
 	{
 		$this->db->select('*,course.course_title as course_title,course.course_code as course_code,course.credit as credit,section.section_title as section_title,course.course_id as course');
 		$this->db->from('course_allocation');
         $this->db->join('course', 'course.course_id = course_allocation.course', 'left');
         $this->db->join('section', 'section.section_id = course_allocation.section','left');
-       // $this->db->join('course', 'course.course_code != tabulation_sheet.course_code','left');
         $this->db->where(array('semester'=>$semester,'day'=>$day));
+		$query=$this->db->get('');
+		$result=$query->result();
+		return $result;
+	}	
+	
+	public function get_student_inprogress_course($student_id,$semester)
+	{
+		$this->db->select('*,course.course_title as course_title,course.course_code as course_code,course.credit as credit,section.section_title as section_title,course.course_id as course,semester.semester_title as semester_title');
+		$this->db->from('tabulation_sheet');
+        $this->db->join('course', 'course.course_id = tabulation_sheet.course', 'left');
+        $this->db->join('section', 'section.section_id = tabulation_sheet.section','left');
+		$this->db->join('semester', 'semester.semester_id = tabulation_sheet.semester','left');
+        $this->db->where(array('tabulation_sheet.semester'=>$semester,'tabulation_sheet.student_id'=>$student_id));
 		$query=$this->db->get('');
 		$result=$query->result();
 		return $result;
@@ -43,6 +55,17 @@ class Model_backend_course_add_drop extends  CI_Model
 	public function save_course_registration_data($data)
 	{
 		$this->db->insert('course_add_drop',$data);
+	}
+
+	public function save_final_registration_data($data2)
+	{
+		$this->db->insert('tabulation_sheet',$data2);
+	}
+
+	public function update_added_course_status($course_add_drop_id,$data3)
+	{
+		$this->db->where('course_add_drop_id',$course_add_drop_id);
+		$this->db->update('course_add_drop',$data3);
 	}
 	
 	public function get_course_data($data)

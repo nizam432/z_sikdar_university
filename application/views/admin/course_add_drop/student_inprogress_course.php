@@ -7,9 +7,8 @@
                                 <tr style="font-size:12px; text-align:center;">
                                     <th  width="25">Sl</th>
                                     <th>Name of the course</th>
-                                    <th  align="center">Course ID </th>
+                                    <th  align="center">Course Code</th>
                                     <th  align="center">Semester </th>
-                                    <th  align="center">Course type</th>
                                     <th  align="center">Day</th>
 									<th  align="center">Section</th>
                                     <th  align="center">Action</th>
@@ -19,17 +18,17 @@
                                
                         <tbody id="data_load_list">
                         <?php
-                        //$i=1;
+                        $sl=1;
                 
                        // $SQlInCourse_Select=mysql_query("select * from  fbs_tabulation_sheet  WHERE student_id='$student_id' AND semester!='$txt_semister_id' AND status in (0,1)");
                         //while($SQlInCourse=mysql_fetch_assoc($SQlInCourse_Select)){
-                        ?>
+							foreach($student_inprogress_course as $student_inprogress_course_data) : ?>
                                 <tr class="odd gradeA">
                                   
-                                        <td width="25"><?php //echo $i; ?></td>
-                                        <td><?php //echo $course_name_array[$SQlInCourse['course_code']]; ?> </td>
-                                        <td align="left"><?php  //echo $course_name_arrays[$SQlInCourse['course_code']]; ?> </td>
-                                        <td align="left"><?php  //echo $semester_array[$SQlInCourse['semester']]; ?> </td>
+                                        <td width="25"><?php echo $sl; ?></td>
+                                        <td><?php echo $student_inprogress_course_data->course_title; ?> </td>
+                                        <td align="left"><?php  echo  $student_inprogress_course_data->course_code; ?> </td>
+                                        <td align="left"><?php   echo  $student_inprogress_course_data->semester_title; ?> </td>
                                         <td align="left"><?php  //echo $course_type_Arr[$course_name_arrays_type[$SQlInCourse['course_code']]];  ?></td>
                                         <?php
                                        // $sql_day=mysql_query("SELECT course_date from fbs_assign_course where semester_id='".$SQlInCourse['semester']."' AND course_id='".$SQlInCourse['course_code']."' AND section='".$SQlInCourse['section']."'");
@@ -41,8 +40,9 @@
                                      <td align="center" width="100"><button onclick='fnc_retake_registration_form("<?php //echo $SQlInCourse['id'] ?>")>Retake</button> </td>
                                 </tr>
                                 <?php
-                                 // $i++;
-                                 // }
+                                  $sl++;
+                                 endforeach;
+								 
                                 ?>
 								
 							

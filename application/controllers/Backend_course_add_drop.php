@@ -68,17 +68,37 @@ class Backend_course_add_drop extends CI_Controller
 		$this->load->view('admin/course_add_drop/course_add_drop_form',$data);
     }
 
+	/**
+	 * get registerd course
+	 *
+	 * @return void
+	 */	
 	public function get_student_registerd_course()
 	{
-        $data = array();
-		$data['faculty']= $this->model_backend_course_add_drop->get_faculty_data();
-		$data['semester']=$this->model_backend_course_add_drop->get_semester_data();		
+        $data = array();	
 		$data['day']=array(1=>'Saturday',2=>'Sunday',3=>'Monday',4=>'Tuesday',5=>'Wednesday',6=>'Thusday',7=>'Friday');	
 		$semester=$this->input->post('semester');
         $student_id=$this->input->post('student_id');
         $data['student_registerd_course']=$this->model_backend_course_add_drop->get_student_registerd_course($student_id,$semester);
 		$data['content'] = $this->load->view('admin/course_add_drop/add',$data, TRUE);
 		$this->load->view('admin/course_add_drop/student_registerd_course',$data);
+    }
+	
+	
+	/**
+	 * get registerd course
+	 *
+	 * @return void
+	 */	
+	public function get_student_inprogress_course()
+	{
+        $data = array();		
+		$data['day']=array(1=>'Saturday',2=>'Sunday',3=>'Monday',4=>'Tuesday',5=>'Wednesday',6=>'Thusday',7=>'Friday');	
+		$semester=$this->input->post('semester');
+        $student_id=$this->input->post('student_id');
+        $data['student_inprogress_course']=$this->model_backend_course_add_drop->get_student_inprogress_course($student_id,$semester);
+		$data['content'] = $this->load->view('admin/course_add_drop/add',$data, TRUE);
+		$this->load->view('admin/course_add_drop/student_inprogress_course',$data);
     }
 
 	/**
@@ -102,7 +122,7 @@ class Backend_course_add_drop extends CI_Controller
 	}
 	
 	/**
-	 * Save course_allocation
+	 * Save final registration
 	 *
 	 * @return void
 	 */	
@@ -114,19 +134,24 @@ class Backend_course_add_drop extends CI_Controller
 		$data['student_registerd_course']=$this->model_backend_course_add_drop->get_student_registerd_course($data['student_id'],$data['semester']);
 		$student_registerd_course_data = json_decode(json_encode($data['student_registerd_course']), True);
 		$data2=array();
+		
 		foreach($student_registerd_course_data as $key=>$value)
 		{
-			  $data2['student_id']=$student_registerd_course_data[$key]['student_id'];
-              $data2['semester']=$student_registerd_course_data[$key]['semester_id'];  
-			
-		}
 		
-		echo '<pre>';print_r($data['student_registerd_course']);echo '</pre>';
-		echo 'test';
-		exit;
-		$data['entry_by']=$this->session->userdata('admin_id');
-		$data['entry_date_time']=date('Y-m-d H:i:s');
-		$this->model_backend_course_add_drop->save_final_registration_data($data);
+			$data2['student_id']=$student_registerd_course_data[$key]['student_id'];
+            $data2['semester']=$student_registerd_course_data[$key]['semester_id'];  
+			$data2['section']=$student_registerd_course_data[$key]['section'];
+			$data2['course']=$student_registerd_course_data[$key]['course'];
+			$data2['entry_by']=$this->session->userdata('admin_id');
+			$data2['entry_date_time']=date('Y-m-d H:i:s');
+			$data2['status']=0;	
+			$this->model_backend_course_add_drop->save_final_registration_data($data2);
+			
+		$course_add_drop_id=$student_registerd_course_data[$key]['course_add_drop_id'];
+			$data3=array();
+			$data3['status']=1;
+			$this->model_backend_course_add_drop->update_added_course_status($course_add_drop_id,$data3); 
+		}
 	}	
 		
 	/**
@@ -140,6 +165,5 @@ class Backend_course_add_drop extends CI_Controller
 		 $data=array();
 		 $course_add_drop_id=$this->input->get_post('course_add_drop_id');
 		 $data['course_add_drop_id']=$this->model_backend_course_add_drop->delete_registerd_course_row_data($course_add_drop_id);
-		 //$this->load->view('admin/course_allocation/course',$data);
 	}
 }

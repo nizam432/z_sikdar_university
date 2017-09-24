@@ -14,62 +14,35 @@
 	<div class="box-header with-border">
 	  <h3 class="box-title">Search Course</h3>
 	</div>
-		<form class="form-horizontal" action="<?php echo base_url()?>backend_dashboard/resgister_search" method="post">
-			<div class="box-body">
-				<div class="form-group">
-					<label class="col-sm-2 control-label">Faculty</label>
-					<div class="col-sm-4">
-					  <select name="faculty" class="form-control faculty">
-						<option value="">Please select</option>
-							<?php 
-								foreach($faculty as $faculty_data)
-								{		
-									 echo '<option value="'.$faculty_data->faculty_id.'">'.$faculty_data->faculty_title.'</option>';
-								}
-							?>
-					  </select>
+		<div class="box-body">
+			<form class="form-horizontal" action="<?php echo base_url()?>backend_dashboard/resgister_search" method="post">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Student ID</label>
+						<div class="col-sm-4">
+							  <input type="text" id="student_id" class="form-control">
+						</div>
+						<label class="col-sm-2 control-label">Semester</label>
+						<div class="col-sm-4">
+							  <select  class="form-control" id="semester">
+								<option value="">Please select</option>
+									<?php 
+										foreach($semester as $semester_data)
+										{		
+											 echo '<option value="'.$semester_data->semester_id.'">'.$semester_data->semester_title.'</option>';
+										}
+									?>
+							  </select>
+						</div>
 					</div>
-					<label class="col-sm-2 control-label">Department</label>
-					<div class="col-sm-4">
-					  <select name="department"  class="form-control department" >
-						<option value="">Please select</option>
-					  </select>
+			
+					<div class="form-group">
+						<div class="col-sm-offset-4 col-sm-5">
+							<!--<button  value="39" class="btn btn-primary search" onclick="fnc_search_course()">Search</button>-->
+						<input type="button" class="btn btn-primary" value="Search" onclick="fnc_search_course()"><br><br>
+						</div>
 					</div>
-				</div>
-				<div class="form-group">				
-					<label class="col-sm-2 control-label">Program</label>
-					<div class="col-sm-4">
-						  <select name="program"  class="form-control program" >
-							<option value="">Please select</option>
-						  </select>
-					</div>
-					<label class="col-sm-2 control-label">Semester</label>
-					<div class="col-sm-4">
-						  <select  class="form-control" id="semester">
-							<option value="">Please select</option>
-								<?php 
-									foreach($semester as $semester_data)
-									{		
-										 echo '<option value="'.$semester_data->semester_id.'">'.$semester_data->semester_title.'</option>';
-									}
-								?>
-						  </select>
-					</div>
-				</div>
-				<div class="form-group">				
-					<label class="col-sm-2 control-label">Student ID</label>
-					<div class="col-sm-4">
-						  <input type="text" id="student_id" class="form-control">
-					</div>
-				</div>				
-				<div class="form-group">
-					<div class="col-sm-offset-4 col-sm-5">
-						<!--<button  value="39" class="btn btn-primary search" onclick="fnc_search_course()">Search</button>-->
-                    <input type="button" class="btn btn-primary" value="Search" onclick="fnc_search_course()">
-					</div>
-				</div>
-			</div>
-		</form>
+			</form>
+		</div>
 	</div>
 </div>
 <div id="inprogress_crouse"></div>
@@ -103,7 +76,20 @@
                 $("#student_registerd_course").html(response);
             }
         }); 
- return false;
+		
+        $.ajax({
+            url:"<?php echo base_url();?>backend_course_add_drop/get_student_inprogress_course",
+            type:"POST",
+			data:{
+                semester:$('#semester').val(),
+				student_id:$('#student_id').val()
+			},
+            success: function(response) {
+                $("#inprogress_crouse").html(response);
+            }
+        });		
+	
+	return false;
         
     }
 
@@ -155,23 +141,24 @@
 	
 	function course_registration_final(val) 
 	{
-		
-		var valData=val.split('##');
-		var semester=valData[0];
-		var student_id=valData[1];
-        $.ajax({
-            url:"<?php echo base_url();?>backend_course_add_drop/final_registration",
-			data:{
-				semester:semester,
-				student_id:student_id
-			},
-            success: function(response) {
-                alert('data save successfully');
-				 $("#inprogress_crouse").html(response);
-                fnc_search_course();
-            }
-        }); 
-        return false;			
+		if (confirm("Are you want to confirm registration?")) {
+			var valData=val.split('##');
+			var semester=valData[0];
+			var student_id=valData[1];
+			$.ajax({
+				url:"<?php echo base_url();?>backend_course_add_drop/final_registration",
+				data:{
+					semester:semester,
+					student_id:student_id
+				},
+				success: function(response) {
+					alert('data save successfully');
+					// $("#inprogress_crouse").html(response);
+					fnc_search_course();
+				}
+			}); 
+		}
+		return false;			
 	}	
 	
 </script>
