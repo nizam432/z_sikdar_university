@@ -1,9 +1,12 @@
+<div class="col-md-12">
+  <!-- general form elements -->
+  <div class="box box-primary">
+	<div class="box-header with-border">
+	  <h3 class="box-title">In-Progress Courses</h3>
+	</div>
  <div class="panel-body">
 <table class="table table-striped table-bordered table-hover">
                             <thead>
-                                <tr>
-                                <th  colspan="11"><h4 style="margin:0px; font-weight:bolder; color:#006600; padding:0px;"> In-Progress Courses</h4></th>
-                                </tr>
                                 <tr style="font-size:12px; text-align:center;">
                                     <th  width="25">Sl</th>
                                     <th>Name of the course</th>
@@ -24,19 +27,19 @@
                         //while($SQlInCourse=mysql_fetch_assoc($SQlInCourse_Select)){
 							foreach($student_inprogress_course as $student_inprogress_course_data) : ?>
                                 <tr class="odd gradeA">
-                                  
                                         <td width="25"><?php echo $sl; ?></td>
                                         <td><?php echo $student_inprogress_course_data->course_title; ?> </td>
                                         <td align="left"><?php  echo  $student_inprogress_course_data->course_code; ?> </td>
                                         <td align="left"><?php   echo  $student_inprogress_course_data->semester_title; ?> </td>
-                                        <td align="left"><?php  //echo $course_type_Arr[$course_name_arrays_type[$SQlInCourse['course_code']]];  ?></td>
+                                       <!-- <td align="left"><?php  //echo $course_type_Arr[$course_name_arrays_type[$SQlInCourse['course_code']]];  ?></td>-->
                                         <?php
                                        // $sql_day=mysql_query("SELECT course_date from fbs_assign_course where semester_id='".$SQlInCourse['semester']."' AND course_id='".$SQlInCourse['course_code']."' AND section='".$SQlInCourse['section']."'");
 										//$SqlROWDAY=mysql_fetch_assoc($sql_day);
 										
 										?>
-                                        <td align="left"><?php //echo $SqlROWDAY['course_date']; ?> </td>
-										<td align="left"><?php //echo $Section_Arr[$SQlInCourse['section']]; ?> </td>
+                                        <td align="left"><?php //echo $student_inprogress_course_data->day; ?> </td>
+										<td align="left"><?php echo  $student_inprogress_course_data->section_title; ?> </td>
+										<td></td>
                                      <td align="center" width="100"><button onclick='fnc_retake_registration_form("<?php //echo $SQlInCourse['id'] ?>")>Retake</button> </td>
                                 </tr>
                                 <?php
@@ -51,15 +54,17 @@
 							</tr>
 							
 					   <?php
-                       // $w=1;
+					   $sl=1;
+					  foreach($student_taken_course as $student_taken_course_data){
+                       
                 
                        // $SQlInCourse_Select_Running=mysql_query("select * from  fbs_tabulation_sheet  WHERE student_id='$student_id' AND  semester='$txt_semister_id' AND later_grade!='W' AND status='0'");
                        // while($SQlInCourse_Running=mysql_fetch_assoc($SQlInCourse_Select_Running)){
                         ?>	
 								 <tr class="odd gradeA">
                                   
-                                        <td width="25"><?php // echo $w; ?></td>
-                                        <td><?php //echo $course_name_array[$SQlInCourse_Running['course_code']]; ?> </td>
+                                        <td width="25"><?php  echo $sl; ?></td>
+                                        <td><?php echo $student_taken_course_data->course_title;  ?> </td>
                                         <td align="left"><?php  //echo $course_name_arrays[$SQlInCourse_Running['course_code']]; ?> </td>
                                         <td align="left"><?php  //echo $semester_array[$SQlInCourse_Running['semester']]; ?> </td>
                                         <td align="left"><?php  //echo $course_type_Arr[$course_name_arrays_type[$SQlInCourse_Running['course_code']]];  ?></td>
@@ -72,9 +77,13 @@
 										<td align="left"><?php //echo $Section_Arr[$SQlInCourse_Running['section']]; ?> </td>
                                        <td align="left"> <button class="btn btn-danger" onclick="fnc_course_cancel_account('<?php //echo $SQlInCourse_Running['id']; ?>')"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button></td>
                                 </tr>	
-						<?php //$w++; } ?>
+						<?php $sl++;
+					   } ?>
 								
                                 </tbody>
                            </table>     
  
 </div>  
+</div> 
+</div> 
+</div>
