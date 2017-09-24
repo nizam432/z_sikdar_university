@@ -65,16 +65,16 @@
                                   
                                         <td width="25"><?php  echo $sl; ?></td>
                                         <td><?php echo $student_taken_course_data->course_title;  ?> </td>
-                                        <td align="left"><?php  //echo $course_name_arrays[$SQlInCourse_Running['course_code']]; ?> </td>
-                                        <td align="left"><?php  //echo $semester_array[$SQlInCourse_Running['semester']]; ?> </td>
-                                        <td align="left"><?php  //echo $course_type_Arr[$course_name_arrays_type[$SQlInCourse_Running['course_code']]];  ?></td>
+                                        <td align="left"><?php  echo $student_inprogress_course_data->course_code;?> </td>
+                                        <td align="left"><?php  echo $student_taken_course_data->semester_title; ?> </td>
+                                       <!-- <td align="left"><?php  //echo $course_type_Arr[$course_name_arrays_type[$SQlInCourse_Running['course_code']]];  ?></td>-->
                                         <?php
                                         //$sql_dayXXX=mysql_query("SELECT course_date from fbs_assign_course where semester_id='".$SQlInCourse_Running['semester']."' AND course_id='".$SQlInCourse_Running['course_code']."' AND section='".$SQlInCourse_Running['section']."'");
 										//$SqlROWDAYxxx=mysql_fetch_assoc($sql_dayXXX);
 										
 										?>
                                         <td align="left"><?php// echo $SqlROWDAYxxx['course_date']; ?> </td>
-										<td align="left"><?php //echo $Section_Arr[$SQlInCourse_Running['section']]; ?> </td>
+										<td align="left"><?php echo  $student_inprogress_course_data->section_title; ?>  </td>
                                        <td align="left"> <button class="btn btn-danger" onclick="fnc_course_cancel_account('<?php //echo $SQlInCourse_Running['id']; ?>')"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button></td>
                                 </tr>	
 						<?php $sl++;
