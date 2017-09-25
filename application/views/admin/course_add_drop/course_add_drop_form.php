@@ -1,49 +1,3 @@
-<!--<div class="panel-body">
-<table class="table table-striped table-bordered table-hover">
-                            <thead>
-                                <tr>
-                <th  colspan="9"><h4 style="margin:0px; font-weight:bolder; color:#ff0000; padding:0px;"> Completed Courses</h4></th>
-                                </tr>
-                                <tr style="font-size:12px; text-align:center;">
-                                    <th  width="25">Sl</th>
-                                    <th>Name of the course</th>
-                                    <th  align="center">Course ID </th>
-                                    <th  align="center">Course type</th>
-                                    <th  align="center">Credit</th>
-                                    <th  align="center" width="100">Grade</th>
-									<th  align="center" width="100">Action</th>
-                                    
-                                </tr>
-                            </thead>
-                               
-                        <tbody id="data_load_list">
-                        <?php
-                        //$i=1;
-                
-                       // $SQlCompleteCourse_Select=mysql_query("select * from  fbs_tabulation_sheet WHERE student_id='$student_id' AND status=2");
-                       // while($SQlCompleteCourse=mysql_fetch_assoc($SQlCompleteCourse_Select)){
-                        ?>
-                                <tr class="odd gradeA">
-                                  
-                                        <td width="25"><?php //echo $i; ?></td>
-                                        <td><?php //echo $course_name_array[$SQlCompleteCourse['course_code']]; ?> </td>
-                                        <td align="left"><?php //echo $course_name_arrays[$SQlCompleteCourse['course_code']]; ?> </td>
-                                        <td align="left"><?php  //echo  $course_type_Arr[$course_name_arrays_type[$SQlCompleteCourse['course_code']]];?> </td>
-                                        
-                                        <td align="center"><?php //echo $course_name_arrays_credit[$SQlCompleteCourse['course_code']]; ?> </td>
-                                        <td align="center" width="100" style="font-weight:bolder;"><?php  //if($SQlCompleteCourse['later_grade']=='F' || $SQlCompleteCourse['later_grade']=='I' || $SQlCompleteCourse['later_grade']=='WH'){ echo '<span style="color:red;">'.$SQlCompleteCourse['later_grade'].'</span>';} else { echo $SQlCompleteCourse['later_grade'];}?> </td>
-										
-									    <td align="center" width="100"><button onclick='fnc_retake_registration_form("<?php //echo $SQlCompleteCourse['id'] ?>")'> Retake</button> </td>
-                                         
-                                </tr>
-                                <?php
-                                  //$i++;
-                                  //}
-                                ?>
-                                </tbody>
-                           </table>     
- 
-</div> -->
 
 <div class="panel-body" align="left">
     
@@ -65,9 +19,6 @@
 	  <h3 class="box-title">Available course  for Registration</h3>
 	</div>
 <table class="table  table-bordered">
-
-            <input type="hidden" value="<?php //echo $txt_semister_id; ?>" name="txt_semister_id" id="txt_semister_id" />
-            <input type="hidden" value="<?php //echo $txt_semister_id; ?>" name="student_id" id="student_id" />
 
 			<tbody id="data_load_list">
 			<?php foreach($assing_course_data as $course_assing_day_info): ?>
@@ -95,7 +46,6 @@
 			//if($check_row_when_while_loop['course_code']!=$row['course_id']){
             $sl=1;
             foreach($course_assing_day_info['assing_course'] as $assing_course): ?>
-<?php //echo $assing_course['course']; exit;?>
 					<tr class="odd gradeA">
 							<td width="5%">
 

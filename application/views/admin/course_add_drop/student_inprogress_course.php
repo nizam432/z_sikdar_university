@@ -56,11 +56,11 @@
 					   <?php
 					   $sl=1;
 					  foreach($student_taken_course as $student_taken_course_data){
-                       
-               echo '<pre>'; print_r($student_taken_course_data); echo '</pre>';
                        // $SQlInCourse_Select_Running=mysql_query("select * from  fbs_tabulation_sheet  WHERE student_id='$student_id' AND  semester='$txt_semister_id' AND later_grade!='W' AND status='0'");
                        // while($SQlInCourse_Running=mysql_fetch_assoc($SQlInCourse_Select_Running)){
-                        ?>	
+                      
+                        //echo '<pre>'; print_r($student_taken_course_data); echo '</pre>';
+?>	
 								 <tr class="odd gradeA">
                                   
                                         <td width="25"><?php  echo $sl; ?></td>
@@ -73,9 +73,9 @@
 										//$SqlROWDAYxxx=mysql_fetch_assoc($sql_dayXXX);
 										
 										?>
-                                        <td align="left"><?php echo $student_taken_course_data->day; ?> </td>
+                                        <td align="left"><?php echo $day[$student_taken_course_data->day]; ?> </td>
 										<td align="left"><?php echo  $student_taken_course_data->section_title; ?>  </td>
-                                       <td align="left"> <button class="btn btn-danger" onclick="fnc_course_cancel_account('<?php //echo $SQlInCourse_Running['id']; ?>')"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button></td>
+                                       <td align="left"> <button class="btn btn-danger" onclick="cancel_registerd_courses('<?php echo $student_taken_course_data->trabulation_sheet_id ?>')"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button></td>
                                 </tr>	
 						<?php $sl++;
 					   } ?>

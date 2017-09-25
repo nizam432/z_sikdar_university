@@ -45,6 +45,7 @@
 		</div>
 	</div>
 </div>
+<div id="completed_crouse"></div>
 <div id="inprogress_crouse"></div>
 <div id="student_registerd_course"></div>
 <div id="course_add_drop"></div>
@@ -87,8 +88,20 @@
             success: function(response) {
                 $("#inprogress_crouse").html(response);
             }
-        });		
+        });	
 	
+        $.ajax({
+            url:"<?php echo base_url();?>backend_course_add_drop/get_student_completed_course",
+            type:"POST",
+			data:{
+                semester:$('#semester').val(),
+				student_id:$('#student_id').val()
+			},
+            success: function(response) {
+                $("#completed_crouse").html(response);
+            }
+        });	
+
 	return false;
         
     }
@@ -159,7 +172,25 @@
 			}); 
 		}
 		return false;			
-	}	
+	}
+
+function cancel_registerd_courses(val)
+{
+    if (confirm("Are you want to confirm registration?")) {
+        var trabulation_sheet_id=val;
+        $.ajax({
+            url:"<?php echo base_url();?>backend_course_add_drop/cancel_registerd_courses",
+            data:{
+                trabulation_sheet_id:trabulation_sheet_id
+            },
+            success: function(response) {
+                alert('Cancel Course successfully');
+                fnc_search_course();
+            }
+        }); 
+    }
+    return false;		
+}	
 	
 </script>
 
