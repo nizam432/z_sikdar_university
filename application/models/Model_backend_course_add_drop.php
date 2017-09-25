@@ -46,7 +46,7 @@ class Model_backend_course_add_drop extends  CI_Model
         $this->db->join('course', 'course.course_id = tabulation_sheet.course', 'left');
         $this->db->join('section', 'section.section_id = tabulation_sheet.section','left');
 		$this->db->join('semester', 'semester.semester_id = tabulation_sheet.semester','left');
-        $this->db->where(array('tabulation_sheet.semester'=>$semester,'tabulation_sheet.student_id'=>$student_id,'tabulation_sheet.status'=>0));
+        $this->db->where(array('tabulation_sheet.semester'=>$semester,'tabulation_sheet.student_id'=>$student_id,'tabulation_sheet.status'=>1));
 		$query=$this->db->get('');
 		$result=$query->result();
 		return $result;
@@ -59,6 +59,7 @@ class Model_backend_course_add_drop extends  CI_Model
         $this->db->join('course', 'course.course_id = tabulation_sheet.course', 'left');
         $this->db->join('section', 'section.section_id = tabulation_sheet.section','left');
 		$this->db->join('semester', 'semester.semester_id = tabulation_sheet.semester','left');
+		//$this->db->join('course_allocation', 'semester.semester_id = tabulation_sheet.course','left');
         $this->db->where(array('tabulation_sheet.semester'=>$semester,'tabulation_sheet.student_id'=>$student_id,'tabulation_sheet.status'=>0));
 		$query=$this->db->get('');
 		$result=$query->result();

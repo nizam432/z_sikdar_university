@@ -98,6 +98,8 @@ class Backend_course_add_drop extends CI_Controller
         $student_id=$this->input->post('student_id');
         $data['student_inprogress_course']=$this->model_backend_course_add_drop->get_student_inprogress_course($student_id,$semester);
         $data['student_taken_course']=$this->model_backend_course_add_drop->get_student_taken_course($student_id,$semester);
+		
+		
 		$data['content'] = $this->load->view('admin/course_add_drop/add',$data, TRUE);
 		$this->load->view('admin/course_add_drop/student_inprogress_course',$data);
     }

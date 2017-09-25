@@ -57,7 +57,7 @@
 					   $sl=1;
 					  foreach($student_taken_course as $student_taken_course_data){
                        
-                
+               echo '<pre>'; print_r($student_taken_course_data); echo '</pre>';
                        // $SQlInCourse_Select_Running=mysql_query("select * from  fbs_tabulation_sheet  WHERE student_id='$student_id' AND  semester='$txt_semister_id' AND later_grade!='W' AND status='0'");
                        // while($SQlInCourse_Running=mysql_fetch_assoc($SQlInCourse_Select_Running)){
                         ?>	
@@ -65,7 +65,7 @@
                                   
                                         <td width="25"><?php  echo $sl; ?></td>
                                         <td><?php echo $student_taken_course_data->course_title;  ?> </td>
-                                        <td align="left"><?php  echo $student_inprogress_course_data->course_code;?> </td>
+                                        <td align="left"><?php  echo $student_taken_course_data->course_code;?> </td>
                                         <td align="left"><?php  echo $student_taken_course_data->semester_title; ?> </td>
                                        <!-- <td align="left"><?php  //echo $course_type_Arr[$course_name_arrays_type[$SQlInCourse_Running['course_code']]];  ?></td>-->
                                         <?php
@@ -73,8 +73,8 @@
 										//$SqlROWDAYxxx=mysql_fetch_assoc($sql_dayXXX);
 										
 										?>
-                                        <td align="left"><?php// echo $SqlROWDAYxxx['course_date']; ?> </td>
-										<td align="left"><?php echo  $student_inprogress_course_data->section_title; ?>  </td>
+                                        <td align="left"><?php echo $student_taken_course_data->day; ?> </td>
+										<td align="left"><?php echo  $student_taken_course_data->section_title; ?>  </td>
                                        <td align="left"> <button class="btn btn-danger" onclick="fnc_course_cancel_account('<?php //echo $SQlInCourse_Running['id']; ?>')"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button></td>
                                 </tr>	
 						<?php $sl++;
