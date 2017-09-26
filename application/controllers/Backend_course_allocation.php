@@ -14,7 +14,7 @@ class Backend_course_allocation extends CI_Controller
 		}
 		if($this->session->userdata('admin_user_type')!='1')
 		{
-			exit;
+			exit; 
 		}
 	  //load model
 	  $this->load->model('model_backend_course_allocation');

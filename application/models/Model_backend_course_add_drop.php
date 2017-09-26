@@ -12,7 +12,7 @@ class Model_backend_course_add_drop extends  CI_Model
 		$result=$query->result();
 		return $result;
 	}	
-
+ 
     public function get_student_registerd_course($student_id,$semester)
 	{
 		$this->db->select('*,course.course_title as course_title,course.course_code as course_code,semester.semester_title as semester_title,section.section_title as section_title');

@@ -109,7 +109,7 @@ class Backend_course_add_drop extends CI_Controller
 	 *
 	 * @return void
 	 */	
-	public function get_student_completed_course()
+	public function get_student_completed_course() 
 	{
         $data = array();		
 		$data['day']=array(1=>'Saturday',2=>'Sunday',3=>'Monday',4=>'Tuesday',5=>'Wednesday',6=>'Thusday',7=>'Friday');	
