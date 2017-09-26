@@ -26,7 +26,7 @@ div class="panel-body">
                                
                         <tbody id="data_load_list">
                         <?php
-                        $sl=1;
+                        $sl=1; 
                 
                        // $SQlCompleteCourse_Select=mysql_query("select * from  fbs_tabulation_sheet WHERE student_id='$student_id' AND status=2");
                        // while($SQlCompleteCourse=mysql_fetch_assoc($SQlCompleteCourse_Select)){
