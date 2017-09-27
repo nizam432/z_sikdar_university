@@ -17,11 +17,10 @@
 			<form class="form-horizontal" action="" method="post">
 						<table class="table">
 							<tr>
-								<th width="20%">Faculty Member</th>
-								<th width="20%">Semester</th>
-								<th width="20%">Couse</th>
-								<th width="20%">Student ID</th>
-								<th width="20%">Action</th>
+								<th width="30%">Faculty Member</th>
+								<th width="30%">Semester</th>
+								<th width="30%">Couse</th>
+								<th width="30%">Action</th>
 							</tr>
 							<tr>
 								<td>
@@ -50,10 +49,6 @@
 									<option value="">Please select</option>
 								  </select>
 							</td>
-							<td>
-								  <input type="text" id="student_id" class="form-control">
-							</td>
-
 							<td>
 								<input type="button" class="btn btn-primary" value="Search" onclick="fnc_search_course()"><br><br>
 							</td>
@@ -110,8 +105,9 @@
             url:"<?php echo base_url();?>backend_course_result/add_result",
             type:"POST",
 			data:{
+				faculty_member:$('#faculty_member').val(),
                 semester:$('#semester').val(),
-				student_id:$('#student_id').val()
+                course_allocation_id:$('#course').val()
 			},
             success: function(response) {
                 $("#add_result").html(response);

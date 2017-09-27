@@ -2,8 +2,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed'); 
 class Model_backend_course_result extends  CI_Model
 {
-	public function get_course_result_entry_data($student_id,$semester)
+	public function get_course_result_entry_data($data)
 	{
+print_r($data);
+exit;
 		$this->db->select('*,course.course_title as course_title,course.course_code as course_code,course.credit as credit,section.section_title as section_title,course.course_id as course,semester.semester_title as semester_title');
 		$this->db->from('tabulation_sheet');
         $this->db->join('course', 'course.course_id = tabulation_sheet.course', 'left');

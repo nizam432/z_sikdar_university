@@ -37,10 +37,8 @@ class Backend_course_result extends CI_Controller
 		$data['semester_info']=$this->model_backend_course_result->get_semester_data();	
 		$data['faculty']= $this->model_backend_course_result->get_faculty_data();
 
+        array();
 
-		$data['semester']=$this->input->get_post('semester', TRUE);
-		$data['course_code']=$this->input->get_post('course_code', TRUE);
-		$data['student_id']=$this->input->get_post('student_id', TRUE);
 		
 		$data['content'] = $this->load->view('admin/result/add',$data, TRUE);
 		$this->load->view('admin/index', $data);
@@ -49,8 +47,11 @@ class Backend_course_result extends CI_Controller
 	
 	public function add_result()
 	{
-        $data = array();
-		$data['course_result_entry']=$this->model_backend_course_result->get_course_result_entry_data();
+        $data= array();
+		$data['faculty_member']=$this->input->get_post('faculty_member', TRUE);
+		$data['semester']=$this->input->get_post('semester', TRUE);
+		$data['course_allocation_id']=$this->input->get_post('course_allocation_id', TRUE);
+		$data['course_result_entry']=$this->model_backend_course_result->get_course_result_entry_data($data);
 		$data['content'] = $this->load->view('admin/result/add',$data, TRUE);
 		$this->load->view('admin/result/add_result',$data);				
 	}
