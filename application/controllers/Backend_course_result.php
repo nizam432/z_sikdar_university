@@ -55,18 +55,7 @@ class Backend_course_result extends CI_Controller
 		$this->load->view('admin/result/add_result',$data);				
 	}
 	
-	 /**
-	 * Get Couse info	 
-	 *
-	 * @return void
-	 */	
-	public function  get_course_info()
-	{
-        $data = array();
-		$data['course_result_entry']=$this->model_backend_course_result->get_course_info_data();
-		$data['content'] = $this->load->view('admin/result/add',$data, TRUE);
-		$this->load->view('admin/index', $data);			
-	}	
+
 	
 	/**
 	 * Get Couse info	
@@ -76,19 +65,16 @@ class Backend_course_result extends CI_Controller
 	Public function get_course_info()
 	{
 		$data=array();
-		$data['faculty_member_id'] = $this->get_post('faculty_member_id');
-		$data['semester'] = $this->get_post('semester');
-
-		  $result=$this->db->where('faculty_member',$_POST['id'])
-						->get('department')
-						->result();
-     
-        $data=array();
+		$data['faculty_member'] = $this->input->post('faculty_member');
+		$data['semester'] = $this->input->post('semester');
+		 
+		$result= $this->model_backend_course_result->get_course_info_data($data);
+        $data2=array();
 		foreach($result as $r)
 		{
-			$data['value']=$r->department_id;
-			$data['label']=$r->department_title;
-			$json[]=$data;
+			$data2['value']=$r->course_allocation_id;
+			$data2['label']=$r->course_title;
+			$json[]=$data2;
 		}
 		echo json_encode($json);
 	}	

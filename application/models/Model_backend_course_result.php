@@ -88,11 +88,13 @@ class Model_backend_course_result extends  CI_Model
 		return $result;
 	}
 
-	public function get_course_info($data)
+	public function get_course_info_data($data)
 	{
-		$this->db->select('faculty_member_id,faculty_member_name');
-		$this->db->from('faculty_member');
-		$this->db->where('status',1);
+		$this->db->select('*');
+		
+		$this->db->from('course_allocation');
+		$this->db->join('course', 'course.course_id = course_allocation.course','left');
+		$this->db->where($data);
 		$query=$this->db->get('');
 		$result=$query->result();
 		return $result;

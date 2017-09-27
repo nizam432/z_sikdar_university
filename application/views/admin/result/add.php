@@ -69,11 +69,10 @@
   $(document).ready(function(){
     /*Get the Department list */
 
-    $('.semester').change(function(){
-	
+    $('#semester').change(function(){
       $.ajax({
         type: "POST",
-        url: "<?php echo base_url();?>backend_program/get_course_info",
+        url: "<?php echo base_url();?>backend_course_result/get_course_info",
         data:{
 			semester:$(this).val(),
 			faculty_member:$('#faculty_member').val()
