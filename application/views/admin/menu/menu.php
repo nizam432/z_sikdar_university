@@ -15,6 +15,11 @@
 			<i class="fa fa-user"></i> <span>Course ADD DROP</span>
 		</a>
 	</li>	
+	<li>
+		<a href="<?php echo base_url()?>backend_course_result">
+			<i class="fa fa-user"></i> <span>Result</span>
+		</a>
+	</li>		
 	<li><a href="<?php echo base_url()?>backend_user"><i class="fa fa-user"></i> <span>User</span></a></li>	
 	
 	<li class="treeview">
