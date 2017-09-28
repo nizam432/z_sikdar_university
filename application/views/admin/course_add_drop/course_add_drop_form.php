@@ -46,10 +46,12 @@
 			//if($check_row_when_while_loop['course_code']!=$row['course_id']){
             $sl=1;
             foreach($course_assing_day_info['assing_course'] as $assing_course): ?>
+			
+			<?php //echo '<pre>'; print_r($assing_course); echo '</pre>';?>
 					<tr class="odd gradeA">
 							<td width="5%">
 
-							 <input type="button" class="btn btn-success" value="Add" onclick="fnc_course_registration('<?php echo $assing_course['course_code']?>,<?php echo $semester?>,<?php echo $student_id?>,<?php echo $assing_course['section']?>,<?php echo $course_assing_day_info['day']; ?>,<?php echo $assing_course['course']?>')">
+							 <input type="button" class="btn btn-success" value="Add" onclick="fnc_course_registration('<?php echo $assing_course['course_code']?>,<?php echo $semester?>,<?php echo $student_id?>,<?php echo $assing_course['section']?>,<?php echo $course_assing_day_info['day']; ?>,<?php echo $assing_course['course']?>,<?php echo $assing_course['course_allocation_id']?>')">
 							</td>
 
 							<td width="5%"><?php echo $sl; ?></td>

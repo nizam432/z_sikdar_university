@@ -151,7 +151,8 @@ class Backend_course_add_drop extends CI_Controller
 		$data['semester']=$this->input->get_post('semester', TRUE);
 		$data['section']=$this->input->get_post('section', TRUE);
 		$data['day']=$this->input->get_post('day', TRUE);
-		$data['course']=$this->input->get_post('course', TRUE);  
+		$data['course']=$this->input->get_post('course', TRUE);
+		$data['course_allocation_id']=$this->input->get_post('course_allocation_id', TRUE);		
    
 		$data['entry_by']=$this->session->userdata('admin_id');
 		$data['entry_date_time']=date('Y-m-d H:i:s');
@@ -179,6 +180,7 @@ class Backend_course_add_drop extends CI_Controller
             $data2['semester']=$student_registerd_course_data[$key]['semester_id'];  
 			$data2['section']=$student_registerd_course_data[$key]['section'];
 			$data2['course']=$student_registerd_course_data[$key]['course'];
+			$data2['course_allocation_id']=$student_registerd_course_data[$key]['course_allocation_id'];
 			$data2['entry_by']=$this->session->userdata('admin_id');
 			$data2['entry_date_time']=date('Y-m-d H:i:s');
 			$data2['status']=0;	

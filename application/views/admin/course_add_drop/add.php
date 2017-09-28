@@ -115,6 +115,7 @@
         var section=valueData[3];
         var day=valueData[4];
         var course=valueData[5];
+		var course_allocation_id=valueData[6];
 
 
         $.ajax({
@@ -125,7 +126,8 @@
 				student_id:student_id,
                 section:section,
                 day:day,
-                course:course
+                course:course,
+                course_allocation_id:course_allocation_id
 			},
             success: function(response) {
                 alert('data save successfully');
