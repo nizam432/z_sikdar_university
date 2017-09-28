@@ -25,6 +25,7 @@ class Backend_course_result extends CI_Controller
 	  $this->load->library('session');
 	   date_default_timezone_set('Asia/Dhaka');
 	}
+	
  	/**
 	 * Show search 
 	 *
@@ -53,9 +54,7 @@ class Backend_course_result extends CI_Controller
 		$data['course_result_entry']=$this->model_backend_course_result->get_course_result_entry_data();
 		$data['content'] = $this->load->view('admin/result/add',$data, TRUE);
 		$this->load->view('admin/result/add_result',$data);				
-	}
-	
-
+	}	
 	
 	/**
 	 * Get Couse info	
@@ -77,7 +76,9 @@ class Backend_course_result extends CI_Controller
 			$json[]=$data2;
 		}
 		echo json_encode($json);
-	}	
+	}
+
+	
 	 /**
 	 * Get Assigned course
 	 *
@@ -194,7 +195,7 @@ class Backend_course_result extends CI_Controller
 			$data2['status']=0;	
 			$this->model_backend_course_add_drop->save_final_registration_data($data2);
 			
-		$course_add_drop_id=$student_registerd_course_data[$key]['course_add_drop_id'];
+			$course_add_drop_id=$student_registerd_course_data[$key]['course_add_drop_id'];
 			$data3=array();
 			$data3['status']=1;
 			$this->model_backend_course_add_drop->update_added_course_status($course_add_drop_id,$data3); 
