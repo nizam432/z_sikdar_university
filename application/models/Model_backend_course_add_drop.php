@@ -29,7 +29,7 @@ class Model_backend_course_add_drop extends  CI_Model
 		
 	public function get_assing_course_data($semester,$day)
 	{
-		$this->db->select('course_allocation.day as day,course_allocation.section as section,course.course_title as course_title,course.course_code as course_code,course.credit as credit,section.section_title as section_title,semester.semester_title as semester_title,course.course_id as course');
+		$this->db->select('course_allocation.course_allocation_id as course_allocation_id,course_allocation.day as day,course_allocation.section as section,course.course_title as course_title,course.course_code as course_code,course.credit as credit,section.section_title as section_title,semester.semester_title as semester_title,course.course_id as course');
 		$this->db->from('course_allocation');
         $this->db->join('course', 'course.course_id = course_allocation.course', 'left');
         $this->db->join('section', 'section.section_id = course_allocation.section','left');
